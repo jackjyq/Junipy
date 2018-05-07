@@ -1,4 +1,6 @@
-# Jack
+# ignore server side run-time files
 /server/.vscode/
 /server/venv/
+/server/__pycache__
+/server/.idea/
 

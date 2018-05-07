@@ -4,30 +4,16 @@ import copy
 from collections import defaultdict
 from server_config import *
 
-############################ common function ############################
-def download(filename, url):
-# if can be downloaded ,return true
-# if can not be found, return false
-    if DEBUG_MODE:
-        print("downloading...")
-    try:
-        urllib.request.urlretrieve(url, DOWNLOAD_PATH + filename)
-    except urllib.error.HTTPError:
-        return False
-    return True
-
-
-def csv_to_list(filename):
+########################### worldbank function ##########################
+def csv_to_list(indicator):
     # convert csv file to a list
-    path = CSV_PATH + filename
+    path = CSV_PATH + indicator
     with open(path, 'r') as csv_file:
         csv_data = csv.reader(csv_file)
         csv_list = list(csv_data)
     return csv_list
 
 
-
-#################### data source specified function #####################
 def get_GDP():
     # https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?view=chart
     # data structure of the return dictionary
@@ -76,4 +62,4 @@ def get_GDP():
 
 ############################# main function #############################
 if __name__ == "__main__":
-    download('test.csv','http://api.worldbank.org/v2/en/indicator/EN.ATM.CO2E.KT?downloadformat=csv')
+    pass
