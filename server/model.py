@@ -62,4 +62,4 @@ def get_GDP():
 
 ############################# main function #############################
 if __name__ == "__main__":
-    pass
+    print(global_wb_data_source['NV.AGR.TOTL.ZS'])
