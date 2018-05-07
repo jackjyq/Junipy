@@ -1,18 +1,23 @@
-# debug switch
-DEBUG_MODE = True
+
+########################## debug mode control ###########################
+DEBUG_MODE = True   # debug switch
 
 
-# local path
-CSV_PATH = './csv/'
+######################### data base configuration #######################
+#   when debuging database related code, use debug DB_URL
+#   when using database, use deploy DB_URL
+# DB_URL = mongodb://junipy:comp9321@ds217350.mlab.com:17350/junipy_debug"
+DB_URL = "mongodb://junipy:comp9321@ds014658.mlab.com:14658/junipy_deploy"
 
 
-# world bank data source
-global_wb_data_source = {
-    'NY.GDP.MKTP.CD': 'GDP (current US$)',
-    'NV.AGR.TOTL.ZS': 'Agriculture, value added (percent of GDP)',
-    'NV.IND.TOTL.ZS': 'Industry, value added (percent of GDP)',
-    'NV.SRV.TETC.ZS': 'Services, etc., value added (percent of GDP)',
-    'EN.ATM.CO2E.KT': 'CO2 emissions (kt)',
-    'EN.ATM.PM25.MC.M3': 'PM2.5 air pollution, mean annual exposure (micrograms per cubic meter)',
-    'ER.H2O.FWTL.K3': 'Annual freshwater withdrawals, total (billion cubic meters)'
-}
+########################## year configuration ###########################
+MIN_YEAR = 1960     # the min year we can use
+MAX_YEAR = 2018     # the max year we can use
+
+
+####################### local path configuration ########################
+# csv file will be download in this folder
+# the csv file in this folder will be ignored when upload to git
+CSV_PATH = './csv/'     
+INDICATOR_PATH = './data/indicator.json'
+CODE_PATH = './data/country_code.csv'
