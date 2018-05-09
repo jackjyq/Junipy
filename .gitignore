@@ -1,6 +1,7 @@
 # ignore server side run-time files
 /server/.vscode/
 /server/venv/
+/server/*.sh
 /server/__pycache__
 /server/.idea/
 /server/csv/*.csv
