@@ -11,6 +11,6 @@ if __name__ == "__main__":
 
 
     # db_client = connect(host=DB_URL)
-    # print(model.query_country('USA')['1988'])
+    # print(model.query_country('USA')['1999'])
 
     # db_client.close()

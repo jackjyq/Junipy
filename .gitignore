@@ -1,6 +1,17 @@
-# ignore server side run-time files
+# Server
+
+## IDE related files
 /server/.vscode/
 /server/venv/
 /server/__pycache__
 /server/.idea/
-/server/csv/*.csv
+
+## run-time files
+/server/tmp/
+!/server/tmp/.gitkeep
+/server/flag/
+!/server/flag/.gitkeep
+
+
+## script
+/server/*.sh
