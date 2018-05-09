@@ -226,5 +226,5 @@ if __name__ == "__main__":
     # init_data_import()
     # query database
     db_client = connect(host=DB_URL)
-    print(query_country('ZWE')['1992'])
+    print(query_country('USA'))
     db_client.close()
