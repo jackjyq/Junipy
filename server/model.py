@@ -1,17 +1,42 @@
 # this file contains functions dealing from download to parse to import
 # to the database.
-# the flask server api should be in main.py
 # scroll down to the bottom to see the example usage
 
-import urllib.request
+import urllib.request, urllib.error
+import requests
 import csv
 import copy
 import json
+import zipfile
+import os
 from collections import defaultdict
 from mongoengine import connect,StringField, Document
 from server_config import *
 
 ######################### data process function #########################
+def preprocess(indicator):
+    # download, unzip and rename
+    global global_indicators
+    # download to ZIP_PATH
+    url = "http://api.worldbank.org/v2/en/indicator/"\
+           + global_indicators[indicator]\
+           + "?downloadformat=csv"
+    zip_file_path = ZIP_PATH + 'download.zip'
+    if DEBUG_MODE:
+        print('downloading ', url)
+    zip_file, headers = urllib.request.urlretrieve(url, zip_file_path)
+    # unzip to CSV_PATH
+    csv_file_name = headers.get('Content-Disposition')[21:-3] + 'csv'
+    # if DEBUG_MODE:
+    #     print('unzipping ', csv_file_name)
+    zip_ref = zipfile.ZipFile(zip_file_path)
+    zip_ref.extract(csv_file_name ,CSV_PATH)
+    # rename to indicator.csv
+    os.rename(CSV_PATH + csv_file_name, CSV_PATH + indicator + '.csv')
+    return True
+
+
+
 def csv_to_list(path):
     # convert csv file to a list
     try:
@@ -27,7 +52,9 @@ def csv_to_list(path):
 
 def wb_csv_parse(indicator, title_row=4, data_col=4, code_col=1):
     # Description:
-    #   parse csv file from world bank
+    #   parse csv file from world bank, and convert it to a dictionary
+    #   this function will parse all the exist value, NOT only the
+    #   the domain which is defined in server_config.py
     #
     # Input:
     #   indicator
@@ -37,11 +64,11 @@ def wb_csv_parse(indicator, title_row=4, data_col=4, code_col=1):
     #
     # Output:
     #   return_dict = {
-    #     code 1: {
+    #     country code 1: {
     #         year 1: data 1,
     #         year 2: data 2
     #     },
-    #     code 2: {
+    #     country code 2: {
     #         year 1: data 1,
     #         year 2: data 2
     #     }
@@ -57,7 +84,7 @@ def wb_csv_parse(indicator, title_row=4, data_col=4, code_col=1):
     time_span = len(year_list)
 
     # if DEBUG_MODE:
-    #     print("\n###",indicator, indicator_to_description[indicator])
+    #     print("\n###",indicator)
     #     print("year list = ", year_list)
     #     print("time span = ", time_span)
 
@@ -79,10 +106,89 @@ def wb_csv_parse(indicator, title_row=4, data_col=4, code_col=1):
     return return_dict
 
 
-def get_code_dict(code, all_in_one_dict):
-    # Description:
-    #   convert dictionary
+def filter_dict(input_dict):
+    # filter a dictionary returned by wb_csv_parse
+    # based on  global_years and global_codes
+    # all missing value will be filled by None
+    # Input(default dict) & Output(dict):
+    #    {
+    #     country code 1: {
+    #         year 1: data 1,
+    #         year 2: data 2
+    #     },
+    #     country code 2: {
+    #         year 1: data 1,
+    #         year 2: data 2
+    #     }
+    #   }
+    # 
+    global global_codes
+    global global_years
+
+    return_dict = dict()
+    code_dict = dict()
+
+    for code in global_codes.keys():
+        code_dict.clear()
+        # generate code dictionary
+        if input_dict[code]:
+            for year in global_years:
+                if input_dict[code][year]:
+                    code_dict[year] = input_dict[code][year]
+                else:
+                    # fill None to the year that does not exist
+                    code_dict[year] = None
+        else:
+            # fill None to every year when code does not exist
+            for year in global_years:
+                code_dict[year] = None
+        return_dict[code] = copy.deepcopy(code_dict)
+    return return_dict
+
+
+############################# country database ##########################
+# schema
+# country -> years -> indicator
+
+class Junipy_country(Document):
+    country = StringField(required=True, primary_key=True)
+    data = StringField(required=True)
+
+    def __init__(self, country, data, *args, **values):
+        super().__init__(*args, **values)
+        self.country = country
+        self.data = data
+
+
+def update_junipy_country(country, data_dict):
     # Input:
+    #   a str code and a default dictionary
+    # Description:
+    # create or update it to database
+    data_json = json.dumps(data_dict)
+    instance = Junipy_country(country, data_json)
+    # if DEBUG_MODE:
+    #     print("code = ", instance.code)
+    #     print("data = ", instance.data)
+    instance.save()
+
+
+def query_junipy_country(country):
+    # Input:
+    #   a string country code
+    # Return:
+    #   a dictionary
+    if not Junipy_country.objects(country=country):
+        # nothing found in database
+        return dict()
+    data_json =  Junipy_country.objects(country=country)[0].data
+    data_dict = dict(json.loads(data_json))
+    return data_dict
+
+
+def get_all_in_one_dict():
+    # merge dictrionary 
+    # Return:
     #   all_in_one_dict = {
     #     indicator 1: {
     #       code 1: {
@@ -90,6 +196,34 @@ def get_code_dict(code, all_in_one_dict):
     #       },
     #     indicator 2: {
     #       code 1: {
+    #           year 1: data 1,
+    #       }
+    #     }
+    #   }
+    global global_codes
+    global global_years
+    global global_indicators
+
+    all_in_one_dict = dict()
+    indicator_dict = dict()
+    for indicator in global_indicators.keys():
+        # parse all csv files, get a default dictionary
+        indicator_dict = filter_dict(wb_csv_parse(indicator))
+        all_in_one_dict[indicator] = copy.deepcopy(indicator_dict)
+    return all_in_one_dict
+
+
+def get_country_dict(country, all_in_one_dict):
+    # Description:
+    #   convert dictionary to fit schema of Junipy_country
+    # Input:
+    #   all_in_one_dict = {
+    #     indicator 1: {
+    #       country 1: {
+    #           year 1: data 1,
+    #       },
+    #     indicator 2: {
+    #       country 1: {
     #           year 1: data 1,
     #       }
     #     }
@@ -106,125 +240,179 @@ def get_code_dict(code, all_in_one_dict):
     #         indicator 2: data 2
     #     }
     #   }
-    global indicator_to_description
-    return_dict = defaultdict(str)
-    year_dict = defaultdict(str)
+    global global_indicators
+    global global_years
+    return_dict = dict()
+    year_dict = dict()
     # genereate the return dictionary
-    for year in range(MIN_YEAR, MAX_YEAR + 1):
-        year = str(year)
+    for year in global_years:
         # generate the year_dict inside return dictionary
         year_dict.clear()
-        for indicator in indicator_to_description.keys():
+        for indicator in global_indicators.keys():
             # if (DEBUG_MODE):
             #    print("indicator = ", indicator)
             #    print("code = ", code)
             #    print("year = ", year)
             #    print(all_in_one_dict[indicator][code])
-            # we need to handle situation when there is no data for a code
-            if all_in_one_dict[indicator][code]:
-                data = all_in_one_dict[indicator][code][year]
-            else:
-                data = False
-            # add to year_dict only if it is not empty
-            if data:
-                year_dict[indicator] = data
-        # add to return_dict only if it is not empty
-        if year_dict:
-            return_dict[year] = copy.deepcopy(year_dict)
+            year_dict[indicator] = all_in_one_dict[indicator][country][year]
+        # add to return_dict
+        return_dict[year] = copy.deepcopy(year_dict)
     return return_dict
 
+############################ overview database ##########################
 
-############################# mongodb function ##########################
-class Country(Document):
-    code = StringField(required=True, primary_key=True)
+class Junipy_overview(Document):
+    # country -> years -> indicator
+    item = StringField(required=True, primary_key=True)
     data = StringField(required=True)
 
-    def __init__(self, code, data, *args, **values):
+    def __init__(self, item, data, *args, **values):
         super().__init__(*args, **values)
-        self.code = code
+        self.item = item
         self.data = data
 
 
-def update_country(code, data_dict):
+def update_junipy_overview(item, data_dict):
     # Input:
     #   a str code and a default dictionary
     # Description:
     # create or update it to database
-
     data_json = json.dumps(data_dict)
-    instance = Country(code, data_json)
+    instance = Junipy_overview(item, data_json)
     # if DEBUG_MODE:
     #     print("code = ", instance.code)
     #     print("data = ", instance.data)
     instance.save()
 
 
-def query_country(code):
+def query_junipy_overview(item):
     # Input:
     #   a string country code
     # Return:
-    #   a default dictionary, could be empty
-    
-    if not Country.objects(code=code):
+    #   a dictionary
+    if not Junipy_overview.objects(item=item):
         # nothing found in database
-        return defaultdict(str)
-    data_json =  Country.objects(code=code)[0].data
-    data_dict = defaultdict(str, json.loads(data_json))
+        return dict()
+    data_json =  Junipy_overview.objects(item=item)[0].data
+    data_dict = dict(json.loads(data_json))
     return data_dict
+
+
+def get_latest_GDP_dict(all_in_one_dict):
+    # Description:
+    #   convert dictionary to fit schema of Junipy_overview
+    # Input:
+    #   all_in_one_dict = {
+    #     indicator 1: {
+    #       country 1: {
+    #           year 1: data 1,
+    #       },
+    #     indicator 2: {
+    #       country 1: {
+    #           year 1: data 1,
+    #       }
+    #     }
+    #   }
+    #
+    # Output:
+    #   return_dict = {
+    #         country 1: GDP 1,
+    #         country 2: GDP 2
+    #   }
+
+    global global_years
+    global global_codes
+    return_dict = dict()
+    gdp_dict = all_in_one_dict["GDP_total"]
+    latest_year = global_years[-1]
+    for code in global_codes.keys():
+        return_dict[code] = gdp_dict[code][latest_year]
+    return return_dict
 
 
 
 ########################## initialization function ######################
-def init_query_dict():
-    # this function will return 3 dictionary
-    #   - code_to_country
-    #   - country_to_code
-    #   - indicator_to_description
+def reset_database():
+    # create or update database
+    global global_codes
+    global global_years
+    global global_indicators
 
-    code_to_country = defaultdict(str)
-    country_to_code = defaultdict(str)
-    csv_list = csv_to_list(CODE_PATH)
-    for row in csv_list:
-        code_to_country[row[1]] = row[0]
-        country_to_code[row[0]] = row[1]
-    # generate indicator_to_description
-    with open(INDICATOR_PATH, 'r') as json_file:
-        indicator_to_description = defaultdict(str, json.load(json_file))
-    return code_to_country, country_to_code, indicator_to_description
+    # preprocess data source
+    for indicator in global_indicators.keys():
+        preprocess(indicator)
+
+    # parse and merge dictionary
+    all_in_one_dict = get_all_in_one_dict()
 
 
-def init_data_import():
-    # import data to database
-    # return False if something goes wrong
-
-    global code_to_country
-    global indicator_to_description
-    # parse csv file and generate a dictionary
-    all_in_one_dict = defaultdict(str)
-    for indicator in indicator_to_description.keys():
-        indicator_dict = wb_csv_parse(indicator)
-        all_in_one_dict[indicator] = indicator_dict
-
-    # import data to database by code
     db_client = connect(host=DB_URL)
-    for code in code_to_country.keys():
+    # import data to Junipy_overview
+    lastest_GDP = get_latest_GDP_dict(all_in_one_dict)
+    
+    if DEBUG_MODE:
+        print("importing lastest_GDP to Junipy_overview...")
+    # Junipy_overview.drop_collection()
+    update_junipy_overview('lastest_GDP', lastest_GDP)
+
+    # import data to Junipy_country
+    # Junipy_country.drop_collection()
+    for code in global_codes.keys():
         if DEBUG_MODE:
-            print("importing", code, "...")
-        data_dict = get_code_dict(code, all_in_one_dict)
-        update_country(code, data_dict)
+            print("importing ", code, " to Junipy_country...")
+        data_dict = get_country_dict(code, all_in_one_dict)
+        update_junipy_country(code, data_dict)
+
     db_client.close()
     return True
 
 
+# has not implemented yet
+def get_flag_from_CIA(reset=False):
+    # download country flag from CIA website to GIF_PATH
+    # Input:
+    #   True: download gif files (may take long time)
+    #   False: generate dictionary from local cache
+    #
+    # return 
+    # a dictionary: flag[code] = local gif path
+    # if flag does not exist, set path to NON_FLAG
+    global global_codes
+    flag = dict()
+    flag_prefix = \
+        'https://www.cia.gov/library//publications/the-world-factbook/graphics/flags/large/'
+    flag_suffix = '-lgflag.gif'
+
+    # generate the dictionary contains url
+    for code in global_codes.keys():
+        short = global_codes[code]['short'].lower()
+        flag_url = flag_prefix + short + flag_suffix
+        gif_file_path = GIF_PATH + code + '.gif'
+        try:
+            gif_file, headers = urllib.request.urlretrieve(flag_url, gif_file_path)
+            if DEBUG_MODE:
+                print(gif_file_path + 'has been downloaded')
+                flag[code] = gif_file_path
+        except urllib.error.HTTPError:
+            if DEBUG_MODE:
+                print(gif_file_path + 'does not exist')
+            flag[code] = NON_FLAG
+
+    print(flag)
 ############################# test function #############################
 if __name__ == "__main__":
-    # generate the global dictionary, which may be useful in main.py
-    code_to_country, \
-    country_to_code, \
-    indicator_to_description = init_query_dict()
-    # import data to database, also you can use it to update database
-    # init_data_import()
-    # query database
-    db_client = connect(host=DB_URL)
-    print(query_country('USA'))
-    db_client.close()
+    # download and import the database
+    # once the data base has been setup, you don't need to run it again
+    # only used when change database
+    # reset_database()
+
+    # db_client = connect(host=DB_URL)
+    # # query overview database
+    # print(query_junipy_overview('lastest_GDP'))
+
+    # # query country database
+    # print(query_junipy_country('USA')['1990'])
+    # db_client.close()
+
+    # get a dictionary of country flag and locator
+    get_flag_from_CIA()
