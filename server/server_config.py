@@ -6,8 +6,8 @@ DEBUG_MODE = True   # debug switch
 ######################### data base configuration #######################
 #   when debuging database related code, use debug DB_URL
 #   when using database, use deploy DB_URL
-# DB_URL = mongodb://junipy:comp9321@ds217350.mlab.com:17350/junipy_debug"
-DB_URL = "mongodb://junipy:comp9321@ds014658.mlab.com:14658/junipy_deploy"
+DB_URL = "mongodb://junipy:comp9321@ds217350.mlab.com:17350/junipy_debug"
+# DB_URL = "mongodb://junipy:comp9321@ds014658.mlab.com:14658/junipy_deploy"
 
 
 ########################## year configuration ###########################
