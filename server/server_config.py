@@ -1,14 +1,19 @@
 
-############################# debug control #############################
-DEBUG_MODE = True   # main debug switch
+############################# print control #############################
+DEBUG_MODE = False   # True: print as much information False: default
+SILENT_MODE = False  # True: print as less information False: default
 
+########################## local configuration ##########################
+# files inside tmp folder will be ignored by Git
+ZIP_PATH = './tmp/' # zip file will be download here
+CSV_PATH = './tmp/' # csv file will be unzip here
+GIF_PATH = './tmp/' # gif file will be download here
 
-############################## local path ###############################
-# file inside those folders will be ignored by Git
-ZIP_PATH = './tmp/'
-CSV_PATH = './tmp/'
-GIF_PATH = './flag/'
-NON_FLAG = None     # a picture use when no flag can be found
+# flag cache folder
+FLAG_CACHE = './static/'   # used to store retrieved flag image
+
+# a picture used when no flag can be found
+NON_FLAG = './static/default_flag.gif'     
 
 
 ########################### mlab configuration ##########################
@@ -17,6 +22,10 @@ NON_FLAG = None     # a picture use when no flag can be found
 # database for deploy
 DB_URL = "mongodb://junipy:comp9321@ds143907.mlab.com:43907/junipy_deploy"
 
+# database collections, used in query(col=database collection)
+OVERVIEW = 1
+INDICATOR = 2
+FLAG = 3
 
 ############################ data source domain #########################
 # the years to be processed
