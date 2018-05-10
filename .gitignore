@@ -1,21 +1,18 @@
-# Server
+# IDE related files
+.vscode/
+venv/
+__pycache__/
+.idea/
 
-## IDE related files
-/server/.vscode/
-/server/venv/
-/server/__pycache__
-/server/.idea/
-/.idea/
 
-## run-time files
+# Server run-time files
 /server/tmp/
 !/server/tmp/.gitkeep
 
 
-## script
-/server/*.sh
-server/main.py
-server/main.py
+# some specified files
+/server/venv_sync.sh
 
-## mac os
+
+# mac os
 .DS_Store
