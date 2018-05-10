@@ -5,7 +5,7 @@
 /server/venv/
 /server/__pycache__
 /server/.idea/
-
+/.idea/
 
 ## run-time files
 /server/tmp/
