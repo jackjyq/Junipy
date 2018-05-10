@@ -6,11 +6,10 @@
 /server/__pycache__
 /server/.idea/
 
+
 ## run-time files
 /server/tmp/
 !/server/tmp/.gitkeep
-/server/flag/
-!/server/flag/.gitkeep
 
 
 ## script
