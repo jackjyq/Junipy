@@ -16,3 +16,6 @@
 /server/*.sh
 server/main.py
 server/main.py
+
+## mac os
+.DS_Store
