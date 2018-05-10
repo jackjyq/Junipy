@@ -4,15 +4,9 @@ venv/
 __pycache__/
 .idea/
 
-
 # Server run-time files
 /server/tmp/
 !/server/tmp/.gitkeep
-
-
-# some specified files
-/server/venv_sync.sh
-
 
 # mac os
 .DS_Store
