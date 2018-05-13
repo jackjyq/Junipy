@@ -1,232 +1,200 @@
 <!doctype html>
 <html lang="Default">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <link rel="shortcut icon" type="image/png" href="../favicon.png">
-    
+	<meta charset="utf-8">
+	<meta name="keywords" content="">
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+	<link rel="shortcut icon" type="image/png" href="../favicon.png">
+
 	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
 	<link rel="stylesheet" type="text/css" href="./static/css/font-awesome.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Lobster+Two&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    
+
 	<script src="../static/js/jquery-2.1.0.min.js"></script>
 	<script src="../static/js/bootstrap.min.js"></script>
 	<script src="../static/js/blocs.min.js"></script>
 	<script src="../static/js/jquery.touchSwipe.min.js" defer></script>
 	<script src="../static/js/lazysizes.min.js" defer></script>
-    <title>Junipy</title>
-    
-    <link href="../static/css/jqvmap.css" media="screen" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../static/js/jquery.vmap.js"></script>
-    <script type="text/javascript" src="../static/js/jquery.vmap.world.js" charset="utf-8"></script>
-    <script type="text/javascript" src="../static/js/jquery.vmap.sampledata.js"></script>
+	<title>Junipy</title>
 
-    <script type="text/javascript">
-    jQuery(document).ready(function() {
-      jQuery('#vmap').vectorMap({ 
-//		  map: 'world_en',
-//		  backgroundColor: '#2C3251',
-//		  enableZoom: false,
-//		  hoverColor: '#EB9715',
-//		  selectedColor: '#EB9715',
-		  map: 'world_en',
+	<link href="../static/css/jqvmap.css" media="screen" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.js"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.world.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.sampledata.js"></script>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('#vmap').vectorMap({
+				map: 'world_en',
 				backgroundColor: '#2C3251',
 				color: '#ffffff',
 				enableZoom: false,
 				selectedColor: '#7079A9',
-				//		  hoverColor: '#EB9715',
 				hoverOpacity: 0.7,
 				scaleColors: ['#FFCF2C', '#D2670D'],
 				values: sample_data,
 				showTooltip: true,
-				normalizeFunction: 'polynomial'
-	  });
-    });
-    </script>
+				normalizeFunction: 'polynomial',
+				onLabelShow: function(event, label, code) {
+					label.text(label.text() + ' ( ' + sample_data[code] + ' )');
+				}
+			});
+		});
+	</script>
 
-    
-<!-- Google Analytics -->
- 
-<!-- Google Analytics END -->
-    
+
+	<!-- Google Analytics -->
+
+	<!-- Google Analytics END -->
+
 </head>
+
 <body>
-<!-- Main container -->
-<div class="page-container">
-    
-<!-- bloc-0 -->
-<div class="bloc none bgc-charcoal d-bloc" id="bloc-0">
-	<div class="container bloc-sm">
-		<nav class="navbar row">
-			<div class="navbar-header">
-				<a class="navbar-brand " href="index.html"><img src="../static/img/logo.png" alt="logo" />Junipy</a>
-				<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
+	<!-- Main container -->
+	<div class="page-container">
+
+		<!-- bloc-0 -->
+		<div class="bloc none bgc-charcoal d-bloc" id="bloc-0">
+			<div class="container bloc-sm">
+				<nav class="navbar row">
+					<div class="navbar-header">
+						<a class="navbar-brand " href="index.html"><img src="../static/img/logo.png" alt="logo" />Junipy</a>
+						<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
 					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 				</button>
+					</div>
+					<div class="collapse navbar-collapse navbar-1">
+						<ul class="site-navigation nav navbar-nav">
+							<li>
+								<a href="index.html" class="ltc-snow">Home</a>
+							</li>
+						</ul>
+					</div>
+				</nav>
 			</div>
-			<div class="collapse navbar-collapse navbar-1">
-				<ul class="site-navigation nav navbar-nav">
-					<li>
-						<a href="index.html" class="ltc-snow">Home</a>
-					</li>
-				</ul>
-			</div>
-		</nav>
-	</div>
-</div>
-<!-- bloc-0 END -->
+		</div>
+		<!-- bloc-0 END -->
 
-<!-- bloc-1 -->
-<div class="bloc full-width-bloc bgc-charcoal d-bloc" id="bloc-1">
-	<div class="container bloc-lg">
-	<div id="vmap" style="width: 100%; height: 700px;"></div>
-<!--
+		<!-- bloc-1 -->
+		<div class="bloc full-width-bloc bgc-charcoal d-bloc" id="bloc-1">
+			<div class="container bloc-lg">
+				<div id="vmap" style="width: 100%; height: 700px;"></div>
+				<!--
 		<div class="row">
 			<div class="col-sm-12">
 			
 			</div>
 		</div>
 -->
+			</div>
+		</div>
+		<!-- bloc-1 END -->
+
+		<!-- bloc-2 -->
+		<div class="bloc bgc-charcoal d-bloc" id="bloc-2">
+			<div class="container bloc-sm">
+				<div class="row">
+					<div class="col-sm-12">
+						<h3 class="mg-md text-center">
+							Countries
+						</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- bloc-2 END -->
+
+		<!-- bloc-3 -->
+		<div class="bloc bgc-charcoal d-bloc " id="bloc-3">
+			<div class="container bloc-lg">
+				<div class="row">
+					<div class="col-sm-3">
+						<ul class="list-unstyled">
+							<li>
+								{% for i in range(0,62) %}
+								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<ul class="list-unstyled">
+							<li>
+								{% for i in range(62,124) %}
+								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<ul class="list-unstyled">
+							<li>
+								{% for i in range(124, 186) %}
+								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+							</li>
+						</ul>
+					</div>
+					<div class="col-sm-3">
+						<ul class="list-unstyled">
+							<li>
+								{% for i in range(185, 246) %}
+								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+							</li>
+							<li>
+								<span class="empty-column"></span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- bloc-3 END -->
+
+		<!-- bloc-7 -->
+		<div class="bloc bgc-charcoal d-bloc" id="bloc-7">
+			<div class="container bloc-lg">
+				<div class="row">
+					<div class="col-sm-3">
+						<h3 class="mg-md bloc-mob-center-text">
+							About
+						</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">The team</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Contact us</a>
+					</div>
+					<div class="col-sm-3">
+						<h3 class="mg-md bloc-mob-center-text">
+							Get the App
+						</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">iPhone</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Android</a>
+					</div>
+					<div class="col-sm-3">
+						<h3 class="mg-md bloc-mob-center-text">
+							Follow Us
+						</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">Twitter</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Facebook</a>
+					</div>
+					<div class="col-sm-3">
+						<h3 class="mg-md bloc-mob-center-text">
+							Company
+						</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">Terms of use</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Privacy</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- bloc-7 END -->
+
+		<!-- ScrollToTop Button -->
+		<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up"></span></a>
+		<!-- ScrollToTop Button END-->
+
+
 	</div>
-</div>
-<!-- bloc-1 END -->
-
-<!-- bloc-2 -->
-<div class="bloc bgc-charcoal d-bloc " id="bloc-2">
-	<div class="container bloc-lg">
-		<div class="row">
-			<div class="col-sm-12">
-				<h2 class="text-center mg-md">
-					Countries
-				</h2>
-			</div>
-		</div>
-		<div class="row voffset">
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="../static/img/placeholder-image.png" data-gallery-id="gallery-1"><img src="../static/img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="img/placeholder-image.png" data-gallery-id="gallery-1"><img src="img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="img/placeholder-image.png" data-gallery-id="gallery-1"><img src="img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="img/placeholder-image.png" data-gallery-id="gallery-1"><img src="img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-		</div>
-		<div class="row voffset">
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="img/placeholder-image.png" data-gallery-id="gallery-1"><img src="img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="img/placeholder-image.png" data-gallery-id="gallery-1"><img src="img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="img/placeholder-image.png" data-gallery-id="gallery-1"><img src="img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-			<div class="col-sm-3">
-				<a href="#" data-lightbox="img/placeholder-image.png" data-gallery-id="gallery-1"><img src="img/placeholder-image.png" class="img-responsive" /></a>
-				<h3 class="mg-md">
-					Title goes here
-				</h3>
-				<p>
-					Lorem ipsum dolor sit amet, adipiscing elit Aenean commodo ligula eget.
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- bloc-2 END -->
-
-<!-- bloc-3 -->
-<div class="bloc bgc-charcoal d-bloc" id="bloc-3">
-	<div class="container bloc-lg">
-		<div class="row">
-			<div class="col-sm-3">
-				<h3 class="mg-md bloc-mob-center-text">
-					About
-				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">The team</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Contact us</a>
-			</div>
-			<div class="col-sm-3">
-				<h3 class="mg-md bloc-mob-center-text">
-					Get the App
-				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">iPhone</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Android</a>
-			</div>
-			<div class="col-sm-3">
-				<h3 class="mg-md bloc-mob-center-text">
-					Follow Us
-				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">Twitter</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Facebook</a>
-			</div>
-			<div class="col-sm-3">
-				<h3 class="mg-md bloc-mob-center-text">
-					Company
-				</h3><a href="index.html" class="a-btn a-block bloc-mob-center-text">Terms of use</a><a href="index.html" class="a-btn a-block bloc-mob-center-text">Privacy</a>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- bloc-3 END -->
-
-<!-- ScrollToTop Button -->
-<a class="bloc-button btn btn-d scrollToTop" onclick="scrollToTarget('1')"><span class="fa fa-chevron-up"></span></a>
-<!-- ScrollToTop Button END-->
+	<!-- Main container END -->
 
 
-</div>
-<!-- Main container END -->
-    
 
-
-<!-- Preloader -->
-<div id="page-loading-blocs-notifaction"></div>
-<!-- Preloader END -->
+	<!-- Preloader -->
+	<div id="page-loading-blocs-notifaction"></div>
+	<!-- Preloader END -->
 
 </body>
+
 </html>
