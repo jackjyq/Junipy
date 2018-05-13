@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <title>JQVMap - World Map</title>
+    
+    <link href="./css/jqvmap.css" media="screen" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.vmap.js"></script>
+    <script type="text/javascript" src="js/jquery.vmap.world.js" charset="utf-8"></script>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function() {
+      jQuery('#vmap').vectorMap({ map: 'world_en' });
+    });
+    </script>
+  </head>
+  <body>
+    <div id="vmap" style="width: 600px; height: 400px;"></div>
+  </body>
+</html>
