@@ -91,16 +91,13 @@ def download_introduction(code):
     try:
         page = urllib.request.urlopen(intro_url).read()
         soup = BeautifulSoup(page, 'html.parser')
-        target = soup.find_all('div', {'class', 'category_data'})[0]
-        print(type(target))
-        # target = re.sub(r'^.*>', target)
-        print(target)
-
+        tag = soup.find_all('div', {'class', 'category_data'})[0]
+        intro = tag.contents[0]
         info(intro_url, 'has been parsed')
     except urllib.error.HTTPError:
         info(intro_url, 'not found')
-        return ''
-    return True
+        return NON_INTRO
+    return intro
 
 ######################### data process function ########################
 def wb_csv_parse(indicator, title_row=4, data_col=4, code_col=1):
@@ -375,76 +372,75 @@ def update_collection_flag(country, flag):
     instance.save()
 
 
+class Collection_introduction(Document):
+    code = StringField(required=True, primary_key=True)
+    intro = StringField(required=True)
+
+    def __init__(self, code, intro, *args, **values):
+        super().__init__(*args, **values)
+        self.code = code
+        self.intro = intro
+
+
+def update_collection_introduction(code, intro):
+    instance = Collection_introduction(code, intro)
+    instance.save()
 
 ############################### interface ###############################
-def init( retrieve_indicator=True,
-          retrieve_flag=True,
-          purge_database=False,
-          update_overview=True,
-          update_indicator=True,
-          update_flag=True
+def init( rebuild_overview=True,
+          rebuild_indicator=True,
+          rebuild_flag=True,
+          rebuild_introduction=True,
+          deep_rebuild=False
         ):
     # Description:
     # retrieve data from data source, and update the database
     # once the data base has been setup, you don't need to run it again
     #
     # Arguments:
-    # download_indicator: 
-    #   download csv files from worldbank
-    # download_flag;
-    #   download gif files from CIA website
-    # purge_database:
-    #   drop all collections before update them
+    # deep_rebuild:
+    #   drop collection before update them
+    #   this flag will only apply on collections which need to be rebuild
     #   normally, you don't need to do that before update
-    #   if you set purge_database=True and update_xx to be False
-    #   all data will be erased in database
-    # update_overview:
-    #   update Collection_overview
-    # update_indicator:
-    #   update Collection_indicator
-
-    # create or update database
     global global_codes
     global global_years
     global global_indicators
+    # connect to database
+    db_client = connect(host=DB_URL)    
 
     # dowload and preprocess indicator
-    if retrieve_indicator:
+    if (rebuild_overview or rebuild_indicator):
         for indicator in global_indicators.keys():
             download_indicator(indicator)
     # parse and merge indicator dictionary
     all_in_one_dict = get_all_in_one_dict()
 
-    # download flag file to GIF_PATH
-    if retrieve_flag:
-        for code in global_codes.keys():
-            download_flag(code)
-
-    # connect to database
-    db_client = connect(host=DB_URL)    
-
-    # drop all collection first
-    if purge_database:
-        info("purge database")
-        Collection_overview.drop_collection()
-        Collection_indicator.drop_collection()
-        Collection_flag.drop_collection()
-
-    # import to collection_overview
-    if update_overview:
+    # overview
+    if rebuild_overview:
+        if deep_rebuild:
+            info("purge overview collection")
+            Collection_overview.drop_collection()
         lastest_GDP = get_latest_GDP_dict(all_in_one_dict)
         info("importing lastest_GDP to Collection_overview...")
         update_collection_overview('lastest_GDP', lastest_GDP)
     
-    # import to collection_indicator
-    if update_indicator:
+    # indicator
+    if rebuild_indicator:
+        if deep_rebuild:
+            info("purge indicator collection")
+            Collection_indicator.drop_collection()
         for code in global_codes.keys():
             info("importing ", code, " to Collection_indicator...")
             data_dict = get_indicator_dict(code, all_in_one_dict)
             update_collection_indicator(code, data_dict)
 
-    # import flag to collection
-    if update_flag:
+    # flag
+    if rebuild_flag:
+        if deep_rebuild:
+            info("purge indicator flag")
+            Collection_flag.drop_collection()
+        for code in global_codes.keys():
+            download_flag(code)
         for code in global_codes.keys():
             flag_file = GIF_PATH + 'flag_' + code + '.gif'
             if not os.path.isfile(flag_file):
@@ -454,6 +450,14 @@ def init( retrieve_indicator=True,
             info('uploading ', flag_file, 'to collection...')
             update_collection_flag(code, flag_file)
 
+    # introduction
+    if rebuild_introduction:
+        if deep_rebuild:
+            info("purge indicator introduction")
+            Collection_introduction.drop_collection()
+        for code in global_codes.keys():
+            intro = download_introduction(code)
+            update_collection_introduction(code, intro)
 
     # disconnect to database
     db_client.close()
@@ -516,6 +520,16 @@ def query(col, doc):
         flag_image = instance.flag.read()
         return flag_image
 
+    elif col == INTRODUCTION:
+        # Input:
+        #   doc is the country code, eg. 'USA'
+        # Return:
+        #   a file object
+        #
+        if Collection_introduction.objects(code=doc):
+            intro =  Collection_introduction.objects(code=doc)[0].intro
+            return intro
+
     else:   # invalid collection name
         info(col, " is not a valid collection")
     return False
@@ -525,24 +539,19 @@ def query(col, doc):
 
 ############################# example usage  ############################
 if __name__ == "__main__":
-    # init(retrieve_indicator=False,
-    #       retrieve_flag=True,
-    #       purge_database=False,
-    #       update_overview=False,
-    #       update_indicator=False,
-    #       update_flag=True)    # only use to change the content in database
-    download_introduction('USA')
+    # init(rebuild_overview=True,
+    #      rebuild_indicator=True,
+    #      rebuild_flag=True,
+    #      rebuild_introduction=True,
+    #      deep_rebuild=False
+    # )    
 
     db_client = connect(host=DB_URL)
 
-    # query overview
-    # print(query(OVERVIEW, 'lastest_GDP'))
-
-    # query indicator
-    # print(query(INDICATOR, 'USA')['1990'])
-
-    # query flag 
-    # print(query(FLAG, 'ZWE'))
+    print(query(OVERVIEW, 'lastest_GDP'))
+    print(query(INDICATOR, 'USA')['1990'])
+    print(query(FLAG, 'ZWE'))
+    print(query(INTRODUCTION, 'ALA'))
 
     db_client.close()
 
