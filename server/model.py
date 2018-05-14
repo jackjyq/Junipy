@@ -7,8 +7,9 @@
 #   please scroll down and read from ### interface ### section
 
 import urllib.request, urllib.error
+from bs4 import BeautifulSoup
 import requests
-import csv
+import csv, re
 import copy
 import json
 import zipfile
@@ -64,19 +65,41 @@ def download_indicator(indicator):
 def download_flag(code):
     # download country flag from CIA website to GIF_PATH
     global global_codes
-    flag = dict()
     flag_prefix = 'https://www.cia.gov/library//publications/'\
                   + 'the-world-factbook/graphics/flags/large/'
     flag_suffix = '-lgflag.gif'
     short_code = global_codes[code]['short'].lower()
     flag_url = flag_prefix + short_code + flag_suffix
-    gif_file_path = GIF_PATH + code + '.gif'
+    gif_file_path = GIF_PATH + 'flag_' + code + '.gif'
     # starting download
     try:
         urllib.request.urlretrieve(flag_url, gif_file_path)
         info(gif_file_path + 'has been downloaded')
     except urllib.error.HTTPError:
         info(gif_file_path + 'does not exist')
+        return False
+    return True
+
+
+def download_introduction(code):
+    global global_codes
+    intro_prefix = 'https://www.cia.gov/library//publications/'\
+                    + 'the-world-factbook/geos/'
+    intro_suffix = '.html'
+    short_code = global_codes[code]['short'].lower()
+    intro_url = intro_prefix + short_code + intro_suffix
+    try:
+        page = urllib.request.urlopen(intro_url).read()
+        soup = BeautifulSoup(page, 'html.parser')
+        target = soup.find_all('div', {'class', 'category_data'})[0]
+        print(type(target))
+        # target = re.sub(r'^.*>', target)
+        print(target)
+
+        info(intro_url, 'has been parsed')
+    except urllib.error.HTTPError:
+        info(intro_url, 'not found')
+        return ''
     return True
 
 ######################### data process function ########################
@@ -423,7 +446,7 @@ def init( retrieve_indicator=True,
     # import flag to collection
     if update_flag:
         for code in global_codes.keys():
-            flag_file = GIF_PATH + code + '.gif'
+            flag_file = GIF_PATH + 'flag_' + code + '.gif'
             if not os.path.isfile(flag_file):
                 # use default flag file
                 flag_file = NON_FLAG
@@ -502,17 +525,24 @@ def query(col, doc):
 
 ############################# example usage  ############################
 if __name__ == "__main__":
-    # init()    # only use to change the content in database
+    # init(retrieve_indicator=False,
+    #       retrieve_flag=True,
+    #       purge_database=False,
+    #       update_overview=False,
+    #       update_indicator=False,
+    #       update_flag=True)    # only use to change the content in database
+    download_introduction('USA')
+
     db_client = connect(host=DB_URL)
 
     # query overview
-    print(query(OVERVIEW, 'lastest_GDP'))
+    # print(query(OVERVIEW, 'lastest_GDP'))
 
     # query indicator
-    print(query(INDICATOR, 'USA')['1990'])
+    # print(query(INDICATOR, 'USA')['1990'])
 
     # query flag 
-    print(query(FLAG, 'ZWE'))
+    # print(query(FLAG, 'ZWE'))
 
     db_client.close()
 

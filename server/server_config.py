@@ -11,10 +11,11 @@ GIF_PATH = './tmp/' # gif file will be download here
 
 # flag cache folder
 FLAG_CACHE = './static/'   # used to store retrieved flag image
+# LOCATOR_CACHE = './static/'   # used to store retrieved locator image
 
-# a picture used when no flag can be found
+# default pictures
 NON_FLAG = './static/default_flag.gif'     
-
+# NON_LOCATOR = './static/default_flag.gif'  
 
 ########################### mlab configuration ##########################
 # database for debug
@@ -23,9 +24,11 @@ NON_FLAG = './static/default_flag.gif'
 DB_URL = "mongodb://junipy:comp9321@ds143907.mlab.com:43907/junipy_deploy"
 
 # database collections, used in query(col=database collection)
-OVERVIEW = 1
+OVERVIEW = 1    # latest GDP
 INDICATOR = 2
 FLAG = 3
+# LOCATOR = 4
+INTRODUCTION = 5    # country introduction
 
 ############################ data source domain #########################
 # the years to be processed
