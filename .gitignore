@@ -5,7 +5,7 @@ __pycache__/
 .idea/
 
 # Server run-time files
-/server/tmp/
+/server/tmp/*
 !/server/tmp/.gitkeep
 
 # mac os

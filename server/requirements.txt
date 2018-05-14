@@ -1,8 +1,12 @@
 astroid==1.6.3
+backports.functools-lru-cache==1.5
+beautifulsoup4==4.6.0
+bs4==0.0.1
 certifi==2018.4.16
 chardet==3.0.4
 click==6.7
 colorama==0.3.9
+enum34==1.1.6
 Flask==1.0.2
 idna==2.6
 isort==4.3.4
@@ -16,6 +20,7 @@ pylint==1.8.4
 pymongo==3.6.1
 requests==2.18.4
 rope==0.10.7
+singledispatch==3.4.0.3
 six==1.11.0
 urllib3==1.22
 Werkzeug==0.14.1
