@@ -5,7 +5,7 @@
 
 ## Important Links
 
-- [Junipy demo website](http://45.76.176.41/)
+- [Junipy demo website](http://junipy.jackj.me/)
 - [Junipy trello board](https://trello.com/b/BLktTIOc/junipy)
 - [Assignment 3: Design and Development of a Data Mashup Application](https://webcms3.cse.unsw.edu.au/COMP9321/18s1/resources/16378)
 
