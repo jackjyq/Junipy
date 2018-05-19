@@ -6,8 +6,17 @@ from flask import Flask,jsonify,Response,send_file
 import json
 import math
 
+global_indicator = {"GDP_total": "GDP",
+                    "GDP_agriculture": "agriculture",
+                    "GDP_industry": "industry",
+                    "GDP_service": "service",
+                    "CO2_emission": "CO2",
+                    "PM25_index": "PM25",
+                    "freshwater_withdrawals": "Freshwater",
+                    "Population": "Population"
+                    }
 app = Flask(__name__)
-@app.route('/lastest_GDP', methods=['GET'])
+@app.route('/GDP', methods=['GET'])
 def get_lastest_GDP():
 	data_dict = model.query(OVERVIEW, 'lastest_GDP')
 	data_remove = data_dict.copy()
@@ -27,7 +36,7 @@ def get_lastest_GDP():
 	return a
 
 
-@app.route('/sorted_GDP', methods=['GET'])
+@app.route('/SortedGDP', methods=['GET'])
 def get_sorted_GDP():
 	data_dict = model.query(OVERVIEW, 'lastest_GDP')
 	data_remove = data_dict.copy()
@@ -65,8 +74,9 @@ def get_detail(code):
 	short_code = global_codes[code]['short'].lower()
 	flag_url = flag_prefix + short_code + flag_suffix
 	data_detail['flag'] = flag_url
-	for i in global_indicators:
-		data_detail[i] = model.query(INDICATOR, code)['2016'][i]
+	for i in global_indicator:
+		n = global_indicator[i]
+		data_detail[n] = model.query(INDICATOR, code)['2016'][i]
 	return json.dumps(data_detail)
 
 
