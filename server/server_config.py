@@ -59,7 +59,7 @@ global_codes = {
         "short": "AF"
     },
     "ALA": {
-        "name": "Åland Islands",
+        "name": "Aland Islands",
         "short": "AX"
     },
     "ALB": {
