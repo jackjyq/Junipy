@@ -70,7 +70,7 @@
 					<div class="collapse navbar-collapse navbar-1">
 						<ul class="site-navigation nav navbar-nav">
 							<li>
-								<a href="index.html" class="ltc-snow">Home</a>
+								<a href={{url_for('home')}} class="ltc-snow">Home</a>
 							</li>
 						</ul>
 					</div>
@@ -116,7 +116,7 @@
 						<ul class="list-unstyled">
 							<li>
 								{% for i in range(0,62) %}
-								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+								<a href={{url_for('detail', country=CHN)}} class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
 							</li>
 						</ul>
 					</div>

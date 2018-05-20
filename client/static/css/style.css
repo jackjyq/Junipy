@@ -41,47 +41,34 @@ a:hover{text-decoration: none; cursor:pointer;}
 .bloc-lg{
 	padding:100px 50px;
 }
+.bloc-md{
+	padding:50px;
+}
 .bloc-sm{
 	padding:20px 50px;
 }
 
-/* = Full Width Blocs 
--------------------------------------------------------------- */
 
-.full-width-bloc{
-	padding-left:0;
-	padding-right:0;
+/* Background Textures */
+
+.bloc-bg-texture::before{
+	content:"";
+	background-size: 2px 2px;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left:0;
+	right:0;
 }
-.full-width-bloc .container{
-	width:100%;
-	max-width:100%!important;
-}
-.full-width-bloc .carousel img{
-	width:100%;
-	height:auto;
-}
-.full-width-bloc .navbar{
-	margin-left: 0px;
-	margin-right: 0px;
+.texture-fabric::before{
+	background: url("../img/texture-fabric.png");
 }
 
 
-/* Group Styles */
+/* Background Effects */
 
-.bloc-group{
-	display:flex;
-}
-.bloc-tile-2{
-	width:50%;
-}
-.bloc-tile-3{
-	width:33.33333333%;
-}
-.bloc-tile-4{
-	width:25%;
-}
-.bloc-tile-2 .container, .bloc-tile-3 .container, .bloc-tile-4 .container{
-	width:100%;
+.b-parallax{
+	background-attachment:fixed;
 }
 
 
@@ -135,13 +122,29 @@ a:hover{text-decoration: none; cursor:pointer;}
 	border-color:rgba(0,0,0,.3);
 }
 
+/* Row Margin Offsets */
+
+.voffset{
+	margin-top:30px;
+}
+
+/* Column No Gutters */
+
+.row-no-gutters{
+	margin-right:0;
+	margin-left:0;
+}
+.row.row-no-gutters > [class^="col-"],.row.row-no-gutters > [class*=" col-"] {
+	padding-right: 0;
+	padding-left: 0;
+}
+
 /* Bloc text custom styling */
 
 #bloc-0 .navbar-brand{
-	font-weight: 800;
+	font-size: 38px;
 	font-family: "Lobster Two";
-	font-size: 30px;
-	line-height: 40px;
+	line-height: 30px;
 }
 
 /* = NavBar
@@ -271,78 +274,31 @@ nav .caret{
 	margin: 6px -5px 0 0!important;
 	float: right;
 }
+/* = Sticky Nav
+-------------------------------------------------------------- */
 
-/* Force Mini Menu */
-.navbar-header{
-	float: none;
-}
-.navbar-toggle{
-	display: block;
-}
- .navbar-collapse.collapse{
-	display: none!important;
-}
- .navbar-collapse.collapse.in{
-	display: block!important;
-}
- .site-navigation{
-	transform:none!important;
-}
-.nav-invert .navbar-header{
-	float: none;
-	 width:100%;
-}
-.nav-invert .navbar-toggle{
-	float:left;
-}
-/* Rounded Bars Menu Icon */
-.navbar-toggle.menu-icon-rounded-bars .icon-bar{
-	height: 4px;
-	border-radius: 6px;
-}
-/* Drop Down Navigation */
-@media (min-width: 768px){
-	
-.mini-nav .special-dropdown-nav .site-navigation{
-	display: block;
-	position: absolute;
-	top: 80%;
-	z-index: 1000;
-	float: left;
-	min-width: 160px;
-	padding: 5px 0;
-	margin: 2px 0 0;
-	font-size: 14px;
-	text-align: left;
-	list-style: none;
-	background-color: #fff;
-	-webkit-background-clip: padding-box;
-	background-clip: padding-box;
-	border: 1px solid #ccc;
-	border: 1px solid rgba(0,0,0,.15);
-	border-radius: 4px;
-	-webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
-	box-shadow: 0 6px 12px rgba(0,0,0,.175);
-}
-.mini-nav .special-dropdown-nav .site-navigation li{
-	width:100%;
-}
-.special-dropdown-nav.collapsing{
-	transition: height 0.001s;
-}
-.mini-nav .special-dropdown-nav .site-navigation li a{
-	color: rgba(0,0,0,.6)!important;
-}
- }.navbar-toggle.menu-icon-rounded-bars{
-	margin-top:7px!important;
+.sticky-nav.sticky{
+	position:fixed;
+	top:0;
+	z-index:1000;
+	box-shadow:0 1px 2px rgba(0,0,0,.3);
+	 transition: all .2s ease-out;
 }
 
 /* = Bric adjustment margins
 -------------------------------------------------------------- */
 
+.mg-sm{
+	margin-top:10px;
+	margin-bottom:5px;
+}
 .mg-md{
 	margin-top:10px;
 	margin-bottom:20px;
+}
+.mg-lg{
+	margin-top:10px;
+	margin-bottom:40px;
 }
 
 /* = Buttons
@@ -380,8 +336,34 @@ button{
 	text-align:center;
 }
 
+/* = Icons
+-------------------------------------------------------------- */
+.icon-md{
+	font-size:30px!important;
+}
+.icon-round{
+	margin:0 auto;
+	border:2px solid transparent;
+	border-radius: 50%;
+	padding: 32px 30px 26px 30px;
+	min-width:80px;
+}
+.icon-round.icon-md,.icon-square.icon-md,.icon-rounded.icon-md{
+	min-width: 92px;
+}
+.icon-round.icon-lg,.icon-square.icon-lg,.icon-rounded.icon-lg{
+	min-width: 122px;
+}
+.icon-round.icon-xl,.icon-square.icon-xl,.icon-rounded.icon-xl{
+	min-width: 162px;
+}
 
 
+/* = Text & Icon Styles
+-------------------------------------------------------------- */
+.glow-t{
+	text-shadow:0 0 10px #FFF;
+}
 
 
 .panel-sq, .panel-sq .panel-heading, .panel-sq .panel-footer{
@@ -397,6 +379,22 @@ button{
 	border-radius:0 0 29px 29px;
 }
 
+/* = Dividers
+-------------------------------------------------------------- */
+.divider-h{
+	padding:20px 0;
+}
+.divider-h span{
+	display: block;
+	border-top:1px solid transparent;
+}
+.divider-half{
+	width: 50%;
+	margin: 0 auto;
+}
+.dropdown-menu .divider-h,.dropdown-menu .divider-half{
+	padding:0;
+}
 
 
 
@@ -421,6 +419,11 @@ button{
 	opacity: 1;
 }
 
+/* Hide Object */
+.object-hidden{
+	display:none;
+}
+
 /* = Custom Styling
 -------------------------------------------------------------- */
 
@@ -436,6 +439,26 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 .hero-bloc-text-sub{
 	font-size:36px;
 }
+.blocs-mobile-signup-text{
+	font-size:33px;
+}
+.right-bloc-freature{
+	background-color:transparent;
+	background:linear-gradient(49deg, rgba(0,0,0,0.0), rgba(255,255,255,0.0));
+	color:#FF2F92!important;
+}
+.numbers{
+	color:#FFAA00!important;
+	text-shadow:0px 0px 0px #FF7D78;
+}
+.flag-img{
+	padding:11px 0px 11px 11px;
+	width:318px;
+	border-style:solid;
+	border-width:20px 20px 20px 20px;
+	border-radius:10px 10px 10px 10px;
+	border-color:#C0C0C0;
+}
 
 /* = Colour
 -------------------------------------------------------------- */
@@ -446,8 +469,20 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	background-color:#2C3251;
 }
 
+/* Link colour styles */
+
+.ltc-white{
+	color:#FFFFFE!important;
+}
+.ltc-white:hover{
+	color:#cccccb!important;
+}
+
 /* Bloc image backgrounds */
 
+.bg-tracks{
+	background-image:url("../img/tracks.jpg");
+}
 
 
 
@@ -634,6 +669,12 @@ h1,h2,h3,h4,h5,h6,p,label,.btn,a{
 	margin-left:41%;
 }
 .bloc-mob-center-text{
+	text-align:center;
+}
+.blocs-mobile-signup-text{
+	text-align:center;
+}
+.blocs-mob-center-text{
 	text-align:center;
 }
  }
