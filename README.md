@@ -1,13 +1,12 @@
 # Junipy
 
-**J**unipy **u**niversal **n**ational **i**ndicator **p**arse and anal**y**se service
+![**J**unipy **u**niversal **n**ational **i**ndicator **p**arse and anal**y**se service](./documentation/title.png)
 
 
 ## Important Links
 
-- [Junipy demo website](http://45.76.176.41/)
 - [Junipy trello board](https://trello.com/b/BLktTIOc/junipy)
-- [Assignment 3: Design and Development of a Data Mashup Application](https://webcms3.cse.unsw.edu.au/COMP9321/18s1/resources/16378)
+- [Assignment Specification](https://webcms3.cse.unsw.edu.au/COMP9321/18s1/resources/16378)
 
 ## Team members
 
