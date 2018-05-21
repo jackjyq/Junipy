@@ -30,6 +30,7 @@ csv_list = csv_to_list('./country-codes.csv')
 title_list = csv_list[0]
 key_col = get_col('ISO3166-1-Alpha-3', title_list)
 name_col = get_col('official_name_en', title_list)
+iso2_col = get_col('ISO3166-1-Alpha-2', title_list)
 short_col = get_col('FIPS', title_list)
 
 
@@ -39,10 +40,12 @@ for row in content_list:
     key = row[key_col]
     value_dict = dict()
     name = row[name_col]
+    iso2 = row[iso2_col]
     short = row[short_col]
     if len(short) != 2: # discart any country do not has 2-letter short code
         continue
     value_dict['name'] = name
+    value_dict['iso2'] = iso2
     value_dict['short'] = short
     my_dict[key] = value_dict.copy()
     # print(key, name, short)
