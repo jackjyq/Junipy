@@ -16,18 +16,16 @@ def loadCountryFlag():
 def home():
 	response = requests.get(apiBase+"/home")
 	dict = json.loads(response.text)
-	print(dict['flags'])
-#	flagList = loadCountryFlag()
-#	print(flagList)
-	return render_template('home.html', GDP=dict['GDP'],flagList=dict['flags']), 200
+	print(len(dict['flags']))
+	return render_template('index.html', GDP=dict['GDP'],flagList=dict['flags']), 200
 
-#@app.route('/<country>', methods=['GET'])
-#def detail(country):
-#	response = requests.get(apiBase+"/detail/"+country)
-#	country = json.loads(response.text)
-#	return render_template('detail.html', country=country), 200
+@app.route('/<country>', methods=['GET'])
+def detail(country):
+	response = requests.get(apiBase+"/detail/"+country)
+	country = json.loads(response.text)
+	return render_template('detail.html', country=country), 200
 
-@app.route('/test/analysis', methods=['GET'])
+@app.route('/analysis', methods=['GET'])
 def analysis():
 	data = loadCountryFlag()
 #	response = requests.get(apiBase+"/analysis/")
