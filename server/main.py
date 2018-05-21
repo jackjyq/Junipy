@@ -12,7 +12,7 @@ global_indicator = {"GDP_total": "GDP",
                     "GDP_service": "Service",
                     "CO2_emission": "CO2",
                     "PM25_index": "PM25Index",
-                    "freshwater_withdrawals": "FreshwaterWithdrawals",
+                    "freshwater_withdrawals": "freshwaterWithdrawals",
                     "Population": "Population"
                     }
 
@@ -84,6 +84,14 @@ def get_detail(code):
 	for i in global_indicator:
 		n = global_indicator[i]
 		data_detail[n] = model.query(INDICATOR, code)['2016'][i]
+		data_detail[global_indicator[i]+'History'] = []
+	raw_data = model.query(INDICATOR, code)
+	for i in range(1990,2017):
+		year = str(i)
+		for j in raw_data[year]:
+			da = {'year':year,'value':raw_data[year][j]}
+			key = global_indicator[j] + 'History'
+			data_detail[key].append(da)
 	return json.dumps(data_detail)
 
 
@@ -105,4 +113,18 @@ def get_flags():
 if __name__ == "__main__":
 	db_client = connect(host=DB_URL)
 	app.run()
+	data_detail = {}
+	for i in global_indicator:
+		n = global_indicator[i]
+		data_detail[n] = model.query(INDICATOR, 'CHN')['2016'][i]
+		data_detail[global_indicator[i]+'History'] = []
+	raw_data = model.query(INDICATOR, 'CHN')
+	print(data_detail)
+	for i in range(1990,2017):
+		year = str(i)
+		for j in raw_data[year]:
+			da = {'year':year,'value':raw_data[year][j]}
+			key = global_indicator[j] + 'History'
+			data_detail[key].append(da)
+	print(data_detail)
 	db_client.close()
