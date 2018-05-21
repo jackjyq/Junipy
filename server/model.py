@@ -439,8 +439,13 @@ def init( rebuild_overview=True,
         if deep_rebuild:
             info("purge indicator flag")
             Collection_flag.drop_collection()
+
+        flag_list = []
         for code in global_codes.keys():
-            download_flag(code)
+            if download_flag(code):
+                flag_list.append(code)
+        print('flag_list =\n', flag_list)
+
         for code in global_codes.keys():
             flag_file = GIF_PATH + 'flag_' + code + '.gif'
             if not os.path.isfile(flag_file):
@@ -455,10 +460,13 @@ def init( rebuild_overview=True,
         if deep_rebuild:
             info("purge indicator introduction")
             Collection_introduction.drop_collection()
+        intro_list = []
         for code in global_codes.keys():
             intro = download_introduction(code)
+            if intro != NON_INTRO:
+                intro_list.append(code)
             update_collection_introduction(code, intro)
-
+        print('intro_list =\n', intro_list)
     # disconnect to database
     db_client.close()
     info('database has been updated')
@@ -549,8 +557,8 @@ if __name__ == "__main__":
     db_client = connect(host=DB_URL)
 
     # print(query(OVERVIEW, 'lastest_GDP'))
-    print(query(INDICATOR, 'USA')['1990'])
+    # print(query(INDICATOR, 'USA')['1990'])
     # print(query(FLAG, 'ZWE'))
-    print(query(INTRODUCTION, 'CHN'))
+    # print(query(INTRODUCTION, 'CHN'))
 
     db_client.close()
