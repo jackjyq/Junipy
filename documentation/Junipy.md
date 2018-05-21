@@ -10,242 +10,259 @@ All server response bodies and request bodies MUST be valid **[JSON](https://too
 ---
 The **Orders** URL (/orders/) is the base URL for reading and updating Order objects The table below shows all the Task-related operations, their URLs, methods, and payloads.
 
-#### Table 1. Order operations
+#### Table 1. Homepage
 |    Operation  | URL | Method | Returns | Inputs |
 | ---------- | --------------- |---- |--- |--- |
-| CreateOrder | /orders |POST | PaymentURI, [order](#Order) | [order](#Order) |
-| UpdateOrder | /orders/&lt;id&gt;/ | PUT | [order](#Order) | [order](#Order) |
-| GetOrder| /orders/&lt;id&gt;| GET | [order](#Order) | none |
-| CancelOrder| /orders/&lt;id&gt;| DELETE | [msg](#Msg) | none |
-| ReleaseOrder | /orders/release/&lt;id&gt;| POST | [msg](#Msg) | none |
-| PreparedOreder | /orders/prepare/&lt;id&gt;| PATCH | [order](#Order) | none |
-| CheckOrderPaied| /orders/paied/&lt;id&gt;| GET | ture/false |none|
-| GetAllOrders |  /orders | GET| [orderList](#OrderList)  | none |
-| GetOpenOrders | /orders/open/ | GET | [orderList](#OrderList) | none |
-| GetPaidOrders | /orders/paied/ | GET | [orderList](#OrderList) | none |
-| GetUnPaidOrders | /orders/unpaied/ | GET | [orderList](#OrderList)  | none |
-| GetReleaseOrders | /orders/release/ | GET | [orderList](#OrderList)  | none |
+| get GDP,flags | /home |GET |[GDP&Flags](#GDP&Flags) | None|
 
-### Payment :dollar:
 
-The **Payment** URL (/payments/) is the base URL for reading and updating User objects and supports the following operations:
+### Detail
 
-#### Table 2. Payment operations
+The **Detail** URL (/detail/) is the base URL for get country detail objects and supports the following operations:
+
+#### Table 2. country detail
 |    Operation    | URL | Method | Returns | Inputs |
 | ---------- | --------------- |---- |--- |--- |
-| CreatePayment | /payments/&lt;id&gt;/ |POST | [order](#Order) | [Payment](#Payment) |
-| GetPayment | /payments/&lt;id&gt;| GET | [payment](#Payment) | none |
+|get the detail of the country | /detail/&lt;code&gt;/ |GET | [detail](#detail) |country code |
+
 
 ## Responses :eyes:
 ----
-The Order API returns four possible payloads (as JSON object):
-* [Order List](#OrderList)
-* [Order](#Order)
-* [Payment](#Payment)
-* [Message](#MSG)
+The home API returns payloads (as JSON object):
+* [GDP&flags](#GDP&flags)
+* [Detail](#Detail)
 
 See below for details.
 
-### <a name="OrderList"></a> Order List Json
-A **order list** looks like this:
-```json
-[
-  {
-    "cost": 5.2,
-    "coffeType": 1,
-    "isPaied": false,
-    "orderID": "201802180001",
-    "isPrepared": false,
-    "date": "2018-02-30T20:40:30",
-    "addition": "no milk",
-    "payment": {
-    	"type": 2,
-    	"amount": 5.2,
-    	"cardNumber": "5037234512344321",
-    	"cardName": "Josh Smith",
-    	"expireDate": "03/20",
-		"byBarista": false
-    }
-  },
-  {
-    "cost": 6.5,
-    "coffeType": 5,
-    "isPaied": false,
-    "orderID": "201802180041",
-    "isPrepared": true,
-    "date": "2018-03-1T11:20:10",
-    "addition": "",
-    "payment": {
-    	"type": 1,
-    	"amount": 6.5,
-    	"cardNumber": "",
-    	"cardName": "",
-    	"expireDate": "",
-		"byBarista": true
-    }
-  }
-]
-
-```
-
-See **[Data Elements](#Data)** for more information on each property.
-
----
-
-#### <a name="Order"></a> Order Json
-A **order** looks like this:
+### <a name="GDP&flags"></a> GDP&flags Json
+A **GDP&flags** looks like this:
 ```json
 {
-    "cost": 5.2,
-    "coffeType": 1,
-    "isPaied": true,
-    "orderID": "201802180001",
-    "isPrepared": false,
-    "date": "2018-02-30T20:40:30",
-    "addition": "no milk",
-    "payment": {
-    	"type": 2,
-    	"amount": 5.2,
-    	"cardNumber": "5037234512344321",
-    	"cardName": "Josh Smith",
-    	"expireDate": "03/20"
-    }
-}
-```
-See **[Data Elements](#Data)** for more information on each property.
-
----
-
-### <a name="Payment"></a> Payment Json
-A **payment** looks like this:
-```json
-   {
-    	"type": 1,
-    	"amount": 5.2,
-    	"cardNumber": "",
-    	"cardName":"",
-    	"expireDate": ""
-    }
-```
-
-See **[Data Elements](#Data)** for more information on each property.
-
----
-
-### <a name="Msg"></a> Error Msg
-A **msg** example looks like this:
-```json
-   {
-      "error": "Repeat order ID"
-    }
-```
-
-See **[Data Elements](#Data)** for more information on each property.
-
-
-## <a name="Request"> Request :icecream:
----
-All payloads sent from the client to the server MUST be valid [JSON Media Type](https://tools.ietf.org/search/rfc4627) messages. The messages **SHOULD** be in simple name-value dictionary format based on the **INPUT** arguments from the [Order](#Order) Operations and the [Payment](#payment) Operations tables.
-
-* [Order](#Order)
-* [Payment](#Payment)
-
-#### <a name="Create"> Create order
----
-When the order was create, the *Payment* in Order Json must be **empty** and the *isPaid* should be **false** as well as *isPrepared*.
-```json
-{
-    "cost": 5.2,
-    "coffeType": 1,
-    "isPaied": false,
-    "orderID": "201802180001",
-    "isPrepared": false,
-    "date": "2018-02-30T20:40:30",
-    "addition": "no milk",
-    "payment": {
-    	"type": 0,
-    	"amount": 5.2,
-    	"cardNumber": "",
-    	"cardName": "",
-    	"expireDate": ""
-    }
+  "GDP": 
+        {"AD": 2858517699.11504, 
+        "AE": 348743265704.561, 
+        "AF": 19469022207.6357...
+        }, 
+  "flags": 
+        [
+          {"name": "Afghanistan", "flag": "\ud83c\udde6\ud83c\uddeb", "code": "AF"},
+          {"name": "Albania", "flag": "\ud83c\udde6\ud83c\uddf1", "code": "AL"},
+          {"name": "Algeria", "flag": "\ud83c\udde9\ud83c\uddff", "code": "DZ"},...          
+        ]
 }
 ```
 
-#### <a name="Create"> Create payment
+
+See **[Data Elements](#Data)** for more information on each property.
+
 ---
-When the payment was create, the **type** should be **1** or **2**. If the type is 2, then *cardNumber* , *cardName* and *expireDate* are required parameters.
 
-##### Cash payment
+#### <a name="Detail"></a> Detail Json
+
+A ** country detail** looks like this:
 ```json
-  {
-    	"type": 1,
-    	"amount": 5.2,
-    	"cardNumber": "",
-    	"cardName": "",
-    	"expireDate": ""
-    }
+{
+    "name": "United States of America",
+    "introduction": "Britain's American colonies broke with the mother country in 1776 and were recognized as the new nation of the United States of America following the Treaty of Paris in 1783. During the 19th and 20th centuries...",
+    "flag": "https://www.cia.gov/library//publications/the-world-factbook/graphics/flags/large/us-lgflag.gif",
+"GDPHistory": [
+        {
+            "year": "1990",
+            "value": "5979589000000"
+        },
+        {
+            "year": "1991",
+            "value": "6174043000000"
+        },
+        {
+            "year": "1992",
+            "value": "6539299000000"
+        }
+        ...
+    ],
+     "agriculture": null,
+     "agriculturePercent": null,
+    "agricultureHistory": [
+        {
+            "year": "1990",
+            "value": null
+        },
+        {
+            "year": "1991",
+            "value": null
+        },
+        {
+            "year": "1992",
+            "value": null
+        },
+        ...
+    ],
+    "industry": null,
+    "industryPrecent": null,
+    "industryHistory": [
+        {
+            "year": "1990",
+            "value": null
+        },
+        {
+            "year": "1991",
+            "value": null
+        },
+        {
+            "year": "1992",
+            "value": null
+        },
+        ...
+    ],
+    "service": null,
+    "servicePrecent": null,
+    "serviceHistory": [
+        {
+            "year": "1990",
+            "value": null
+        },
+        {
+            "year": "1991",
+            "value": null
+        },
+        {
+            "year": "1992",
+            "value": null
+        },
+        ...
+    ],
+    "CO2": null,
+    "CO2History": [
+        {
+            "year": "1990",
+            "value": "4823403.118"
+        },
+        {
+            "year": "1991",
+            "value": "4820847.219"
+        },
+        {
+            "year": "1992",
+            "value": "4909533.614"
+        },
+        ...
+    ],
+    "PM25Index": "9.19693412255931",
+    "PM25IndexHistory": [
+        {
+            "year": "1990",
+            "value": "11.3781550939233"
+        },
+        {
+            "year": "1991",
+            "value": null
+        },
+        {
+            "year": "1992",
+            "value": null
+        },
+       ...
+    ],
+    "freshwaterWithdrawals": null,
+    "freshwaterWithdrawalsHistory": [
+        {
+            "year": "1990",
+            "value": "465.1"
+        },
+        {
+            "year": "1991",
+            "value": null
+        },
+        {
+            "year": "1992",
+            "value": null
+        },
+        ...
+    ]
+}
 ```
 
-##### Card payment
-```json
-    {
-    	"type": 2,
-    	"amount": 6.0,
-    	"cardNumber": "5037234512344321",
-    	"cardName": "Josh Smith",
-    	"expireDate": "03/20"
-    }
-```
+
+
+
+
 
 ## <a name="Data"></a> Data Elements :sushi:
 ---
 There is all the parameters describtion
 
-##### <a name="OrderDetail"></a> Order detail
+##### <a name="home"></a> home detail
 
 |    Name  | Meaning | Type | Optional
 | --- | --- | --- |:----:|
-| cost | Cost of coffee | Int | :heavy_multiplication_x: |
-| [coffeeType](#CoffeeType) | The type of coffee | Int | :heavy_multiplication_x: |
-| isPaied | The order is paied or not | Bool | :heavy_multiplication_x: |
-| orderID | Order id | String | :heavy_multiplication_x:|
-| isPrepared | Coffee is already to release | Bool | :heavy_multiplication_x:|
-| date | Order create time | String | :heavy_multiplication_x:|
-| addition | addition of Order | String | :heavy_check_mark:|
-| payment| Payment detail | [Payment](#Payment) | :heavy_check_mark: |
+| GDP | [countrycode](#countryCode):latest year GDP | String:Int | :heavy_multiplication_x: |
+| flags | name:full name, flag:emoij, code:countrycode| String:String | :heavy_multiplication_x: |
 
-##### <a name="PaymenrDetail"></a> Payment detail
+
+##### <a name="Detail"></a> country detail
 
 |    Name  | Meaning | Type | Optional
 | --- | --- | --- |:----:|
-| [type](#PaymentType) | Type of payment | Int | :heavy_multiplication_x: |
-| amount | The amount of bill | Int | :heavy_multiplication_x: |
-| cardName | Name on credit card | String | :heavy_check_mark: |
-| cardNumber | Credit card number | String |:heavy_check_mark: |
-| expireDate | Credit expire date | String | :heavy_check_mark: |
+| name| country full name | String | :heavy_multiplication_x: |
+| introduction | country's short introduction | String | :heavy_multiplication_x: |
+| flag | URL of large flag picture | String | :heavy_multiplication_x:|
+| GDP | latest year GDP | String |:heavy_multiplication_x: |
+| GDPHistory | {year:,value:} | String:String | :heavy_multiplication_x: |
+| agriculture | latest year agriculture | String |:heavy_multiplication_x: | 
+| agriculturePrecent | latest year agriculture percentage | String |:heavy_multiplication_x: | 
+| agricultureHistory | {year:,value:} | String:String | :heavy_multiplication_x: |
+| industry | latest year industry | String |:heavy_multiplication_x: | 
+| industryPrecent | latest year industry percentage | String |:heavy_multiplication_x: | 
+| industryHistory | {year:,value:} | String:String | :heavy_multiplication_x: |
+| service | latest year service | String |:heavy_multiplication_x: | 
+| servicePrecent | latest year service percentage | String |:heavy_multiplication_x: | 
+| serviceHistory | {year:,value:} | String:String | :heavy_multiplication_x: |
+| CO2 | latest year CO2 emission | String |:heavy_multiplication_x: |
+| CO2History | {year:,value:} | String:String | :heavy_multiplication_x: |
+| PM25Index | latest year PM2.5 | String |:heavy_multiplication_x: |
+| PM25IndexHistory | {year:,value:} | String:String | :heavy_multiplication_x: |
+| freshwaterWithdrawals | latest year freshwaterWithdrawals | String |:heavy_multiplication_x: |
+| GDPHistory | {year:,value:} | String:String | :heavy_multiplication_x: |
+| population | latest year population | String |:heavy_multiplication_x: |
+| populationHistory | {year:,value:} | String:String | :heavy_multiplication_x: |
 
-#### <a name="CoffeeType"></a>  Coffe Type :coffee:
-```python
-	Espresso = 0
-	Double_Espresso = 1
-	Short_Macchiato = 2
-	Long_Macchiato = 3
-	Ristretto = 4
-	Long_Black = 5
-	Latte = 6
-	Cappuccino = 7
-	Flat_White = 8
-	Piccolo_Latte = 9
-	Mocha = 10
-	Affogato = 11
+#### <a name="countryCode"></a>  Country Code 
+```json
+	[
+    {
+        "name": "Afghanistan",
+        "flag": "🇦🇫",
+        "code": "AF",
+        "dial_code": "+93"
+    },
+    {
+        "name": "Åland Islands",
+        "flag": "🇦🇽",
+        "code": "AX",
+        "dial_code": "+358"
+    },
+    {
+        "name": "Albania",
+        "flag": "🇦🇱",
+        "code": "AL",
+        "dial_code": "+355"
+    },
+    {
+        "name": "Algeria",
+        "flag": "🇩🇿",
+        "code": "DZ",
+        "dial_code": "+213"
+    },
+    {
+        "name": "American Samoa",
+        "flag": "🇦🇸",
+        "code": "AS",
+        "dial_code": "+1684"
+    }
+    ...
+    ]
 ```
 
-#### <a name="PaymentType"></a> Payment Type :dollar:
-```python
-	Invailed = 0
-	Cash = 1
-	Card = 2
-```
+
 
 
