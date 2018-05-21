@@ -149,7 +149,7 @@
 							<li>
 
 								{% for i in range(0,41) %}
-								<a href={{url_for('detail', country='CHN')}} class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+								<a href={{url_for('detail', country=flagList[i]['code'])}} class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
 
 							</li>
 						</ul>
@@ -158,7 +158,7 @@
 						<ul class="list-unstyled">
 							<li>
 								{% for i in range(41,82) %}
-								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+								<a href={{url_for('detail', country=flagList[i]['code'])}}  class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
 							</li>
 						</ul>
 					</div>
@@ -166,7 +166,7 @@
 						<ul class="list-unstyled">
 							<li>
 								{% for i in range(82, 123) %}
-								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+								<a href={{url_for('detail', country=flagList[i]['code'])}}  class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
 							</li>
 						</ul>
 					</div>
@@ -174,7 +174,7 @@
 						<ul class="list-unstyled">
 							<li>
 								{% for i in range(123, 164) %}
-								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+								<a href={{url_for('detail', country=flagList[i]['code'])}}  class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
 							</li>
 						</ul>
 					</div>
@@ -182,7 +182,7 @@
 						<ul class="list-unstyled">
 							<li>
 								{% for i in range(164, 205) %}
-								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+								<a href={{url_for('detail', country=flagList[i]['code'])}}  class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
 							</li>
 						</ul>
 					</div>
@@ -191,7 +191,7 @@
 							<li>
 
 								{% for i in range(205, 246) %}
-								<a href="index.html" class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
+								<a href={{url_for('detail', country=flagList[i]['code'])}}  class="a-btn a-block">{{flagList[i]['flag']}}    {{flagList[i]['name']}}</a> {% endfor %}
 
 							</li>
 							<li>

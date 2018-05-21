@@ -111,7 +111,7 @@ def get_sorted_GDP():
 
 @app.route("/detail/<code>",methods = ["GET"])
 def get_detail(code):
-	code = country_change_code[code]
+	code = country_change_code[code.upper()]
 	data_detail = {}
 	data_detail['name'] = global_codes[code]['name']
 	data_detail['introduction'] = model.query(INTRODUCTION, code)

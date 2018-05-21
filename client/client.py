@@ -15,7 +15,7 @@ def loadCountryFlag():
 @app.route('/', methods=['POST','GET'])
 def home():
 	flagList = loadCountryFlag()
-#	print(len(flagList))
+#	print(flagList)
 	return render_template('home.html', flagList=flagList), 200
 
 @app.route('/<country>', methods=['POST','GET'])

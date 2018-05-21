@@ -28,6 +28,59 @@
 	<script src="https://gw.alipayobjects.com/as/g/datavis/g2/2.3.13/index.js"></script>
 	<!--    <script>G2.Global.setTheme('dark');</script>-->
 
+	<script>
+		function go() {
+			document.write("Hello World!");
+		}
+	</script>
+
+	<script>
+		function nFormatter(num) {
+			if (num == null) {
+				document.write("No Data");
+				return "No Data";
+			}
+			var si = [{
+					value: 1,
+					symbol: ""
+				},
+				{
+					value: 1E3,
+					symbol: "k"
+				},
+				{
+					value: 1E6,
+					symbol: "M"
+				},
+				{
+					value: 1E9,
+					symbol: "G"
+				}
+				//					  ,
+				//				{
+				//					value: 1E12,
+				//					symbol: "T"
+				//				},
+				//				{
+				//					value: 1E15,
+				//					symbol: "P"
+				//				},
+				//				{
+				//					value: 1E18,
+				//					symbol: "E"
+				//				}
+			];
+			var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+			var i;
+			for (i = si.length - 1; i > 0; i--) {
+				if (num >= si[i].value) {
+					break;
+				}
+			}
+			document.write((num / si[i].value).toFixed(1).replace(rx, "$1") + si[i].symbol);
+			return (num / si[i].value).toFixed(1).replace(rx, "$1") + si[i].symbol;
+		}
+	</script>
 	<!-- Google Analytics -->
 
 	<!-- Google Analytics END -->
@@ -127,7 +180,11 @@
 								GDP
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['GDP']}}
+								{% if country['GDP'] is not none %}
+								<script>
+									nFormatter({{country['GDP']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -142,7 +199,11 @@
 								Population
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{{country['Population']}}
+								{% if country['Population'] is not none %}
+								<script>
+									nFormatter({{country['Population']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -159,7 +220,11 @@
 								Industry
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['industry']}}
+								{% if country['Industry'] is not none %}
+								<script>
+									nFormatter({{country['Industry']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -174,7 +239,11 @@
 								Service
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{{country['service']}}
+								{% if country['Service'] is not none %}
+								<script>
+									nFormatter({{country['Service']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -191,7 +260,11 @@
 								Agriculture<br>
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['agriculture']}}
+								{% if country['Agriculture'] is not none %}
+								<script>
+									nFormatter({{country['Agriculture']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -206,7 +279,11 @@
 								Water consumption
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{{country['Freshwater']}}
+								{% if country['freshwaterWithdrawals'] is not none %}
+								<script>
+									nFormatter({{country['freshwaterWithdrawals']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -223,7 +300,11 @@
 								PM2.5
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['PM25']}}
+								{% if country['PM25Index'] is not none %}
+								<script>
+									nFormatter({{country['PM25Index']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -238,7 +319,11 @@
 								CO₂ emission
 							</h3>
 							<h3 class="blocs-mob-center-text numbers animated fadeInUp">
-								{{country['CO2']}}
+								{% if country['CO2'] is not none %}
+								<script>
+									nFormatter({{country['CO2']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -374,69 +459,73 @@
 
 						<div id="c2"></div>
 						<script>
-							var data = [{
-									month: 'Jan',
-									temperature: 7.0
-								},
-								{
-									month: 'Feb',
-									temperature: 6.9
-								},
-								{
-									month: 'Mar',
-									temperature: 9.5
-								},
-								{
-									month: 'Apr',
-									temperature: 14.5
-								},
-								{
-									month: 'May',
-									temperature: 18.2
-								},
-								{
-									month: 'Jun',
-									temperature: 21.5
-								},
-								{
-									month: 'Jul',
-									temperature: 25.2
-								},
-								{
-									month: 'Aug',
-									temperature: 26.5
-								},
-								{
-									month: 'Sep',
-									temperature: 23.3
-								},
-								{
-									month: 'Oct',
-									temperature: 18.3
-								},
-								{
-									month: 'Nov',
-									temperature: 13.9
-								},
-								{
-									month: 'Dec',
-									temperature: 9.6
-								}
-							];
+							var data = 
+								{{country['GDPHistory'] | tojson | safe}};
+//								[{
+//									year: '2000',
+//									value: 7.0
+//								},
+//								{
+//									year: '2001',
+//									value: 6.9
+//								},
+//								{
+//									year: '2002',
+//									value: 9.5
+//								},
+//								{
+//									year: '2003',
+//									value: 14.5
+//								},
+//								{
+//									year: '2004',
+//									value: 18.2
+//								},
+//								{
+//									year: '2005',
+//									value: 21.5
+//								},
+//								{
+//									year: '2006',
+//									value: 25.2
+//								},
+//								{
+//									year: '2007',
+//									value: 26.5
+//								},
+//								{
+//									year: '2008',
+//									value: 23.3
+//								},
+//								{
+//									year: '2009',
+//									value: 18.3
+//								},
+//								{
+//									year: '2010',
+//									value: 13.9
+//								},
+//								{
+//									year: '2011',
+//									value: 9.6
+//								}
+//							];
 							var chart = new G2.Chart({
 								id: 'c2',
 								forceFit: true,
 								height: 450
 							});
 							chart.source(data, {
-								month: {
-									range: [0, 1]
+								year: {
+									range: [0, 1],
+									alias: 'Year'
 								},
-								temperature: {
+								value: {
+									range: [0, 1],
 									alias: 'GDP'
 								}
 							});
-							chart.axis('temperature', {
+							chart.axis('year', {
 								labels: {
 									label: {
 										fill: '#FFCF2C'
@@ -445,7 +534,7 @@
 
 							});
 
-							chart.axis('month', {
+							chart.axis('value', {
 								labels: {
 									label: {
 										fill: '#FFCF2C'
@@ -453,8 +542,9 @@
 								}
 
 							});
-
-							chart.line().position('month*temperature').size(2).color('orange').shape('smooth');
+							
+							chart.area().position('year*value').color('l(90) 0:#FFCF2C 0.8:#2c3251 1:#2c3251').shape('smooth');
+							chart.line().position('year*value').size(2).color('#FFCF2C').shape('smooth');
 							chart.render();
 						</script>
 
