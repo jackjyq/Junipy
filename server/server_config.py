@@ -58,25 +58,21 @@ global_codes = {
         "name": "Afghanistan",
         "short": "AF"
     },
-    "ALA": {
-        "name": "Åland Islands",
-        "short": "AX"
-    },
     "ALB": {
         "name": "Albania",
         "short": "AL"
     },
     "DZA": {
         "name": "Algeria",
-        "short": "DZ"
+        "short": "AG"
     },
     "ASM": {
         "name": "American Samoa",
-        "short": "AS"
+        "short": "AQ"
     },
     "AND": {
         "name": "Andorra",
-        "short": "AD"
+        "short": "AN"
     },
     "AGO": {
         "name": "Angola",
@@ -84,15 +80,15 @@ global_codes = {
     },
     "AIA": {
         "name": "Anguilla",
-        "short": "AI"
+        "short": "AV"
     },
     "ATA": {
         "name": "Antarctica",
-        "short": "AQ"
+        "short": "AY"
     },
     "ATG": {
         "name": "Antigua and Barbuda",
-        "short": "AG"
+        "short": "AC"
     },
     "ARG": {
         "name": "Argentina",
@@ -104,31 +100,31 @@ global_codes = {
     },
     "ABW": {
         "name": "Aruba",
-        "short": "AW"
+        "short": "AA"
     },
     "AUS": {
         "name": "Australia",
-        "short": "AU"
+        "short": "AS"
     },
     "AUT": {
         "name": "Austria",
-        "short": "AT"
+        "short": "AU"
     },
     "AZE": {
         "name": "Azerbaijan",
-        "short": "AZ"
+        "short": "AJ"
     },
     "BHS": {
         "name": "Bahamas",
-        "short": "BS"
+        "short": "BF"
     },
     "BHR": {
         "name": "Bahrain",
-        "short": "BH"
+        "short": "BA"
     },
     "BGD": {
         "name": "Bangladesh",
-        "short": "BD"
+        "short": "BG"
     },
     "BRB": {
         "name": "Barbados",
@@ -136,7 +132,7 @@ global_codes = {
     },
     "BLR": {
         "name": "Belarus",
-        "short": "BY"
+        "short": "BO"
     },
     "BEL": {
         "name": "Belgium",
@@ -144,15 +140,15 @@ global_codes = {
     },
     "BLZ": {
         "name": "Belize",
-        "short": "BZ"
+        "short": "BH"
     },
     "BEN": {
         "name": "Benin",
-        "short": "BJ"
+        "short": "BN"
     },
     "BMU": {
         "name": "Bermuda",
-        "short": "BM"
+        "short": "BD"
     },
     "BTN": {
         "name": "Bhutan",
@@ -160,19 +156,19 @@ global_codes = {
     },
     "BOL": {
         "name": "Bolivia (Plurinational State of)",
-        "short": "BO"
+        "short": "BL"
     },
     "BES": {
         "name": "Bonaire, Sint Eustatius and Saba",
-        "short": "BQ"
+        "short": "NL"
     },
     "BIH": {
         "name": "Bosnia and Herzegovina",
-        "short": "BA"
+        "short": "BK"
     },
     "BWA": {
         "name": "Botswana",
-        "short": "BW"
+        "short": "BC"
     },
     "BVT": {
         "name": "Bouvet Island",
@@ -186,21 +182,25 @@ global_codes = {
         "name": "British Indian Ocean Territory",
         "short": "IO"
     },
+    "VGB": {
+        "name": "British Virgin Islands",
+        "short": "VI"
+    },
     "BRN": {
         "name": "Brunei Darussalam",
-        "short": "BN"
+        "short": "BX"
     },
     "BGR": {
         "name": "Bulgaria",
-        "short": "BG"
+        "short": "BU"
     },
     "BFA": {
         "name": "Burkina Faso",
-        "short": "BF"
+        "short": "UV"
     },
     "BDI": {
         "name": "Burundi",
-        "short": "BI"
+        "short": "BY"
     },
     "CPV": {
         "name": "Cabo Verde",
@@ -208,7 +208,7 @@ global_codes = {
     },
     "KHM": {
         "name": "Cambodia",
-        "short": "KH"
+        "short": "CB"
     },
     "CMR": {
         "name": "Cameroon",
@@ -220,31 +220,39 @@ global_codes = {
     },
     "CYM": {
         "name": "Cayman Islands",
-        "short": "KY"
+        "short": "CJ"
     },
     "CAF": {
         "name": "Central African Republic",
-        "short": "CF"
+        "short": "CT"
     },
     "TCD": {
         "name": "Chad",
-        "short": "TD"
+        "short": "CD"
     },
     "CHL": {
         "name": "Chile",
-        "short": "CL"
+        "short": "CI"
     },
     "CHN": {
         "name": "China",
-        "short": "CN"
+        "short": "CH"
+    },
+    "HKG": {
+        "name": "China, Hong Kong Special Administrative Region",
+        "short": "HK"
+    },
+    "MAC": {
+        "name": "China, Macao Special Administrative Region",
+        "short": "MC"
     },
     "CXR": {
         "name": "Christmas Island",
-        "short": "CX"
+        "short": "KT"
     },
     "CCK": {
         "name": "Cocos (Keeling) Islands",
-        "short": "CC"
+        "short": "CK"
     },
     "COL": {
         "name": "Colombia",
@@ -252,27 +260,19 @@ global_codes = {
     },
     "COM": {
         "name": "Comoros",
-        "short": "KM"
+        "short": "CN"
     },
     "COG": {
         "name": "Congo",
-        "short": "CG"
-    },
-    "COD": {
-        "name": "Congo (Democratic Republic of the)",
-        "short": "CD"
+        "short": "CF"
     },
     "COK": {
         "name": "Cook Islands",
-        "short": "CK"
+        "short": "CW"
     },
     "CRI": {
         "name": "Costa Rica",
-        "short": "CR"
-    },
-    "CIV": {
-        "name": "Côte d'Ivoire",
-        "short": "CI"
+        "short": "CS"
     },
     "HRV": {
         "name": "Croatia",
@@ -283,8 +283,8 @@ global_codes = {
         "short": "CU"
     },
     "CUW": {
-        "name": "Curaçao",
-        "short": "CW"
+        "name": "Curaao",
+        "short": "UC"
     },
     "CYP": {
         "name": "Cyprus",
@@ -292,11 +292,23 @@ global_codes = {
     },
     "CZE": {
         "name": "Czechia",
-        "short": "CZ"
+        "short": "EZ"
+    },
+    "CIV": {
+        "name": "Cte d'Ivoire",
+        "short": "IV"
+    },
+    "PRK": {
+        "name": "Democratic People's Republic of Korea",
+        "short": "KN"
+    },
+    "COD": {
+        "name": "Democratic Republic of the Congo",
+        "short": "CG"
     },
     "DNK": {
         "name": "Denmark",
-        "short": "DK"
+        "short": "DA"
     },
     "DJI": {
         "name": "Djibouti",
@@ -304,11 +316,11 @@ global_codes = {
     },
     "DMA": {
         "name": "Dominica",
-        "short": "DM"
+        "short": "DO"
     },
     "DOM": {
         "name": "Dominican Republic",
-        "short": "DO"
+        "short": "DR"
     },
     "ECU": {
         "name": "Ecuador",
@@ -320,11 +332,11 @@ global_codes = {
     },
     "SLV": {
         "name": "El Salvador",
-        "short": "SV"
+        "short": "ES"
     },
     "GNQ": {
         "name": "Equatorial Guinea",
-        "short": "GQ"
+        "short": "EK"
     },
     "ERI": {
         "name": "Eritrea",
@@ -332,7 +344,7 @@ global_codes = {
     },
     "EST": {
         "name": "Estonia",
-        "short": "EE"
+        "short": "EN"
     },
     "ETH": {
         "name": "Ethiopia",
@@ -360,31 +372,31 @@ global_codes = {
     },
     "GUF": {
         "name": "French Guiana",
-        "short": "GF"
+        "short": "FG"
     },
     "PYF": {
         "name": "French Polynesia",
-        "short": "PF"
+        "short": "FP"
     },
     "ATF": {
         "name": "French Southern Territories",
-        "short": "TF"
+        "short": "FS"
     },
     "GAB": {
         "name": "Gabon",
-        "short": "GA"
+        "short": "GB"
     },
     "GMB": {
         "name": "Gambia",
-        "short": "GM"
+        "short": "GA"
     },
     "GEO": {
         "name": "Georgia",
-        "short": "GE"
+        "short": "GG"
     },
     "DEU": {
         "name": "Germany",
-        "short": "DE"
+        "short": "GM"
     },
     "GHA": {
         "name": "Ghana",
@@ -404,7 +416,7 @@ global_codes = {
     },
     "GRD": {
         "name": "Grenada",
-        "short": "GD"
+        "short": "GJ"
     },
     "GLP": {
         "name": "Guadeloupe",
@@ -412,7 +424,7 @@ global_codes = {
     },
     "GUM": {
         "name": "Guam",
-        "short": "GU"
+        "short": "GQ"
     },
     "GTM": {
         "name": "Guatemala",
@@ -420,15 +432,15 @@ global_codes = {
     },
     "GGY": {
         "name": "Guernsey",
-        "short": "GG"
+        "short": "GK"
     },
     "GIN": {
         "name": "Guinea",
-        "short": "GN"
+        "short": "GV"
     },
     "GNB": {
         "name": "Guinea-Bissau",
-        "short": "GW"
+        "short": "PU"
     },
     "GUY": {
         "name": "Guyana",
@@ -436,7 +448,7 @@ global_codes = {
     },
     "HTI": {
         "name": "Haiti",
-        "short": "HT"
+        "short": "HA"
     },
     "HMD": {
         "name": "Heard Island and McDonald Islands",
@@ -444,15 +456,11 @@ global_codes = {
     },
     "VAT": {
         "name": "Holy See",
-        "short": "VA"
+        "short": "VT"
     },
     "HND": {
         "name": "Honduras",
-        "short": "HN"
-    },
-    "HKG": {
-        "name": "Hong Kong",
-        "short": "HK"
+        "short": "HO"
     },
     "HUN": {
         "name": "Hungary",
@@ -460,7 +468,7 @@ global_codes = {
     },
     "ISL": {
         "name": "Iceland",
-        "short": "IS"
+        "short": "IC"
     },
     "IND": {
         "name": "India",
@@ -476,11 +484,11 @@ global_codes = {
     },
     "IRQ": {
         "name": "Iraq",
-        "short": "IQ"
+        "short": "IZ"
     },
     "IRL": {
         "name": "Ireland",
-        "short": "IE"
+        "short": "EI"
     },
     "IMN": {
         "name": "Isle of Man",
@@ -488,7 +496,7 @@ global_codes = {
     },
     "ISR": {
         "name": "Israel",
-        "short": "IL"
+        "short": "IS"
     },
     "ITA": {
         "name": "Italy",
@@ -500,7 +508,7 @@ global_codes = {
     },
     "JPN": {
         "name": "Japan",
-        "short": "JP"
+        "short": "JA"
     },
     "JEY": {
         "name": "Jersey",
@@ -520,19 +528,11 @@ global_codes = {
     },
     "KIR": {
         "name": "Kiribati",
-        "short": "KI"
-    },
-    "PRK": {
-        "name": "Korea (Democratic People's Republic of)",
-        "short": "KP"
-    },
-    "KOR": {
-        "name": "Korea (Republic of)",
         "short": "KR"
     },
     "KWT": {
         "name": "Kuwait",
-        "short": "KW"
+        "short": "KU"
     },
     "KGZ": {
         "name": "Kyrgyzstan",
@@ -544,19 +544,19 @@ global_codes = {
     },
     "LVA": {
         "name": "Latvia",
-        "short": "LV"
+        "short": "LG"
     },
     "LBN": {
         "name": "Lebanon",
-        "short": "LB"
+        "short": "LE"
     },
     "LSO": {
         "name": "Lesotho",
-        "short": "LS"
+        "short": "LT"
     },
     "LBR": {
         "name": "Liberia",
-        "short": "LR"
+        "short": "LI"
     },
     "LBY": {
         "name": "Libya",
@@ -564,31 +564,23 @@ global_codes = {
     },
     "LIE": {
         "name": "Liechtenstein",
-        "short": "LI"
+        "short": "LS"
     },
     "LTU": {
         "name": "Lithuania",
-        "short": "LT"
+        "short": "LH"
     },
     "LUX": {
         "name": "Luxembourg",
         "short": "LU"
     },
-    "MAC": {
-        "name": "Macao",
-        "short": "MO"
-    },
-    "MKD": {
-        "name": "Macedonia (the former Yugoslav Republic of)",
-        "short": "MK"
-    },
     "MDG": {
         "name": "Madagascar",
-        "short": "MG"
+        "short": "MA"
     },
     "MWI": {
         "name": "Malawi",
-        "short": "MW"
+        "short": "MI"
     },
     "MYS": {
         "name": "Malaysia",
@@ -608,11 +600,11 @@ global_codes = {
     },
     "MHL": {
         "name": "Marshall Islands",
-        "short": "MH"
+        "short": "RM"
     },
     "MTQ": {
         "name": "Martinique",
-        "short": "MQ"
+        "short": "MB"
     },
     "MRT": {
         "name": "Mauritania",
@@ -620,43 +612,39 @@ global_codes = {
     },
     "MUS": {
         "name": "Mauritius",
-        "short": "MU"
+        "short": "MP"
     },
     "MYT": {
         "name": "Mayotte",
-        "short": "YT"
+        "short": "MF"
     },
     "MEX": {
         "name": "Mexico",
         "short": "MX"
     },
     "FSM": {
-        "name": "Micronesia (FederatedStates of)",
+        "name": "Micronesia (Federated States of)",
         "short": "FM"
-    },
-    "MDA": {
-        "name": "Moldova (Republic of)",
-        "short": "MD"
     },
     "MCO": {
         "name": "Monaco",
-        "short": "MC"
+        "short": "MN"
     },
     "MNG": {
         "name": "Mongolia",
-        "short": "MN"
+        "short": "MG"
     },
     "MNE": {
         "name": "Montenegro",
-        "short": "ME"
+        "short": "MJ"
     },
     "MSR": {
         "name": "Montserrat",
-        "short": "MS"
+        "short": "MH"
     },
     "MAR": {
         "name": "Morocco",
-        "short": "MA"
+        "short": "MO"
     },
     "MOZ": {
         "name": "Mozambique",
@@ -664,11 +652,11 @@ global_codes = {
     },
     "MMR": {
         "name": "Myanmar",
-        "short": "MM"
+        "short": "BM"
     },
     "NAM": {
         "name": "Namibia",
-        "short": "NA"
+        "short": "WA"
     },
     "NRU": {
         "name": "Nauru",
@@ -692,19 +680,19 @@ global_codes = {
     },
     "NIC": {
         "name": "Nicaragua",
-        "short": "NI"
+        "short": "NU"
     },
     "NER": {
         "name": "Niger",
-        "short": "NE"
+        "short": "NG"
     },
     "NGA": {
         "name": "Nigeria",
-        "short": "NG"
+        "short": "NI"
     },
     "NIU": {
         "name": "Niue",
-        "short": "NU"
+        "short": "NE"
     },
     "NFK": {
         "name": "Norfolk Island",
@@ -712,7 +700,7 @@ global_codes = {
     },
     "MNP": {
         "name": "Northern Mariana Islands",
-        "short": "MP"
+        "short": "CQ"
     },
     "NOR": {
         "name": "Norway",
@@ -720,7 +708,7 @@ global_codes = {
     },
     "OMN": {
         "name": "Oman",
-        "short": "OM"
+        "short": "MU"
     },
     "PAK": {
         "name": "Pakistan",
@@ -728,23 +716,19 @@ global_codes = {
     },
     "PLW": {
         "name": "Palau",
-        "short": "PW"
-    },
-    "PSE": {
-        "name": "Palestine, State of",
         "short": "PS"
     },
     "PAN": {
         "name": "Panama",
-        "short": "PA"
+        "short": "PM"
     },
     "PNG": {
         "name": "Papua New Guinea",
-        "short": "PG"
+        "short": "PP"
     },
     "PRY": {
         "name": "Paraguay",
-        "short": "PY"
+        "short": "PA"
     },
     "PER": {
         "name": "Peru",
@@ -752,11 +736,11 @@ global_codes = {
     },
     "PHL": {
         "name": "Philippines",
-        "short": "PH"
+        "short": "RP"
     },
     "PCN": {
         "name": "Pitcairn",
-        "short": "PN"
+        "short": "PC"
     },
     "POL": {
         "name": "Poland",
@@ -764,19 +748,23 @@ global_codes = {
     },
     "PRT": {
         "name": "Portugal",
-        "short": "PT"
+        "short": "PO"
     },
     "PRI": {
         "name": "Puerto Rico",
-        "short": "PR"
+        "short": "RQ"
     },
     "QAT": {
         "name": "Qatar",
         "short": "QA"
     },
-    "REU": {
-        "name": "Réunion",
-        "short": "RE"
+    "KOR": {
+        "name": "Republic of Korea",
+        "short": "KS"
+    },
+    "MDA": {
+        "name": "Republic of Moldova",
+        "short": "MD"
     },
     "ROU": {
         "name": "Romania",
@@ -784,38 +772,42 @@ global_codes = {
     },
     "RUS": {
         "name": "Russian Federation",
-        "short": "RU"
+        "short": "RS"
     },
     "RWA": {
         "name": "Rwanda",
         "short": "RW"
     },
+    "REU": {
+        "name": "Runion",
+        "short": "RE"
+    },
     "BLM": {
-        "name": "Saint Barthélemy",
-        "short": "BL"
+        "name": "Saint Barthlemy",
+        "short": "TB"
     },
     "SHN": {
-        "name": "Saint Helena, Ascension and Tristan da Cunha",
+        "name": "Saint Helena",
         "short": "SH"
     },
     "KNA": {
         "name": "Saint Kitts and Nevis",
-        "short": "KN"
+        "short": "SC"
     },
     "LCA": {
         "name": "Saint Lucia",
-        "short": "LC"
+        "short": "ST"
     },
     "MAF": {
-        "name": "Saint Martin (French part)",
-        "short": "MF"
+        "name": "Saint Martin (French Part)",
+        "short": "RN"
     },
     "SPM": {
         "name": "Saint Pierre and Miquelon",
-        "short": "PM"
+        "short": "SB"
     },
     "VCT": {
-        "name": "Saint Vincent andthe Grenadines",
+        "name": "Saint Vincent and the Grenadines",
         "short": "VC"
     },
     "WSM": {
@@ -828,7 +820,7 @@ global_codes = {
     },
     "STP": {
         "name": "Sao Tome and Principe",
-        "short": "ST"
+        "short": "TP"
     },
     "SAU": {
         "name": "Saudi Arabia",
@@ -836,15 +828,11 @@ global_codes = {
     },
     "SEN": {
         "name": "Senegal",
-        "short": "SN"
-    },
-    "SRB": {
-        "name": "Serbia",
-        "short": "RS"
+        "short": "SG"
     },
     "SYC": {
         "name": "Seychelles",
-        "short": "SC"
+        "short": "SE"
     },
     "SLE": {
         "name": "Sierra Leone",
@@ -852,15 +840,15 @@ global_codes = {
     },
     "SGP": {
         "name": "Singapore",
-        "short": "SG"
+        "short": "SN"
     },
     "SXM": {
         "name": "Sint Maarten (Dutch part)",
-        "short": "SX"
+        "short": "NN"
     },
     "SVK": {
         "name": "Slovakia",
-        "short": "SK"
+        "short": "LO"
     },
     "SVN": {
         "name": "Slovenia",
@@ -868,7 +856,7 @@ global_codes = {
     },
     "SLB": {
         "name": "Solomon Islands",
-        "short": "SB"
+        "short": "BP"
     },
     "SOM": {
         "name": "Somalia",
@@ -876,103 +864,95 @@ global_codes = {
     },
     "ZAF": {
         "name": "South Africa",
-        "short": "ZA"
+        "short": "SF"
     },
     "SGS": {
         "name": "South Georgia and the South Sandwich Islands",
-        "short": "GS"
+        "short": "SX"
     },
     "SSD": {
         "name": "South Sudan",
-        "short": "SS"
+        "short": "OD"
     },
     "ESP": {
         "name": "Spain",
-        "short": "ES"
+        "short": "SP"
     },
     "LKA": {
         "name": "Sri Lanka",
-        "short": "LK"
+        "short": "CE"
     },
     "SDN": {
         "name": "Sudan",
-        "short": "SD"
+        "short": "SU"
     },
     "SUR": {
         "name": "Suriname",
-        "short": "SR"
-    },
-    "SJM": {
-        "name": "Svalbard and Jan Mayen",
-        "short": "SJ"
+        "short": "NS"
     },
     "SWZ": {
         "name": "Swaziland",
-        "short": "SZ"
+        "short": "WZ"
     },
     "SWE": {
         "name": "Sweden",
-        "short": "SE"
+        "short": "SW"
     },
     "CHE": {
         "name": "Switzerland",
-        "short": "CH"
+        "short": "SZ"
     },
     "SYR": {
         "name": "Syrian Arab Republic",
         "short": "SY"
     },
-    "TWN": {
-        "name": "Taiwan, Province of China",
-        "short": "TW"
-    },
     "TJK": {
         "name": "Tajikistan",
-        "short": "TJ"
-    },
-    "TZA": {
-        "name": "Tanzania, United Republic of",
-        "short": "TZ"
+        "short": "TI"
     },
     "THA": {
         "name": "Thailand",
         "short": "TH"
     },
+    "MKD": {
+        "name": "The former Yugoslav Republic of Macedonia",
+        "short": "MK"
+    },
     "TLS": {
         "name": "Timor-Leste",
-        "short": "TL"
+        "short": "TT"
     },
     "TGO": {
         "name": "Togo",
-        "short": "TG"
+        "short": "TO"
     },
     "TKL": {
         "name": "Tokelau",
-        "short": "TK"
+        "short": "TL"
     },
     "TON": {
         "name": "Tonga",
-        "short": "TO"
+        "short": "TN"
     },
     "TTO": {
         "name": "Trinidad and Tobago",
-        "short": "TT"
+        "short": "TD"
     },
     "TUN": {
         "name": "Tunisia",
-        "short": "TN"
+        "short": "TS"
     },
     "TUR": {
         "name": "Turkey",
-        "short": "TR"
+        "short": "TU"
     },
     "TKM": {
         "name": "Turkmenistan",
-        "short": "TM"
+        "short": "TX"
     },
     "TCA": {
         "name": "Turks and Caicos Islands",
-        "short": "TC"
+        "short": "TK"
     },
     "TUV": {
         "name": "Tuvalu",
@@ -984,7 +964,7 @@ global_codes = {
     },
     "UKR": {
         "name": "Ukraine",
-        "short": "UA"
+        "short": "UP"
     },
     "ARE": {
         "name": "United Arab Emirates",
@@ -992,15 +972,19 @@ global_codes = {
     },
     "GBR": {
         "name": "United Kingdom of Great Britain and Northern Ireland",
-        "short": "GB"
+        "short": "UK"
+    },
+    "TZA": {
+        "name": "United Republic of Tanzania",
+        "short": "TZ"
+    },
+    "VIR": {
+        "name": "United States Virgin Islands",
+        "short": "VQ"
     },
     "USA": {
         "name": "United States of America",
         "short": "US"
-    },
-    "UMI": {
-        "name": "United States Minor Outlying Islands",
-        "short": "UM"
     },
     "URY": {
         "name": "Uruguay",
@@ -1012,7 +996,7 @@ global_codes = {
     },
     "VUT": {
         "name": "Vanuatu",
-        "short": "VU"
+        "short": "NH"
     },
     "VEN": {
         "name": "Venezuela (Bolivarian Republic of)",
@@ -1020,34 +1004,26 @@ global_codes = {
     },
     "VNM": {
         "name": "Viet Nam",
-        "short": "VN"
-    },
-    "VGB": {
-        "name": "Virgin Islands (British)",
-        "short": "VG"
-    },
-    "VIR": {
-        "name": "Virgin Islands (U.S.)",
-        "short": "VI"
+        "short": "VM"
     },
     "WLF": {
-        "name": "Wallis and Futuna",
+        "name": "Wallis and Futuna Islands",
         "short": "WF"
     },
     "ESH": {
         "name": "Western Sahara",
-        "short": "EH"
+        "short": "WI"
     },
     "YEM": {
         "name": "Yemen",
-        "short": "YE"
+        "short": "YM"
     },
     "ZMB": {
         "name": "Zambia",
-        "short": "ZM"
+        "short": "ZA"
     },
     "ZWE": {
         "name": "Zimbabwe",
-        "short": "ZW"
+        "short": "ZI"
     }
 }
