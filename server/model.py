@@ -548,10 +548,9 @@ if __name__ == "__main__":
 
     db_client = connect(host=DB_URL)
 
-    print(query(OVERVIEW, 'lastest_GDP'))
+    # print(query(OVERVIEW, 'lastest_GDP'))
     print(query(INDICATOR, 'USA')['1990'])
-    print(query(FLAG, 'ZWE'))
-    print(query(INTRODUCTION, 'ALA'))
+    # print(query(FLAG, 'ZWE'))
+    print(query(INTRODUCTION, 'CHN'))
 
     db_client.close()
-
