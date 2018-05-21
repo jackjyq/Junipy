@@ -22,8 +22,9 @@ for i in global_codes:
 	country_change_code[shorts] = i
 
 def loadCountryFlags():
- with open('./static/country_flags.json') as json_data:
-  return json.load(json_data)
+ with open('./static/country_flags.json') as json_data:	 
+	
+   return json.load(json_data)
 
 app = Flask(__name__)
 
@@ -52,8 +53,11 @@ def get_home_data():
 	flags = []
 	#print(flags_data)
 	for i in flags_data:
-		flagsdata1 = {'name':i['name'],'flag':i['flag']}
-		alldata['flags'].append(flagsdata1)	
+		short_code = i['code']
+		if short_code in country_change_code:
+			code = country_change_code[short_code]
+			flagsdata1 = {'name':i['name'],'flag':i['flag'],'code':i['code']}
+			alldata['flags'].append(flagsdata1)	
 	a  = json.dumps(alldata)
 	return a
 
@@ -149,27 +153,6 @@ def get_flags():
 if __name__ == "__main__":
 	db_client = connect(host=DB_URL)
 	app.run()
-	data_dict = model.query(OVERVIEW, 'lastest_GDP')
-	data_remove = data_dict.copy()
-	for i in data_dict:
-		if data_dict[i] == None:
-			data_dict[i] = 0
-			data_remove.pop(i)
-		else:
-			shorts = global_codes[i]["short"]
-			data_remove[shorts] = data_remove.pop(i)
-			data_remove[shorts] = float(data_dict[i])
-	data_sort = sorted(data_remove.items(), key=lambda d:d[0])
-	data_sorted = defaultdict()
-	for i in data_sort:
-		data_sorted[i[0]] = i[1]
-	flags_data = loadCountryFlags()
-	flags = []
-	#print(flags_data)
-	for i in flags_data:
-		flagsdata1 = {'name':i['name'],'flag':i['flag']}
-		flags.append(flagsdata1)
-	print(flags)
 	#app.run()
 	# data_detail = {}
 	# for i in global_indicator:
