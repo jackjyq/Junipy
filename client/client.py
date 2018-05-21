@@ -16,10 +16,9 @@ def loadCountryFlag():
 def home():
 	response = requests.get(apiBase+"/home")
 	dict = json.loads(response.text)
-	print(len(dict['flags']))
 	return render_template('index.html', GDP=dict['GDP'],flagList=dict['flags']), 200
 
-@app.route('/<country>', methods=['GET'])
+@app.route('/detail/<country>', methods=['GET'])
 def detail(country):
 	response = requests.get(apiBase+"/detail/"+country)
 	country = json.loads(response.text)

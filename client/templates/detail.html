@@ -7,10 +7,10 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-	<link rel="shortcut icon" type="image/png" href="../favicon.png">
+	<link rel="shortcut icon" type="image/png" href="../static/imgfavicon.png">
 	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
-	<link rel="stylesheet" type="text/css" href="./static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
 
 	<link rel="stylesheet" type="text/css" href="../static/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/linecons.min.css">
@@ -96,7 +96,7 @@
 			<div class="container bloc-sm">
 				<nav class="navbar row">
 					<div class="navbar-header">
-						<a class="navbar-brand  ltc-white" href={{url_for( 'home')}}><img src="../static/img/Artboard.png" alt="logo" height="50" width="50" /> Junipy</a>
+						<a class="navbar-brand  ltc-white" href={{url_for('home')}}><img src="../static/img/Artboard.png" alt="logo" height="50" width="50" /> Junipy</a>
 						<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
 					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 				</button>
@@ -104,10 +104,10 @@
 					<div class="collapse navbar-collapse navbar-1">
 						<ul class="site-navigation nav navbar-nav">
 							<li>
-								<a href={{url_for( 'home')}}>Home</a>
+								<a href={{url_for('home')}}>Home</a>
 							</li>
 							<li>
-								<a href={{url_for( 'analysis')}}>Analysis</a>
+								<a href={{url_for('analysis')}}>Analysis</a>
 							</li>
 						</ul>
 					</div>
@@ -129,7 +129,7 @@
 											<div class="col-sm-12">
 												<div class="row voffset row-no-gutters">
 													<div class="col-sm-12">
-														<img src="img/lazyload-ph.png" data-src={{country[ 'flag']}} class="img-responsive lazyload" />
+														<img src="../static/img/lazyload-ph.png" data-src={{country[ 'flag']}} class="img-responsive lazyload" />
 													</div>
 												</div>
 											</div>
@@ -199,9 +199,9 @@
 								Population
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{% if country['Population'] is not none %}
+								{% if country['population'] is not none %}
 								<script>
-									nFormatter({{country['Population']}})
+									nFormatter({{country['population']}})
 								</script>
 								{% else %} No Data {%endif %}
 							</h3>
@@ -220,9 +220,9 @@
 								Industry
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{% if country['Industry'] is not none %}
+								{% if country['industry'] is not none %}
 								<script>
-									nFormatter({{country['Industry']}})
+									nFormatter({{country['industry']}})
 								</script>
 								{% else %} No Data {%endif %}
 							</h3>
@@ -239,9 +239,9 @@
 								Service
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{% if country['Service'] is not none %}
+								{% if country['service'] is not none %}
 								<script>
-									nFormatter({{country['Service']}})
+									nFormatter({{country['service']}})
 								</script>
 								{% else %} No Data {%endif %}
 							</h3>
@@ -260,9 +260,9 @@
 								Agriculture<br>
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{% if country['Agriculture'] is not none %}
+								{% if country['agriculture'] is not none %}
 								<script>
-									nFormatter({{country['Agriculture']}})
+									nFormatter({{country['agriculture']}})
 								</script>
 								{% else %} No Data {%endif %}
 							</h3>
