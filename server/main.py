@@ -18,7 +18,7 @@ global_indicator = {"GDP_total": "GDP",
 
 country_change_code = {}
 for i in global_codes:
-	shorts = global_codes[i]['short']	
+	shorts = global_codes[i]['iso2']	
 	country_change_code[shorts] = i
 
 app = Flask(__name__)
