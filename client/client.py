@@ -20,9 +20,15 @@ def home():
 
 @app.route('/<country>', methods=['POST','GET'])
 def detail(country):
-	response = requests.get(apiBase+"/detail/CHN")
+	response = requests.get(apiBase+"/detail/"+country)
 	country = json.loads(response.text)
 	return render_template('detail.html', country=country), 200
+
+@app.route('/analysis', methods=['POST','GET'])
+def analysis():
+#	response = requests.get(apiBase+"/analysis/")
+#	country = json.loads(response.text)
+	return render_template('analysis.html'), 200
 
 if __name__ == "__main__":
 	app.config['JSON_AS_ASCII'] = False
