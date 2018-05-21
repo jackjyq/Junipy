@@ -12,22 +12,27 @@ def loadCountryFlag():
 	with open('./static/data/country_flags.json') as json_data:
 		return json.load(json_data)
 		
-@app.route('/', methods=['POST','GET'])
+@app.route('/', methods=['GET'])
 def home():
-	flagList = loadCountryFlag()
+	response = requests.get(apiBase+"/home")
+	dict = json.loads(response.text)
+	print(dict['flags'])
+#	flagList = loadCountryFlag()
 #	print(flagList)
-	return render_template('home.html', flagList=flagList), 200
+	return render_template('home.html', GDP=dict['GDP'],flagList=dict['flags']), 200
 
-@app.route('/<country>', methods=['POST','GET'])
-def detail(country):
-	response = requests.get(apiBase+"/detail/"+country)
-	country = json.loads(response.text)
-	return render_template('detail.html', country=country), 200
+#@app.route('/<country>', methods=['GET'])
+#def detail(country):
+#	response = requests.get(apiBase+"/detail/"+country)
+#	country = json.loads(response.text)
+#	return render_template('detail.html', country=country), 200
 
-@app.route('/analysis', methods=['POST','GET'])
+@app.route('/test/analysis', methods=['GET'])
 def analysis():
+	data = loadCountryFlag()
 #	response = requests.get(apiBase+"/analysis/")
 #	country = json.loads(response.text)
+#	return render_template('analysis.html', data=data), 200
 	return render_template('analysis.html'), 200
 
 if __name__ == "__main__":
