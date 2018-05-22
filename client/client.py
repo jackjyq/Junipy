@@ -18,7 +18,7 @@ def home():
 	dict = json.loads(response.text)
 	return render_template('index.html', GDP=dict['GDP'],flagList=dict['flags']), 200
 
-@app.route('/detail/<country>', methods=['GET'])
+@app.route('/<country>', methods=['GET'])
 def detail(country):
 	response = requests.get(apiBase+"/detail/"+country)
 	country = json.loads(response.text)
@@ -27,9 +27,6 @@ def detail(country):
 @app.route('/analysis', methods=['GET'])
 def analysis():
 	data = loadCountryFlag()
-#	response = requests.get(apiBase+"/analysis/")
-#	country = json.loads(response.text)
-#	return render_template('analysis.html', data=data), 200
 	return render_template('analysis.html'), 200
 
 if __name__ == "__main__":

@@ -358,24 +358,24 @@
 						<div id="c1"></div>
 						<script>
 							var data = [{
-									year: 2011,
+									year: 2016,
 									area: 'Industry',
-									profit: 7620 * 0.539
+									profit: 76.20 * {{country['industry']}}
 								},
 								{
-									year: 2011,
+									year: 2016,
 									area: 'Agriculture',
-									profit: 7620 * 0.065
+									profit: 76.20 * {{country['agriculture']}}
 								},
 								{
-									year: 2011,
+									year: 2016,
 									area: 'others',
-									profit: 7620 * 0.162
+									profit: 76.20 - {{country['industry']}} - {{country['service']}} - {{country['agriculture']}}
 								},
 								{
-									year: 2011,
+									year: 2016,
 									area: 'Service',
-									profit: 7620 * 0.234
+									profit: 76.20 * {{country['service']}}
 								}
 							];
 							var Stat = G2.Stat;
