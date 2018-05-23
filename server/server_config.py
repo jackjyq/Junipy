@@ -107,7 +107,7 @@ global_codes = {
         "name": "Antarctica",
         "iso2": "AQ",
         "short": "AY",
-        "region": "",
+        "region": "Antarctica",
         "": ""
     },
     "ATG": {
