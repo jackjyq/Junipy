@@ -16,6 +16,19 @@ global_indicator = {"GDP_total": "GDP",
                     "Population": "population"
                     }
 
+dataunit = { '3' : 'thousnd',
+			 '6' : 'millon',
+			 '9' : 'billon',
+			 '12' : 'trillion',
+			 '15' : 'quadrillion',
+			 '18' : 'quintillion',
+			 '21' : 'sextillion',
+			 '24' : 'septillion',
+			 '27' : 'octilion',
+			 '30' : 'nonillion',
+			 '33' : 'decillion'
+}
+
 country_change_code = {}
 for i in global_codes:
 	shorts = global_codes[i]['iso2']	
@@ -149,7 +162,9 @@ def get_detail(code):
 	data_detail['flag'] = flag_url
 	raw_data = model.query(INDICATOR, code)
 	for n in global_indicator:
-		data_detail[global_indicator[n]+'History'] = []
+		data_detail[global_indicator[n]+'History'] = {}
+		data_detail[global_indicator[n]+'History']['data'] = []
+		data_detail[global_indicator[n]+'History']['unit'] = None
 	for j in range (2016,1990,-1):
 		hasdata = 1
 		rightkey = {}
@@ -171,8 +186,7 @@ def get_detail(code):
 			break
 	data_detail['year'] = year
 	for m in datahas:
-		data_detail[m] = rightkey[m]
-	print(data_detail)
+		data_detail[m] = datahas[m]
 	for i in range(1990,2017):
 		gdp = float(raw_data[str(i)]['GDP_total'])
 		for j in raw_data[str(i)]:
@@ -186,25 +200,42 @@ def get_detail(code):
 			else:
 				da = {'year':i,'value':raw_data[str(i)][j]}
 			key = global_indicator[j] + 'History'
-			data_detail[key].append(da)
+			data_detail[key]['data'].append(da)
+	#print(data_detail)
 	for i in data_detail:
 		if 'History' in i:
 			allva = []
-			for k in range(len(data_detail[i])):
-				if not data_detail[i][k]['value'] == None:
-					notst = float(data_detail[i][k]['value'])
+			for k in range(len(data_detail[i]['data'])):
+				if not data_detail[i]['data'][k]['value'] == None:
+					notst = float(data_detail[i]['data'][k]['value'])
 					allva.append(notst)
-				if not len(allva) == 0:
-					min_da = (sorted(allva))[0]
-					divide = int(min_da)
-					a = len(str(divide)) - 1
+			if not len(allva) == 0:
+				min_da = (sorted(allva))[0]
+				divide = int(min_da)
+				a = len(str(divide)) - 1
+				b = a % 3
+				c = int(a/3)
+				print(c)
+				if c!= 0:
+					if b <= 1:
+						a = c * 3
+					else:
+						c = c + 1
+						a = c * 3
+					unit = dataunit[str(a)]
 					a = 10 ** a
-			for k in range(len(data_detail[i])):
+					data_detail[i]['unit'] = unit
+				else:
+					data_detail[i]['unit'] = None
+			for k in range(len(data_detail[i]['data'])):
 				if not len(allva) == 0:
-					if not data_detail[i][k]['value'] == None:
-						notst = float(data_detail[i][k]['value'])
+					if not data_detail[i]['data'][k]['value'] == None:
+						notst = float(data_detail[i]['data'][k]['value'])
 						ll = notst / a
-						data_detail[i][k]['value'] = '%.2f'% ll
+						data_detail[i]['data'][k]['value'] = '%.2f'% ll
+				else:
+					data_detail[i]['unit'] = None
+
 	return json.dumps(data_detail)
 
 
