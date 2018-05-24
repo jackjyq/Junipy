@@ -46,29 +46,28 @@
 				},
 				{
 					value: 1E3,
-					symbol: "k"
+					symbol: " Thousand"
 				},
 				{
 					value: 1E6,
-					symbol: "M"
+					symbol: " Million"
 				},
 				{
 					value: 1E9,
-					symbol: "G"
+					symbol: " Billion"
+				},
+				{
+					value: 1E12,
+					symbol: " Trillion"
+				},
+				{
+					value: 1E15,
+					symbol: " Quadrillion"
+				},
+				{
+					value: 1E18,
+					symbol: " Quintillion"
 				}
-				//					  ,
-				//				{
-				//					value: 1E12,
-				//					symbol: "T"
-				//				},
-				//				{
-				//					value: 1E15,
-				//					symbol: "P"
-				//				},
-				//				{
-				//					value: 1E18,
-				//					symbol: "E"
-				//				}
 			];
 			var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
 			var i;
@@ -220,9 +219,9 @@
 								Industry
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{% if country['industry'] is not none %}
+								{% if country['industryNum'] is not none %}
 								<script>
-									nFormatter({{country['industry']}})
+									nFormatter({{country['industryNum']}})
 								</script>
 								{% else %} No Data {%endif %}
 							</h3>
@@ -239,9 +238,9 @@
 								Service
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{% if country['service'] is not none %}
+								{% if country['serviceNum'] is not none %}
 								<script>
-									nFormatter({{country['service']}})
+									nFormatter({{country['serviceNum']}})
 								</script>
 								{% else %} No Data {%endif %}
 							</h3>
@@ -260,9 +259,9 @@
 								Agriculture<br>
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{% if country['agriculture'] is not none %}
+								{% if country['agricultureNum'] is not none %}
 								<script>
-									nFormatter({{country['agriculture']}})
+									nFormatter({{country['agricultureNum']}})
 								</script>
 								{% else %} No Data {%endif %}
 							</h3>
@@ -283,6 +282,7 @@
 								<script>
 									nFormatter({{country['freshwaterWithdrawals']}})
 								</script>
+								Billion m³
 								{% else %} No Data {%endif %}
 							</h3>
 						</div>
@@ -304,6 +304,7 @@
 								<script>
 									nFormatter({{country['PM25Index']}})
 								</script>
+								mg/m³
 								{% else %} No Data {%endif %}
 							</h3>
 						</div>
@@ -323,6 +324,7 @@
 								<script>
 									nFormatter({{country['CO2']}})
 								</script>
+								Kilo-ton
 								{% else %} No Data {%endif %}
 							</h3>
 						</div>
