@@ -7,10 +7,10 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-	<link rel="shortcut icon" type="image/png" href="../favicon.png">
+	<link rel="shortcut icon" type="image/png" href="../static/imgfavicon.png">
 	<link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
-	<link rel="stylesheet" type="text/css" href="./static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/font-awesome.min.css">
 
 	<link rel="stylesheet" type="text/css" href="../static/css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="../static/css/linecons.min.css">
@@ -28,6 +28,58 @@
 	<script src="https://gw.alipayobjects.com/as/g/datavis/g2/2.3.13/index.js"></script>
 	<!--    <script>G2.Global.setTheme('dark');</script>-->
 
+	<script>
+		function go() {
+			document.write("Hello World!");
+		}
+	</script>
+
+	<script>
+		function nFormatter(num) {
+			if (num == null) {
+				document.write("No Data");
+				return "No Data";
+			}
+			var si = [{
+					value: 1,
+					symbol: ""
+				},
+				{
+					value: 1E3,
+					symbol: " Thousand"
+				},
+				{
+					value: 1E6,
+					symbol: " Million"
+				},
+				{
+					value: 1E9,
+					symbol: " Billion"
+				},
+				{
+					value: 1E12,
+					symbol: " Trillion"
+				},
+				{
+					value: 1E15,
+					symbol: " Quadrillion"
+				},
+				{
+					value: 1E18,
+					symbol: " Quintillion"
+				}
+			];
+			var rx = /\.0+$|(\.[0-9]*[1-9])0+$/;
+			var i;
+			for (i = si.length - 1; i > 0; i--) {
+				if (num >= si[i].value) {
+					break;
+				}
+			}
+			document.write((num / si[i].value).toFixed(1).replace(rx, "$1") + si[i].symbol);
+			return (num / si[i].value).toFixed(1).replace(rx, "$1") + si[i].symbol;
+		}
+	</script>
 	<!-- Google Analytics -->
 
 	<!-- Google Analytics END -->
@@ -43,7 +95,7 @@
 			<div class="container bloc-sm">
 				<nav class="navbar row">
 					<div class="navbar-header">
-						<a class="navbar-brand  ltc-white" href={{url_for( 'home')}}><img src="../static/img/Artboard.png" alt="logo" height="50" width="50" /> Junipy</a>
+						<a class="navbar-brand  ltc-white" href={{url_for('home')}}><img src="../static/img/Artboard.png" alt="logo" height="50" width="50" /> Junipy</a>
 						<button id="nav-toggle" type="button" class="ui-navbar-toggle navbar-toggle" data-toggle="collapse" data-target=".navbar-1">
 					<span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 				</button>
@@ -51,10 +103,10 @@
 					<div class="collapse navbar-collapse navbar-1">
 						<ul class="site-navigation nav navbar-nav">
 							<li>
-								<a href={{url_for( 'home')}}>Home</a>
+								<a href={{url_for('home')}}>Home</a>
 							</li>
 							<li>
-								<a href={{url_for( 'analysis')}}>Analysis</a>
+								<a href={{url_for('analysis')}}>Analysis</a>
 							</li>
 						</ul>
 					</div>
@@ -76,7 +128,7 @@
 											<div class="col-sm-12">
 												<div class="row voffset row-no-gutters">
 													<div class="col-sm-12">
-														<img src="img/lazyload-ph.png" data-src={{country[ 'flag']}} class="img-responsive lazyload" />
+														<img src="../static/img/lazyload-ph.png" data-src={{country[ 'flag']}} class="img-responsive lazyload" />
 													</div>
 												</div>
 											</div>
@@ -127,7 +179,11 @@
 								GDP
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['GDP']}}
+								{% if country['GDP'] is not none %}
+								<script>
+									nFormatter({{country['GDP']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -142,7 +198,11 @@
 								Population
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{{country['Population']}}
+								{% if country['population'] is not none %}
+								<script>
+									nFormatter({{country['population']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -159,7 +219,11 @@
 								Industry
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['industry']}}
+								{% if country['industryNum'] is not none %}
+								<script>
+									nFormatter({{country['industryNum']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -174,7 +238,11 @@
 								Service
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{{country['service']}}
+								{% if country['serviceNum'] is not none %}
+								<script>
+									nFormatter({{country['serviceNum']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -191,7 +259,11 @@
 								Agriculture<br>
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['agriculture']}}
+								{% if country['agricultureNum'] is not none %}
+								<script>
+									nFormatter({{country['agricultureNum']}})
+								</script>
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -206,7 +278,12 @@
 								Water consumption
 							</h3>
 							<h3 class="blocs-mob-center-text animated fadeInUp numbers">
-								{{country['Freshwater']}}
+								{% if country['freshwaterWithdrawals'] is not none %}
+								<script>
+									nFormatter({{country['freshwaterWithdrawals']}})
+								</script>
+								Billion m³
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -223,7 +300,12 @@
 								PM2.5
 							</h3>
 							<h3 class="text-right blocs-mob-center-text numbers animated fadeInUp">
-								{{country['PM25']}}
+								{% if country['PM25Index'] is not none %}
+								<script>
+									nFormatter({{country['PM25Index']}})
+								</script>
+								mg/m³
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -238,7 +320,12 @@
 								CO₂ emission
 							</h3>
 							<h3 class="blocs-mob-center-text numbers animated fadeInUp">
-								{{country['CO2']}}
+								{% if country['CO2'] is not none %}
+								<script>
+									nFormatter({{country['CO2']}})
+								</script>
+								Kilo-ton
+								{% else %} No Data {%endif %}
 							</h3>
 						</div>
 					</div>
@@ -273,24 +360,24 @@
 						<div id="c1"></div>
 						<script>
 							var data = [{
-									year: 2011,
+									year: 2016,
 									area: 'Industry',
-									profit: 7620 * 0.539
+									profit: 76.20 * {{country['industry']}}
 								},
 								{
-									year: 2011,
+									year: 2016,
 									area: 'Agriculture',
-									profit: 7620 * 0.065
+									profit: 76.20 * {{country['agriculture']}}
 								},
 								{
-									year: 2011,
+									year: 2016,
 									area: 'others',
-									profit: 7620 * 0.162
+									profit: 76.20 - {{country['industry']}} - {{country['service']}} - {{country['agriculture']}}
 								},
 								{
-									year: 2011,
+									year: 2016,
 									area: 'Service',
-									profit: 7620 * 0.234
+									profit: 76.20 * {{country['service']}}
 								}
 							];
 							var Stat = G2.Stat;
@@ -374,53 +461,75 @@
 
 						<div id="c2"></div>
 						<script>
-							var data = [{
-									month: 'Jan',
-									temperature: 7.0
+							var data = 
+//								{{country['GDPHistory'] | tojson | safe}};
+								[{
+									year: '2000',
+									value: 3.0
 								},
 								{
-									month: 'Feb',
-									temperature: 6.9
+									year: '2001',
+									value: 4.2
 								},
 								{
-									month: 'Mar',
-									temperature: 9.5
+									year: '2002',
+									value: 4.8
 								},
 								{
-									month: 'Apr',
-									temperature: 14.5
+									year: '2003',
+									value: 5.0
 								},
 								{
-									month: 'May',
-									temperature: 18.2
+									year: '2004',
+									value: 5.2
 								},
 								{
-									month: 'Jun',
-									temperature: 21.5
+									year: '2005',
+									value: 8.5
 								},
 								{
-									month: 'Jul',
-									temperature: 25.2
+									year: '2006',
+									value: 12.6
 								},
 								{
-									month: 'Aug',
-									temperature: 26.5
+									year: '2007',
+									value: 28.5
 								},
 								{
-									month: 'Sep',
-									temperature: 23.3
+									year: '2008',
+									value: 30.3
 								},
 								{
-									month: 'Oct',
-									temperature: 18.3
+									year: '2009',
+									value: 38.3
 								},
 								{
-									month: 'Nov',
-									temperature: 13.9
+									year: '2010',
+									value: 43.9
 								},
 								{
-									month: 'Dec',
-									temperature: 9.6
+									year: '2011',
+									value: 60.6
+								},
+								{
+									year: '2012',
+									value: 61.6
+								},
+								{
+									year: '2013',
+									value: 64.6
+								},
+								{
+									year: '2014',
+									value: 70.6
+								},
+								{
+									year: '2015',
+									value: 71.6
+								},
+								{
+									year: '2016',
+									value: 73.6
 								}
 							];
 							var chart = new G2.Chart({
@@ -429,14 +538,16 @@
 								height: 450
 							});
 							chart.source(data, {
-								month: {
-									range: [0, 1]
+								year: {
+									range: [0, 1],
+									alias: 'Year'
 								},
-								temperature: {
+								value: {
+									range: [0, 1],
 									alias: 'GDP'
 								}
 							});
-							chart.axis('temperature', {
+							chart.axis('year', {
 								labels: {
 									label: {
 										fill: '#FFCF2C'
@@ -445,7 +556,7 @@
 
 							});
 
-							chart.axis('month', {
+							chart.axis('value', {
 								labels: {
 									label: {
 										fill: '#FFCF2C'
@@ -453,8 +564,9 @@
 								}
 
 							});
-
-							chart.line().position('month*temperature').size(2).color('orange').shape('smooth');
+							
+							chart.area().position('year*value').color('l(90) 0:#FFCF2C 0.8:#2c3251 1:#2c3251').shape('smooth');
+							chart.line().position('year*value').size(2).color('#FFCF2C').shape('smooth');
 							chart.render();
 						</script>
 
@@ -554,9 +666,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-12">
-					<h4 class="mg-md text-center">
-						Copyright made by lmcmz
-					</h4>
+					<h6 class="mg-md text-center">
+						Copyright © <font color="orange">lmcmz</font>
+					</h6>
 				</div>
 			</div>
 		</div>

@@ -1,611 +1,24 @@
+﻿<!DOCTYPE html>
 <html>
-                 <head>
-                   <meta charset="UTF-8">
-                   <meta name = "viewport" content = "width = device-width, initial-scale = 1, maximum-scale = 1">
-                   <style id="style">
-@font-face {
-  font-family: 'Lato';
-  src: url('file:///Applications/Boostnote.app/Contents/Resources/app/resources/fonts/Lato-Regular.woff2') format('woff2'), /* Modern Browsers */
-       url('file:///Applications/Boostnote.app/Contents/Resources/app/resources/fonts/Lato-Regular.woff') format('woff'), /* Modern Browsers */
-       url('file:///Applications/Boostnote.app/Contents/Resources/app/resources/fonts/Lato-Regular.ttf') format('truetype');
-  font-style: normal;
-  font-weight: normal;
-  text-rendering: optimizeLegibility;
-}
-@font-face {
-  font-family: 'Lato';
-  src: url('file:///Applications/Boostnote.app/Contents/Resources/app/resources/fonts/Lato-Black.woff2') format('woff2'), /* Modern Browsers */
-       url('file:///Applications/Boostnote.app/Contents/Resources/app/resources/fonts/Lato-Black.woff') format('woff'), /* Modern Browsers */
-       url('file:///Applications/Boostnote.app/Contents/Resources/app/resources/fonts/Lato-Black.ttf') format('truetype');
-  font-style: normal;
-  font-weight: 700;
-  text-rendering: optimizeLegibility;
-}
-html,
-body,
-div,
-span,
-applet,
-object,
-iframe,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-blockquote,
-pre,
-a,
-abbr,
-acronym,
-address,
-big,
-cite,
-code,
-del,
-dfn,
-em,
-img,
-ins,
-kbd,
-q,
-s,
-samp,
-small,
-strike,
-strong,
-sub,
-sup,
-tt,
-var,
-dl,
-dt,
-dd,
-ol,
-ul,
-li,
-fieldset,
-form,
-label,
-legend,
-table,
-caption,
-tbody,
-tfoot,
-thead,
-tr,
-th,
-td {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  outline: 0;
-  font-weight: inherit;
-  font-style: inherit;
-  font-family: inherit;
-  font-size: 100%;
-  vertical-align: baseline;
-}
-body {
-  line-height: 1;
-  color: #000;
-  background: #fff;
-}
-ol,
-ul {
-  list-style: none;
-}
-table {
-  border-collapse: separate;
-  border-spacing: 0;
-  vertical-align: middle;
-}
-caption,
-th,
-td {
-  text-align: left;
-  font-weight: normal;
-  vertical-align: middle;
-}
-a img {
-  border: none;
-}
-body {
-  font-size: 16px;
-  padding: 15px;
-  font-family: helvetica, arial, sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-  background-color: #fff;
-}
-body .katex {
-  font: 400 1.2em 'KaTeX_Main';
-  line-height: 1.2em;
-  white-space: initial;
-  text-indent: 0;
-}
-body .katex .mfrac>.vlist>span:nth-child(2) {
-  top: 0 !important;
-}
-body .katex-error {
-  background-color: #f2dede;
-  color: #a64444;
-  padding: 5px;
-  margin: -5px;
-  border-radius: 5px;
-}
-body .flowchart-error,
-body .sequence-error {
-  background-color: #f2dede;
-  color: #a64444;
-  padding: 5px;
-  border-radius: 5px;
-  -webkit-box-pack: left;
-  -moz-box-pack: left;
-  -o-box-pack: left;
-  -ms-flex-pack: left;
-  -webkit-justify-content: left;
-  justify-content: left;
-}
-li label.taskListItem {
-  margin-left: -1.8em;
-}
-li label.taskListItem.checked {
-  text-decoration: line-through;
-  opacity: 0.5;
-  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
-  filter: alpha(opacity=50);
-}
-div.math-rendered {
-  text-align: center;
-}
-.math-failed {
-  background-color: rgba(255,0,0,0.1);
-  color: #d90000;
-  padding: 5px;
-  margin: 5px 0;
-  border-radius: 5px;
-}
-sup {
-  position: relative;
-  top: -0.4em;
-  font-size: 0.8em;
-  vertical-align: top;
-}
-sub {
-  position: relative;
-  bottom: -0.4em;
-  font-size: 0.8em;
-  vertical-align: top;
-}
-a {
-  color: #2bac8f;
-  text-decoration: none;
-  padding: 5px;
-  border-radius: 5px;
-  margin: -5px;
-  -webkit-transition: 0.1s;
-  -moz-transition: 0.1s;
-  -o-transition: 0.1s;
-  -ms-transition: 0.1s;
-  transition: 0.1s;
-}
-a img {
-  vertical-align: sub;
-}
-a:hover {
-  color: #2eb899;
-  text-decoration: underline;
-  background-color: rgba(255,201,92,0.3);
-}
-a:visited {
-  color: #2bac8f;
-}
-hr {
-  border-top: none;
-  border-bottom: solid 1px #d0d0d0;
-  margin: 15px 0;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: bold;
-  word-wrap: break-word;
-}
-h1 {
-  font-size: 2.55em;
-  padding-bottom: 0.3em;
-  line-height: 1.2em;
-  border-bottom: solid 1px #d0d0d0;
-  margin: 1em 0 0.44em;
-}
-h1:first-child {
-  margin-top: 0;
-}
-h2 {
-  font-size: 1.75em;
-  padding-bottom: 0.3em;
-  line-height: 1.225em;
-  border-bottom: solid 1px #d0d0d0;
-  margin: 1em 0 0.57em;
-}
-h2:first-child {
-  margin-top: 0;
-}
-h3 {
-  font-size: 1.5em;
-  line-height: 1.43em;
-  margin: 1em 0 0.66em;
-}
-h4 {
-  font-size: 1.25em;
-  line-height: 1.4em;
-  margin: 1em 0 0.8em;
-}
-h5 {
-  font-size: 1em;
-  line-height: 1.4em;
-  margin: 1em 0 1em;
-}
-h6 {
-  font-size: 1em;
-  line-height: 1.4em;
-  margin: 1em 0 1em;
-  color: #777;
-}
-p {
-  line-height: 1.6em;
-  margin: 0 0 1em;
-  white-space: pre-line;
-  word-wrap: break-word;
-}
-img {
-  max-width: 100%;
-}
-strong,
-b {
-  font-weight: bold;
-}
-em,
-i {
-  font-style: italic;
-}
-s,
-del,
-strike {
-  text-decoration: line-through;
-}
-u {
-  text-decoration: underline;
-}
-blockquote {
-  border-left: solid 4px #3fb399;
-  margin: 0 0 1em;
-  padding: 0 25px;
-}
-ul {
-  list-style-type: disc;
-  padding-left: 2em;
-  margin-bottom: 1em;
-}
-ul li {
-  display: list-item;
-}
-ul li.taskListItem {
-  list-style: none;
-}
-ul li p {
-  margin: 0;
-}
-ul>li>ul,
-ul>li>ol {
-  margin: 0;
-}
-ul>li>ul {
-  list-style-type: circle;
-}
-ul>li>ul>li>ul {
-  list-style-type: square;
-}
-ol {
-  list-style-type: decimal;
-  padding-left: 2em;
-  margin-bottom: 1em;
-}
-ol li {
-  display: list-item;
-}
-ol li p {
-  margin: 0;
-}
-ol>li>ul,
-ol>li>ol {
-  margin: 0;
-}
-code {
-  color: #cc305f;
-  padding: 0.2em 0.4em;
-  background-color: #f7f7f7;
-  border-radius: 3px;
-  font-size: 1em;
-  text-decoration: none;
-  margin-right: 2px;
-}
-pre {
-  padding: 0.5em !important;
-  border: solid 1px #d1d1d1;
-  border-radius: 5px;
-  overflow-x: auto;
-  margin: 0 0 1em;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
-  display: flex;
-  line-height: 1.4em;
-}
-pre.flowchart,
-pre.sequence {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: box;
-  display: flex;
-  -webkit-box-pack: center;
-  -moz-box-pack: center;
-  -o-box-pack: center;
-  -ms-flex-pack: center;
-  -webkit-justify-content: center;
-  justify-content: center;
-  background-color: #fff;
-}
-pre.CodeMirror {
-  height: initial;
-  -webkit-box-lines: multiple;
-  -moz-box-lines: multiple;
-  -o-box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-}
-pre.CodeMirror>code {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -o-box-flex: 1;
-  box-flex: 1;
-  -webkit-flex: 1;
-  -ms-flex: 1;
-  flex: 1;
-  overflow-x: auto;
-}
-pre code {
-  background-color: inherit;
-  margin: 0;
-  padding: 0;
-  border: none;
-  border-radius: 0;
-}
-pre>span.filename {
-  width: 100%;
-  border-radius: 5px 0px 0px 0px;
-  margin: -8px 100% 8px -8px;
-  padding: 0px 6px;
-  background-color: #777;
-  color: #fff;
-}
-pre>span.lineNumber {
-  display: none;
-  font-size: 1em;
-  padding: 0.5em 0;
-  margin: -0.5em 0.5em -0.5em -0.5em;
-  border-right: 1px solid;
-  text-align: right;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-}
-pre>span.lineNumber.CodeMirror-gutters {
-  position: initial;
-  top: initial;
-  left: initial;
-  min-height: 0 !important;
-}
-pre>span.lineNumber>span {
-  display: block;
-  padding: 0 0.5em 0;
-}
-table {
-  display: block;
-  width: 100%;
-  margin: 0 0 1em;
-}
-table thead tr {
-  background-color: #fff;
-}
-table thead th {
-  border-style: solid;
-  padding: 6px 13px;
-  line-height: 1.6;
-  border-width: 1px 0 2px 1px;
-  border-color: #d0d0d0;
-  font-weight: bold;
-}
-table thead th:last-child {
-  border-right: solid 1px #d0d0d0;
-}
-table tbody tr:nth-child(2n + 1) {
-  background-color: #f9f9f9;
-}
-table tbody tr:nth-child(2n) {
-  background-color: #fff;
-}
-table tbody td {
-  border-style: solid;
-  padding: 6px 13px;
-  line-height: 1.6;
-  border-width: 0 0 1px 1px;
-  border-color: #d0d0d0;
-}
-table tbody td:last-child {
-  border-right: solid 1px #d0d0d0;
-}
-kbd {
-  background-color: #fafbfc;
-  border: solid 1px #d0d0d0;
-  border-bottom-color: #888;
-  border-radius: 3px;
-  -webkit-box-shadow: inset 0 -1px 0 #959da5;
-  box-shadow: inset 0 -1px 0 #959da5;
-  display: inline-block;
-  font-size: 0.8em;
-  line-height: 1;
-  padding: 3px 5px;
-}
-body[data-theme="dark"] {
-  color: #f9f9f9;
-  border-color: #444b59;
-  background-color: #2c3033;
-}
-body[data-theme="dark"] a:hover {
-  background-color: rgba(90,214,186,0.2) !important;
-}
-body[data-theme="dark"] code {
-  color: #ea6730;
-  border-color: #3d4450;
-  background-color: #363a3e;
-}
-body[data-theme="dark"] pre {
-  border-color: #474f5c;
-}
-body[data-theme="dark"] pre code {
-  background-color: transparent;
-}
-body[data-theme="dark"] label.taskListItem {
-  background-color: #2c3033;
-}
-body[data-theme="dark"] table thead tr {
-  background-color: #282b2e;
-}
-body[data-theme="dark"] table thead th {
-  border-color: #444b59;
-}
-body[data-theme="dark"] table thead th:last-child {
-  border-right: solid 1px #444b59;
-}
-body[data-theme="dark"] table tbody tr:nth-child(2n + 1) {
-  background-color: #2c3033;
-}
-body[data-theme="dark"] table tbody tr:nth-child(2n) {
-  background-color: #282b2e;
-}
-body[data-theme="dark"] table tbody td {
-  border-color: #444b59;
-}
-body[data-theme="dark"] table tbody td:last-child {
-  border-right: solid 1px #444b59;
-}
-body[data-theme="dark"] kbd {
-  background-color: #444b59;
-  color: #f9f9f9;
-}
-body[data-theme="solarized-dark"] {
-  color: #93a1a1;
-  border-color: #444b59;
-  background-color: #073642;
-}
-body[data-theme="solarized-dark"] table thead tr {
-  background-color: #06313b;
-}
-body[data-theme="solarized-dark"] table thead th {
-  border-color: #444b59;
-}
-body[data-theme="solarized-dark"] table thead th:last-child {
-  border-right: solid 1px #444b59;
-}
-body[data-theme="solarized-dark"] table tbody tr:nth-child(2n + 1) {
-  background-color: #073642;
-}
-body[data-theme="solarized-dark"] table tbody tr:nth-child(2n) {
-  background-color: #06313b;
-}
-body[data-theme="solarized-dark"] table tbody td {
-  border-color: #444b59;
-}
-body[data-theme="solarized-dark"] table tbody td:last-child {
-  border-right: solid 1px #444b59;
-}
-/*# sourceMappingURL=browser/components/markdown.css.map */
-body {
-  font-family: 'Lato','helvetica','arial','sans-serif';
-  font-size: 14px;
-  padding-bottom: 90vh;
-}
-code {
-  font-family: 'Monaco','Consolas','Monaco','Menlo','Ubuntu Mono','Consolas','source-code-pro','monospace';
-  background-color: rgba(0,0,0,0.04);
-}
-.lineNumber {
-  display: block !important;
-  font-family: 'Monaco','Consolas','Monaco','Menlo','Ubuntu Mono','Consolas','source-code-pro','monospace';
-}
 
-.clipboardButton {
-  color: rgba(147,147,149,0.8);;
-  fill: rgba(147,147,149,1);;
-  border-radius: 50%;
-  margin: 0px 10px;
-  border: none;
-  background-color: transparent;
-  outline: none;
-  height: 15px;
-  width: 15px;
-  cursor: pointer;
-}
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
 
-.clipboardButton:hover {
-  transition: 0.2s;
-  color: #939395;
-  fill: #939395;
-  background-color: rgba(0,0,0,0.1);
-}
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="api-documentation-memo">API Documentation 📝</h1>
+<p>This documentation covers the coffe shop order web API.</p>
+<h4 id="media-type-support">Media Type support</h4>
+<hr>
+<p>All server response bodies and request bodies MUST be valid <strong><a href="https://tools.ietf.org/search/rfc4627">JSON</a></strong> messages.</p>
+<h3 id="home-coffee">Home ☕️</h3>
+<hr>
+<p>The <strong>Home</strong> URL (/home/) is the base URL for reading and updating Order objects The table below shows all the Task-related operations, their URLs, methods, and payloads.</p>
 
-h1, h2 {
-  border: none;
-}
-
-h1 {
-  padding-bottom: 4px;
-  margin: 1em 0 8px;
-}
-
-h2 {
-  padding-bottom: 0.2em;
-  margin: 1em 0 0.37em;
-}
-
-body p {
-  white-space: normal;
-}
-</style>
-                   <link rel="stylesheet" href="css/dracula.css"><link rel="stylesheet" href="css/katex.min.css"><link rel="stylesheet" href="css/codemirror.css">
-                 </head>
-                 <body><h1 data-line="0" id="API-Documentation-%F0%9F%93%9D">API Documentation 📝</h1>
-<hr />
-<p data-line="2">This documentation covers the coffe shop order web API.</p>
-<h4 data-line="4" id="Media-Type-support">Media Type support</h4>
-<hr />
-<p data-line="6">All server response bodies and request bodies MUST be valid <strong><a href="https://tools.ietf.org/search/rfc4627">JSON</a></strong> messages.</p>
-<h3 data-line="8" id="Orders-%E2%98%95%EF%B8%8F">Orders ☕️</h3>
-<hr />
-<p data-line="10">The <strong>Orders</strong> URL (/orders/) is the base URL for reading and updating Order objects The table below shows all the Task-related operations, their URLs, methods, and payloads.</p>
-<h4 data-line="12" id="Table-1-Homepage">Table 1. Homepage</h4>
-<table data-line="13">
+<table>
 <thead>
 <tr>
 <th>Operation</th>
@@ -617,19 +30,18 @@ body p {
 </thead>
 <tbody>
 <tr>
-<td>get GDP,flags</td>
+<td>fetch homepage resource</td>
 <td>/home</td>
 <td>GET</td>
 <td><a href="#GDP&amp;Flags">GDP&amp;Flags</a></td>
 <td>None</td>
 </tr>
 </tbody>
-<tbody></tbody>
-</table>
-<h3 data-line="18" id="Detail">Detail</h3>
-<p data-line="20">The <strong>Detail</strong> URL (/detail/) is the base URL for get country detail objects and supports the following operations:</p>
-<h4 data-line="22" id="Table-2-country-detail">Table 2. country detail</h4>
-<table data-line="23">
+</table><h3 id="detail-sushi">Detail 🍣</h3>
+<hr>
+<p>The <strong>Detail</strong> URL (/detail/&lt;code&gt;/) is the base URL for get country detail objects and supports the following operations:</p>
+
+<table>
 <thead>
 <tr>
 <th>Operation</th>
@@ -642,199 +54,260 @@ body p {
 <tbody>
 <tr>
 <td>get the detail of the country</td>
-<td>/detail/&amp;lt;code&amp;gt;/</td>
+<td>/detail/&lt;code&gt;/</td>
 <td>GET</td>
 <td><a href="#detail">detail</a></td>
 <td>country code</td>
 </tr>
 </tbody>
-<tbody></tbody>
-</table>
-<h2 data-line="28" id="Responses-%F0%9F%91%80">Responses 👀</h2>
-<hr />
-<p data-line="30">The home API returns payloads (as JSON object):</p>
+</table><h3 id="analysis-cake">Analysis 🍰</h3>
+<hr>
+<p>The <strong>Analysis</strong> URL (/analysis/) is the an URL for get analysis information for global trend and supports the following operations:</p>
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>URL</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Inputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get analysis data</td>
+<td>/analysis/</td>
+<td>GET</td>
+<td><a href="#analysis">analysis</a></td>
+<td>None</td>
+</tr>
+</tbody>
+</table><h2 id="responses-eyes">Responses 👀</h2>
+<p>The home API returns payloads (as JSON object):</p>
 <ul>
-<li><a href="#GDP&amp;flags">GDP&amp;flags</a></li>
+<li><a href="#Home">Home</a></li>
 <li><a href="#Detail">Detail</a></li>
+<li><a href="#Analysis">Analysis</a></li>
 </ul>
-<p data-line="34">See below for details.</p>
-<h3 data-line="36" id="a-nameGDPflagsa-GDPflags-Json">&lt;a name=&quot;GDP&amp;flags&quot;&gt;&lt;/a&gt; GDP&amp;flags Json</h3>
-<p data-line="37">A <strong>GDP&amp;flags</strong> looks like this:</p>
-<pre class="code CodeMirror"><span class="filename"></span><span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span><span class="CodeMirror-linenumber">4</span><span class="CodeMirror-linenumber">5</span><span class="CodeMirror-linenumber">6</span><span class="CodeMirror-linenumber">7</span><span class="CodeMirror-linenumber">8</span><span class="CodeMirror-linenumber">9</span><span class="CodeMirror-linenumber">10</span><span class="CodeMirror-linenumber">11</span><span class="CodeMirror-linenumber">12</span><span class="CodeMirror-linenumber">13</span></span><code class="json">{
-  &quot;GDP&quot;: 
-        {&quot;AD&quot;: 2858517699.11504, 
-        &quot;AE&quot;: 348743265704.561, 
-        &quot;AF&quot;: 19469022207.6357...
-        }, 
-  &quot;flags&quot;: 
-        [
-          {&quot;name&quot;: &quot;Afghanistan&quot;, &quot;flag&quot;: &quot;\ud83c\udde6\ud83c\uddeb&quot;, &quot;code&quot;: &quot;AF&quot;},
-          {&quot;name&quot;: &quot;Albania&quot;, &quot;flag&quot;: &quot;\ud83c\udde6\ud83c\uddf1&quot;, &quot;code&quot;: &quot;AL&quot;},
-          {&quot;name&quot;: &quot;Algeria&quot;, &quot;flag&quot;: &quot;\ud83c\udde9\ud83c\uddff&quot;, &quot;code&quot;: &quot;DZ&quot;},...          
-        ]
-}
+<p>See below for details.</p>
+<hr>
+<h3 id="a-namehomea-home-json"><a></a> Home Json</h3>
+<p>A <strong>Home</strong> looks like this:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"GDP"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"AD"</span><span class="token punctuation">:</span> <span class="token number">2858517699.11504</span><span class="token punctuation">,</span>
+        <span class="token string">"AE"</span><span class="token punctuation">:</span> <span class="token number">348743265704.561</span><span class="token punctuation">,</span>
+        <span class="token string">"AF"</span><span class="token punctuation">:</span> <span class="token number">19469022207.6357</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"flags"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Afghanistan"</span><span class="token punctuation">,</span>
+            <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇫"</span><span class="token punctuation">,</span>
+            <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AF"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Albania"</span><span class="token punctuation">,</span>
+            <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇱"</span><span class="token punctuation">,</span>
+            <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AL"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Algeria"</span><span class="token punctuation">,</span>
+            <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇩🇿"</span><span class="token punctuation">,</span>
+            <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"DZ"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<p data-line="55">See <strong><a href="#Data">Data Elements</a></strong> for more information on each property.</p>
-<hr />
-<h4 data-line="59" id="a-nameDetaila-Detail-Json">&lt;a name=&quot;Detail&quot;&gt;&lt;/a&gt; Detail Json</h4>
-<p data-line="61">A ** country detail** looks like this:</p>
-<pre class="code CodeMirror"><span class="filename"></span><span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span><span class="CodeMirror-linenumber">4</span><span class="CodeMirror-linenumber">5</span><span class="CodeMirror-linenumber">6</span><span class="CodeMirror-linenumber">7</span><span class="CodeMirror-linenumber">8</span><span class="CodeMirror-linenumber">9</span><span class="CodeMirror-linenumber">10</span><span class="CodeMirror-linenumber">11</span><span class="CodeMirror-linenumber">12</span><span class="CodeMirror-linenumber">13</span><span class="CodeMirror-linenumber">14</span><span class="CodeMirror-linenumber">15</span><span class="CodeMirror-linenumber">16</span><span class="CodeMirror-linenumber">17</span><span class="CodeMirror-linenumber">18</span><span class="CodeMirror-linenumber">19</span><span class="CodeMirror-linenumber">20</span><span class="CodeMirror-linenumber">21</span><span class="CodeMirror-linenumber">22</span><span class="CodeMirror-linenumber">23</span><span class="CodeMirror-linenumber">24</span><span class="CodeMirror-linenumber">25</span><span class="CodeMirror-linenumber">26</span><span class="CodeMirror-linenumber">27</span><span class="CodeMirror-linenumber">28</span><span class="CodeMirror-linenumber">29</span><span class="CodeMirror-linenumber">30</span><span class="CodeMirror-linenumber">31</span><span class="CodeMirror-linenumber">32</span><span class="CodeMirror-linenumber">33</span><span class="CodeMirror-linenumber">34</span><span class="CodeMirror-linenumber">35</span><span class="CodeMirror-linenumber">36</span><span class="CodeMirror-linenumber">37</span><span class="CodeMirror-linenumber">38</span><span class="CodeMirror-linenumber">39</span><span class="CodeMirror-linenumber">40</span><span class="CodeMirror-linenumber">41</span><span class="CodeMirror-linenumber">42</span><span class="CodeMirror-linenumber">43</span><span class="CodeMirror-linenumber">44</span><span class="CodeMirror-linenumber">45</span><span class="CodeMirror-linenumber">46</span><span class="CodeMirror-linenumber">47</span><span class="CodeMirror-linenumber">48</span><span class="CodeMirror-linenumber">49</span><span class="CodeMirror-linenumber">50</span><span class="CodeMirror-linenumber">51</span><span class="CodeMirror-linenumber">52</span><span class="CodeMirror-linenumber">53</span><span class="CodeMirror-linenumber">54</span><span class="CodeMirror-linenumber">55</span><span class="CodeMirror-linenumber">56</span><span class="CodeMirror-linenumber">57</span><span class="CodeMirror-linenumber">58</span><span class="CodeMirror-linenumber">59</span><span class="CodeMirror-linenumber">60</span><span class="CodeMirror-linenumber">61</span><span class="CodeMirror-linenumber">62</span><span class="CodeMirror-linenumber">63</span><span class="CodeMirror-linenumber">64</span><span class="CodeMirror-linenumber">65</span><span class="CodeMirror-linenumber">66</span><span class="CodeMirror-linenumber">67</span><span class="CodeMirror-linenumber">68</span><span class="CodeMirror-linenumber">69</span><span class="CodeMirror-linenumber">70</span><span class="CodeMirror-linenumber">71</span><span class="CodeMirror-linenumber">72</span><span class="CodeMirror-linenumber">73</span><span class="CodeMirror-linenumber">74</span><span class="CodeMirror-linenumber">75</span><span class="CodeMirror-linenumber">76</span><span class="CodeMirror-linenumber">77</span><span class="CodeMirror-linenumber">78</span><span class="CodeMirror-linenumber">79</span><span class="CodeMirror-linenumber">80</span><span class="CodeMirror-linenumber">81</span><span class="CodeMirror-linenumber">82</span><span class="CodeMirror-linenumber">83</span><span class="CodeMirror-linenumber">84</span><span class="CodeMirror-linenumber">85</span><span class="CodeMirror-linenumber">86</span><span class="CodeMirror-linenumber">87</span><span class="CodeMirror-linenumber">88</span><span class="CodeMirror-linenumber">89</span><span class="CodeMirror-linenumber">90</span><span class="CodeMirror-linenumber">91</span><span class="CodeMirror-linenumber">92</span><span class="CodeMirror-linenumber">93</span><span class="CodeMirror-linenumber">94</span><span class="CodeMirror-linenumber">95</span><span class="CodeMirror-linenumber">96</span><span class="CodeMirror-linenumber">97</span><span class="CodeMirror-linenumber">98</span><span class="CodeMirror-linenumber">99</span><span class="CodeMirror-linenumber">100</span><span class="CodeMirror-linenumber">101</span><span class="CodeMirror-linenumber">102</span><span class="CodeMirror-linenumber">103</span><span class="CodeMirror-linenumber">104</span><span class="CodeMirror-linenumber">105</span><span class="CodeMirror-linenumber">106</span><span class="CodeMirror-linenumber">107</span><span class="CodeMirror-linenumber">108</span><span class="CodeMirror-linenumber">109</span><span class="CodeMirror-linenumber">110</span><span class="CodeMirror-linenumber">111</span><span class="CodeMirror-linenumber">112</span><span class="CodeMirror-linenumber">113</span><span class="CodeMirror-linenumber">114</span><span class="CodeMirror-linenumber">115</span><span class="CodeMirror-linenumber">116</span><span class="CodeMirror-linenumber">117</span><span class="CodeMirror-linenumber">118</span><span class="CodeMirror-linenumber">119</span></span><code class="json">{
-    &quot;name&quot;: &quot;United States of America&quot;,
-    &quot;introduction&quot;: &quot;Britain&#39;s American colonies broke with the mother country in 1776 and were recognized as the new nation of the United States of America following the Treaty of Paris in 1783. During the 19th and 20th centuries...&quot;,
-    &quot;flag&quot;: &quot;https://www.cia.gov/library//publications/the-world-factbook/graphics/flags/large/us-lgflag.gif&quot;,
-&quot;GDPHistory&quot;: [
-        {
-            &quot;year&quot;: &quot;1990&quot;,
-            &quot;value&quot;: &quot;5979589000000&quot;
-        },
-        {
-            &quot;year&quot;: &quot;1991&quot;,
-            &quot;value&quot;: &quot;6174043000000&quot;
-        },
-        {
-            &quot;year&quot;: &quot;1992&quot;,
-            &quot;value&quot;: &quot;6539299000000&quot;
-        }
-        ...
-    ],
-     &quot;agriculture&quot;: null,
-     &quot;agriculturePercent&quot;: null,
-    &quot;agricultureHistory&quot;: [
-        {
-            &quot;year&quot;: &quot;1990&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1991&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1992&quot;,
-            &quot;value&quot;: null
-        },
-        ...
-    ],
-    &quot;industry&quot;: null,
-    &quot;industryPrecent&quot;: null,
-    &quot;industryHistory&quot;: [
-        {
-            &quot;year&quot;: &quot;1990&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1991&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1992&quot;,
-            &quot;value&quot;: null
-        },
-        ...
-    ],
-    &quot;service&quot;: null,
-    &quot;servicePrecent&quot;: null,
-    &quot;serviceHistory&quot;: [
-        {
-            &quot;year&quot;: &quot;1990&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1991&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1992&quot;,
-            &quot;value&quot;: null
-        },
-        ...
-    ],
-    &quot;CO2&quot;: null,
-    &quot;CO2History&quot;: [
-        {
-            &quot;year&quot;: &quot;1990&quot;,
-            &quot;value&quot;: &quot;4823403.118&quot;
-        },
-        {
-            &quot;year&quot;: &quot;1991&quot;,
-            &quot;value&quot;: &quot;4820847.219&quot;
-        },
-        {
-            &quot;year&quot;: &quot;1992&quot;,
-            &quot;value&quot;: &quot;4909533.614&quot;
-        },
-        ...
-    ],
-    &quot;PM25Index&quot;: &quot;9.19693412255931&quot;,
-    &quot;PM25IndexHistory&quot;: [
-        {
-            &quot;year&quot;: &quot;1990&quot;,
-            &quot;value&quot;: &quot;11.3781550939233&quot;
-        },
-        {
-            &quot;year&quot;: &quot;1991&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1992&quot;,
-            &quot;value&quot;: null
-        },
-       ...
-    ],
-    &quot;freshwaterWithdrawals&quot;: null,
-    &quot;freshwaterWithdrawalsHistory&quot;: [
-        {
-            &quot;year&quot;: &quot;1990&quot;,
-            &quot;value&quot;: &quot;465.1&quot;
-        },
-        {
-            &quot;year&quot;: &quot;1991&quot;,
-            &quot;value&quot;: null
-        },
-        {
-            &quot;year&quot;: &quot;1992&quot;,
-            &quot;value&quot;: null
-        },
-        ...
-    ]
-}
+<p>See <strong><a href="#Data">Data Elements</a></strong> for more information on each property.</p>
+<hr>
+<h4 id="a-namedetaila-detail-json"><a></a> Detail Json</h4>
+<p>A ** country detail** looks like this:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"United States of America"</span><span class="token punctuation">,</span>
+    <span class="token string">"introduction"</span><span class="token punctuation">:</span> <span class="token string">"Britain's American colonies broke with the mother country in 1776 and were recognized as the new nation of the United States of America following the Treaty of Paris in 1783. During the 19th and 20th centuries..."</span><span class="token punctuation">,</span>
+    <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"https://www.cia.gov/library//publications/the-world-factbook/graphics/flags/large/us-lgflag.gif"</span><span class="token punctuation">,</span>
+<span class="token string">"GDPHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1990"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"5979589000000"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1991"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"6174043000000"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1992"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"6539299000000"</span>
+        <span class="token punctuation">}</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+     <span class="token string">"agriculture"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+     <span class="token string">"agriculturePercent"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"agricultureHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1990"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1991"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1992"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"industry"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"industryPrecent"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"industryHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1990"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1991"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1992"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"service"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"servicePrecent"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"serviceHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1990"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1991"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1992"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"CO2"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"CO2History"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1990"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"4823403.118"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1991"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"4820847.219"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1992"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"4909533.614"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"PM25Index"</span><span class="token punctuation">:</span> <span class="token string">"9.19693412255931"</span><span class="token punctuation">,</span>
+    <span class="token string">"PM25IndexHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1990"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"11.3781550939233"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1991"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1992"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+       <span class="token operator">...</span>
+    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+    <span class="token string">"freshwaterWithdrawals"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"freshwaterWithdrawalsHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1990"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"465.1"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1991"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token string">"1992"</span><span class="token punctuation">,</span>
+            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
 </code></pre>
-<h2 data-line="189" id="a-nameDataa-Data-Elements-%F0%9F%8D%A3">&lt;a name=&quot;Data&quot;&gt;&lt;/a&gt; Data Elements 🍣</h2>
-<hr />
-<p data-line="191">There is all the parameters describtion</p>
-<h5 data-line="193" id="a-namehomea-home-detail">&lt;a name=&quot;home&quot;&gt;&lt;/a&gt; home detail</h5>
-<table data-line="195">
+<h3 id="a-nameanalysisa-analysis-json"><a></a> Analysis Json</h3>
+<p>A <strong>Analysis</strong> looks like this:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+	heatmapLabel<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'GDP_total'</span><span class="token punctuation">,</span> <span class="token string">'CO2_emission'</span><span class="token punctuation">,</span> <span class="token string">'PM25_index'</span><span class="token punctuation">,</span> 
+				  <span class="token string">'freshwater_withdrawals'</span><span class="token punctuation">,</span> <span class="token string">'Population'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+	heatmapData<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.79</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.06</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.43</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.79</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.09</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.88</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.06</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.09</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.27</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.17</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.88</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.27</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.94</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.43</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.17</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.94</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+	matrixData<span class="token punctuation">:</span><span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+				<span class="token string">"GDP"</span><span class="token punctuation">:</span> <span class="token number">92.0372973942371</span><span class="token punctuation">,</span>
+				<span class="token string">"CO2"</span><span class="token punctuation">:</span> <span class="token number">2680.577</span><span class="token punctuation">,</span>
+				<span class="token string">"PM25"</span><span class="token punctuation">:</span> <span class="token number">12.6266732807972</span><span class="token punctuation">,</span>
+				<span class="token string">"freshWaterWithdrawals"</span><span class="token punctuation">:</span> <span class="token number">0.017</span><span class="token punctuation">,</span>
+				<span class="token string">"population"</span><span class="token punctuation">:</span> <span class="token number">419455</span><span class="token punctuation">,</span>
+				<span class="token string">"class"</span><span class="token punctuation">:</span> <span class="token number">0</span>
+
+			<span class="token punctuation">}</span><span class="token punctuation">,</span>
+			<span class="token operator">...</span><span class="token punctuation">.</span>
+			<span class="token punctuation">]</span>
+
+</code></pre>
+<h2 id="a-namedataa-data-elements-sushi"><a></a> Data Elements 🍣</h2>
+<p>There is all the parameters describtion</p>
+<h4 id="a-namehomea-home"><a></a> Home</h4>
+
+<table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Meaning</th>
 <th>Type</th>
-<th style="text-align:center">Optional</th>
+<th align="center">Optional</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>GDP</td>
-<td><a href="#countryCode">countrycode</a>:latest year GDP</td>
-<td>String:Int</td>
-<td style="text-align:center">✖️</td>
+<td>A list of latest year countries GDP</td>
+<td>List</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>flags</td>
-<td>name:full name, flag:emoij, code:countrycode</td>
-<td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td>Flags list of countries</td>
+<td>List</td>
+<td align="center">✖️</td>
 </tr>
 </tbody>
-<tbody></tbody>
-</table>
-<h5 data-line="201" id="a-nameDetaila-country-detail">&lt;a name=&quot;Detail&quot;&gt;&lt;/a&gt; country detail</h5>
-<table data-line="203">
+</table><h4 id="a-namedetaila-detail"><a></a> Detail</h4>
+
+<table>
 <thead>
 <tr>
 <th>Name</th>
 <th>Meaning</th>
 <th>Type</th>
-<th style="text-align:center">Optional</th>
+<th align="center">Optional</th>
 </tr>
 </thead>
 <tbody>
@@ -842,171 +315,171 @@ body p {
 <td>name</td>
 <td>country full name</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>introduction</td>
-<td>country's short introduction</td>
+<td>country’s short introduction</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>flag</td>
 <td>URL of large flag picture</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>GDP</td>
 <td>latest year GDP</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>GDPHistory</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>agriculture</td>
 <td>latest year agriculture</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>agriculturePrecent</td>
 <td>latest year agriculture percentage</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>agricultureHistory</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>industry</td>
 <td>latest year industry</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>industryPrecent</td>
 <td>latest year industry percentage</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>industryHistory</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>service</td>
 <td>latest year service</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>servicePrecent</td>
 <td>latest year service percentage</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>serviceHistory</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>CO2</td>
 <td>latest year CO2 emission</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>CO2History</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>PM25Index</td>
 <td>latest year PM2.5</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>PM25IndexHistory</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>freshwaterWithdrawals</td>
 <td>latest year freshwaterWithdrawals</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>GDPHistory</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>population</td>
 <td>latest year population</td>
 <td>String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 <tr>
 <td>populationHistory</td>
 <td>{year:,value:}</td>
 <td>String:String</td>
-<td style="text-align:center">✖️</td>
+<td align="center">✖️</td>
 </tr>
 </tbody>
-<tbody></tbody>
-</table>
-<h4 data-line="228" id="a-namecountryCodea-Country-Code">&lt;a name=&quot;countryCode&quot;&gt;&lt;/a&gt;  Country Code</h4>
-<pre class="code CodeMirror"><span class="filename"></span><span class="lineNumber CodeMirror-gutters"><span class="CodeMirror-linenumber">1</span><span class="CodeMirror-linenumber">2</span><span class="CodeMirror-linenumber">3</span><span class="CodeMirror-linenumber">4</span><span class="CodeMirror-linenumber">5</span><span class="CodeMirror-linenumber">6</span><span class="CodeMirror-linenumber">7</span><span class="CodeMirror-linenumber">8</span><span class="CodeMirror-linenumber">9</span><span class="CodeMirror-linenumber">10</span><span class="CodeMirror-linenumber">11</span><span class="CodeMirror-linenumber">12</span><span class="CodeMirror-linenumber">13</span><span class="CodeMirror-linenumber">14</span><span class="CodeMirror-linenumber">15</span><span class="CodeMirror-linenumber">16</span><span class="CodeMirror-linenumber">17</span><span class="CodeMirror-linenumber">18</span><span class="CodeMirror-linenumber">19</span><span class="CodeMirror-linenumber">20</span><span class="CodeMirror-linenumber">21</span><span class="CodeMirror-linenumber">22</span><span class="CodeMirror-linenumber">23</span><span class="CodeMirror-linenumber">24</span><span class="CodeMirror-linenumber">25</span><span class="CodeMirror-linenumber">26</span><span class="CodeMirror-linenumber">27</span><span class="CodeMirror-linenumber">28</span><span class="CodeMirror-linenumber">29</span><span class="CodeMirror-linenumber">30</span><span class="CodeMirror-linenumber">31</span><span class="CodeMirror-linenumber">32</span><span class="CodeMirror-linenumber">33</span></span><code class="json">	[
-    {
-        &quot;name&quot;: &quot;Afghanistan&quot;,
-        &quot;flag&quot;: &quot;🇦🇫&quot;,
-        &quot;code&quot;: &quot;AF&quot;,
-        &quot;dial_code&quot;: &quot;+93&quot;
-    },
-    {
-        &quot;name&quot;: &quot;Åland Islands&quot;,
-        &quot;flag&quot;: &quot;🇦🇽&quot;,
-        &quot;code&quot;: &quot;AX&quot;,
-        &quot;dial_code&quot;: &quot;+358&quot;
-    },
-    {
-        &quot;name&quot;: &quot;Albania&quot;,
-        &quot;flag&quot;: &quot;🇦🇱&quot;,
-        &quot;code&quot;: &quot;AL&quot;,
-        &quot;dial_code&quot;: &quot;+355&quot;
-    },
-    {
-        &quot;name&quot;: &quot;Algeria&quot;,
-        &quot;flag&quot;: &quot;🇩🇿&quot;,
-        &quot;code&quot;: &quot;DZ&quot;,
-        &quot;dial_code&quot;: &quot;+213&quot;
-    },
-    {
-        &quot;name&quot;: &quot;American Samoa&quot;,
-        &quot;flag&quot;: &quot;🇦🇸&quot;,
-        &quot;code&quot;: &quot;AS&quot;,
-        &quot;dial_code&quot;: &quot;+1684&quot;
-    }
-    ...
-    ]
+</table><h4 id="a-namecountrycodea--country-code"><a></a>  Country Code</h4>
+<pre class=" language-json"><code class="prism  language-json">	<span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Afghanistan"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇫"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AF"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+93"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Åland Islands"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇽"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AX"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+358"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Albania"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇱"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AL"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+355"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Algeria"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇩🇿"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"DZ"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+213"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"American Samoa"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇸"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AS"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+1684"</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">...</span>
+    <span class="token punctuation">]</span>
 </code></pre>
+</div>
 </body>
-              </html>
+
+</html>
