@@ -197,7 +197,8 @@ def get_detail(code):
 				if not len(allva) == 0:
 					min_da = (sorted(allva))[0]
 					divide = int(min_da)
-					a = len(str(divide))
+					a = len(str(divide)) - 1
+					a = 10 ** a
 			for k in range(len(data_detail[i])):
 				if not len(allva) == 0:
 					if not data_detail[i][k]['value'] == None:
@@ -270,6 +271,7 @@ if __name__ == "__main__":
 					min_da = (sorted(allva))[0]
 					divide = int(min_da)
 					a = len(str(divide))
+					a = 10 ** a
 			for k in range(len(data_detail[i])):
 				if not len(allva) == 0:
 					if not data_detail[i][k]['value'] == None:
