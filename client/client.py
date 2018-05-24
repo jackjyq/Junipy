@@ -22,6 +22,9 @@ def home():
 def detail(country):
 	response = requests.get(apiBase+"/detail/"+country)
 	country = json.loads(response.text)
+	for dict in country['GDPHistory']:
+		dict['value'] = float(dict['value'])
+		print(dict)
 	return render_template('detail.html', country=country), 200
 
 @app.route('/analysis', methods=['GET'])
