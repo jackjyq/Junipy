@@ -1,5 +1,4 @@
 import numpy as np
-from collections import defaultdict
 from collections import defaultdict,OrderedDict
 import model
 from server_config import *
@@ -14,16 +13,81 @@ class Analysis():
 	def __init__(self,st_year=2000,k=200):
 		self.to_k=k
 		self.min_year=st_year
+		self.needed_index_list=["GDP_total","GDP_agriculture","GDP_industry","GDP_service"]
 		client = pymongo.MongoClient("mongodb://junipy:comp9321@ds143907.mlab.com:43907/junipy_deploy")
 		collection = client.junipy_deploy['collection_indicator']
 		self.data_dict={ i["_id"]:i["data"] for i in collection.find()}
+		self.ini_dict()
 		self.country_code=list(self.data_dict.keys())
 		self.index_list= list(global_indicators.keys())
 		self.select_top_k_country()
 		combine_array=np.concatenate(self.taken_data,axis=0)
 		self.combine_df=pd.DataFrame(combine_array,columns=self.index_list+["class"])
 		self.get_corr()
-		
+		self.region_dict=self.get_region_list()
+
+	def count_max_part(self,region):
+		regoin_data_dict=self.get_regoin_last(region)
+		regoin_max_dict={1:[],2:[],3:[]}
+		for code,data  in regoin_data_dict.items():
+			regoin_max_dict[data['maxPart']].append(code)
+		res_l={k:{"count":len(i),"codes":i} for k, i in regoin_max_dict.items()}
+		return res_l
+
+	def ini_dict(self):
+		temp={}
+		for k,temp_dict in self.data_dict.items():
+			json_acceptable_string = temp_dict.replace("'", "\"")
+			temp_dict = json.loads(json_acceptable_string)
+			temp[k]=temp_dict
+		self.data_reg_dict=temp
+
+	def get_region_list(self):
+		region_dict=defaultdict(list)
+		for k,i in global_codes.items():
+			region=i["region"]
+			region_dict[region].append(k)
+		return region_dict
+
+	def get_country_last(self,code):
+		alldata = self.data_reg_dict[code]
+		datanull = { l: None for l in self.needed_index_list}
+		nullformat = {'year':None, 'data':datanull}
+		select = {}
+		for j in range (2016,1990,-1):
+			hasdata = 1
+			rightkey = {}
+			cur_data=alldata[str(j)]
+			for k in self.needed_index_list:
+				if cur_data[k]:
+					rightkey[k] = cur_data[k]
+				else:
+					hasdata = 0
+			if hasdata == 1:
+				select['year'] = j
+				select['data'] = rightkey
+				break
+		if  hasdata==0:
+			select = nullformat
+		return select
+
+	def get_regoin_last(self,region):
+		code_list=self.region_dict[region]
+		temp_data_dict={}
+		for code in code_list:
+			data=self.get_country_last(code)
+			if data["year"]:
+				temp_data_dict[code]={"data":data}
+				max_index=self.get_index(data["data"])
+				temp_data_dict[code]["maxPart"]=max_index
+		return temp_data_dict
+
+	def get_index(self,data_dict):
+		data_list=[ data_dict[i] for k,i in enumerate(self.needed_index_list) if k!=0]
+		min_v=max(data_list)
+		min_index=data_list.index(min_v)
+		return min_index+1
+
 	def check_index_size(self,key):
 		data_dict_index_year=defaultdict(dict)
 		temp_dict=self.data_dict[key]
@@ -74,6 +138,7 @@ class Analysis():
 			else:
 				cluster_mapping[i]=2
 		self.mapping=cluster_mapping
+		self.all_data=all_data_dict
 		ans=[]
 		for code in self.select_country:
 			data=all_data_dict[code]
@@ -130,10 +195,8 @@ class Analysis():
 		plt.savefig(file)
 		corr_list=corr_mat_abs.tolist()
 		res_list=[ [k1,k,v]  for k,i in enumerate(corr_list) for k1,v in enumerate(i)]
-
 		name_list=[ 'GDP', 'CO2', 'PM25', 'freshWaterWithdrawals', 'population']
 		return res_list,name_list
-
 
 	def get_one_trend(self,code):
 		index=self.select_country.index(code)
@@ -166,6 +229,11 @@ class Analysis():
 			return {self.combine_df.columns[k]:v for k,v in enumerate(i) if k==0 or k>3}
 		result_d= [ return_list(i) for i in data_list ]
 		Feature_name=['GDP', 'CO2', 'PM25', 'freshWaterWithdrawals', 'population','Class']
+		data_df=pd.DataFrame(data,columns=['GDP',"1","2","3", 'CO2', 'PM25', 'freshWaterWithdrawals', 'population','Class'])
+		g = sns.PairGrid(data_df, hue="Class")
+		g = g.map_diag(plt.hist)
+		g = g.map_offdiag(plt.scatter)
+		g = g.add_legend()		
 		return result_d,Feature_name
 
 	def plots(self,code,indicators,file="trend.png"):
@@ -180,22 +248,20 @@ class Analysis():
 		plt.title(global_codes[code]["name"]+" "+" ".join(indicators))
 		plt.savefig(file)
 
-from flask import Flask
-import json
-analysis=Analysis()
-app = Flask(__name__)
-@app.route('/analysis/heatmap')
+
 def get_heatmap():
 	res_list,name_list=analysis.get_corr_heatmap()
 	json_dict={"data":res_list,"names":name_list}
 	return json.dumps(json_dict)
 
-@app.route('/analysis/pairMatrix')
 def get_pairMartix():
 	res_list,name_list=analysis.pairMatrix()
 	json_dict={"data":res_list,"names":name_list}
 	return json.dumps(json_dict)
 
 if __name__ == "__main__":
-	
-	app.run()
+	analysis=Analysis()
+	get_heatmap()
+	get_pairMartix()
+	#input region code
+	analysis.count_max_part(region)
