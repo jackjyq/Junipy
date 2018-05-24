@@ -28,7 +28,33 @@ def loadCountryFlags():
 
 app = Flask(__name__)
 
-
+@app.route('/allData/<code>', methods=['GET'])
+def get_all_data(code):
+	alldata = model.query(INDICATOR, code)
+	nullformat = {}
+	nullformat['year'] = None
+	datanull = {}
+	for l in global_indicator:
+		datanull[global_indicator[l]] = None
+	nullformat['data'] = datanull
+	select = {}
+	#print(alldata)
+	for j in range (2016,1990,-1):
+		hasdata = 1
+		rightkey = {}
+		for k in global_indicator:
+			if alldata[str(j)][k] == None:
+				hasdata = 0
+			else:
+				rightkey[global_indicator[k]] = alldata[str(j)][k]
+		if hasdata == 1:
+			select['year'] = j
+			select['data'] = rightkey
+			break
+	if not hasdata:
+		select = nullformat
+	a  = json.dumps(select)
+	return a
 
 @app.route('/home', methods=['GET'])
 def get_home_data():
@@ -152,6 +178,33 @@ def get_flags():
 
 if __name__ == "__main__":
 	db_client = connect(host=DB_URL)
+	# alldata = {}
+	# alldata = model.query(INDICATOR, 'USA')
+	# selectdata = {}	
+	# nullformat = {}
+	# nullformat['year'] = None
+	# datanull = {}
+	# for l in global_indicator:
+	# 	datanull[global_indicator[l]] = None
+	# nullformat['data'] = datanull
+	# select = {}
+	# #print(alldata)
+	# for j in range (2016,1990,-1):
+	# 	hasdata = 1
+	# 	rightkey = {}
+	# 	for k in global_indicator:
+	# 		if alldata[str(j)][k] == None:
+	# 			hasdata = 0
+	# 		else:
+	# 			rightkey[global_indicator[k]] = alldata[str(j)][k]
+	# 	if hasdata == 1:
+	# 		select['year'] = j
+	# 		select['data'] = rightkey
+	# 		selectdata[global_codes['USA']['iso2']] = select
+	# 		break
+	# if not hasdata:
+	# 	selectdata[global_codes['USA']['iso2']] = nullformat
+	# print(selectdata)
 	app.run()
 	#app.run()
 	# data_detail = {}
