@@ -31,7 +31,11 @@ class Analysis():
 		regoin_max_dict={1:[],2:[],3:[]}
 		for code,data  in regoin_data_dict.items():
 			regoin_max_dict[data['maxPart']].append(code)
-		res_l={k:{"count":len(i),"codes":i} for k, i in regoin_max_dict.items()}
+		n=sum([ len(i) for k, i in regoin_max_dict.items()])
+		if n==0:
+			res_l={self.needed_index_list[k]:{"count":len(i),"present":0,"codes":i} for k, i in regoin_max_dict.items()}
+		else:
+			res_l={self.needed_index_list[k]:{"count":len(i),"present":round(float(len(i))/n,3),"codes":i} for k, i in regoin_max_dict.items()}
 		return res_l
 
 	def ini_dict(self):
@@ -264,4 +268,6 @@ if __name__ == "__main__":
 	get_heatmap()
 	get_pairMartix()
 	#input region code
-	analysis.count_max_part(region)
+	regions=analysis.region_dict.keys()
+	for region in regions:
+		print(region,analysis.count_max_part(region))
