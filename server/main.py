@@ -310,45 +310,41 @@ def get_flags():
 		flags[country_name] = flag_url
 	return json.dumps(flags)
 
+@app.route("/region/<code>",methods = ["GET"])
+def get_regionsdata(code):
+	regionsdata = {}
+	analysis=Analysis()
+	raw_data = analysis.count_max_part(code)
+	flags_data = loadCountryFlags()
+
+	#print(flags_data)
+	for i in raw_data:
+		keypercent = global_indicator[i]
+		regionsdata[keypercent] = {}
+		country = []
+		for j in raw_data[i]:
+			if j == 'codes':
+				country = []
+				coun_name_flag = {}
+				for k in raw_data[i][j]:
+					coun_name_flag = {}
+					name = global_codes[k]['name']
+					coun_name_flag['name'] = name
+					for z in flags_data:
+						if global_codes[k]['iso2'] == z['code']:
+							coun_name_flag['flag'] = z['flag']
+					country.append(coun_name_flag)
+				regionsdata[keypercent]['country'] = country
+			else:
+				regionsdata[keypercent][j] = raw_data[i][j]
+				
+	return json.dumps(regionsdata)
 
 if __name__ == "__main__":
 
 	db_client = connect(host=DB_URL)
+	#print(get_regionsdata('Americas'))
 	app.run()
-	#print(get_detail('CN'))
 
-	#app.run()
-	# data_regin = []
-	# analysis= Analysis()
-	# regions=analysis.region_dict.keys()
-	
-	# for region in regions:
-	# 	print(region)
-	# 	print(analysis.count_max_part(region))
-	# print(region_dic)
-	# short_code = 'US'
-	# data_detail = {}
-	# for i in region_dic:
-	# 	if short_code in region_dic[i]:
-	# 		data_detail['region'] = i
-	# print(data_detail)
-	# data_detail
-	# data_GDP = model.query(OVERVIEW, 'lastest_GDP')
-	# sortedGDP = sorted_GDP(data_GDP)
-	# data_detail['worldRank'] = sortedGDP.index('US') + 1
-	# data_dict = model.query(OVERVIEW, 'lastest_GDP')
-	# data_remove = data_dict.copy()
-	# for i in data_dict:
-	# 	if data_dict[i] == None:
-	# 		data_dict[i] = 0
-	# 		data_remove.pop(i)
-	# 	else:
-	# 		shorts = global_codes[i]["short"]
-	# 		data_remove[shorts] = data_remove.pop(i)
-	# 		data_remove[shorts] = float(data_dict[i])
-	# data_sort = sorted(data_remove.items(), key=lambda d:d[1],reverse = True)
-	# rank = []
-	# for i in range(len(data_sort)):
-	# 	rank.append(data_sort[i][0])
-	# print(rank)
+
 	db_client.close()
