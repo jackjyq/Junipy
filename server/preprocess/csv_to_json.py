@@ -51,7 +51,7 @@ for row in content_list:
     value_dict['iso2'] = iso2
     value_dict['short'] = short
     value_dict['region'] = region
-    value_dict[subregion] = subregion
+    value_dict['subregion'] = subregion
     my_dict[key] = value_dict.copy()
     # print(key, name, short)
 
