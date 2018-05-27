@@ -5,6 +5,7 @@ from server_config import *
 from flask import Flask,jsonify,Response,send_file
 import json
 import math
+from server_analysis import *
 
 global_indicator = {"GDP_total": "GDP",
                     "GDP_agriculture": "agriculture",
@@ -16,15 +17,56 @@ global_indicator = {"GDP_total": "GDP",
                     "Population": "population"
                     }
 
+dataunit = { '3' : 'thousnd',
+			 '6' : 'millon',
+			 '9' : 'billon',
+			 '12' : 'trillion',
+			 '15' : 'quadrillion',
+			 '18' : 'quintillion',
+			 '21' : 'sextillion',
+			 '24' : 'septillion',
+			 '27' : 'octilion',
+			 '30' : 'nonillion',
+			 '33' : 'decillion'
+}
+
+
+region_dic = {'Asia': [] ,
+			  'Europe': [] ,
+			  'Africa': [] ,
+			  'Oceania': [] ,
+			  'Americas': [] ,
+			  'Antarctica': [] ,
+
+	}
+
 country_change_code = {}
 for i in global_codes:
 	shorts = global_codes[i]['iso2']	
 	country_change_code[shorts] = i
+	region_dic[global_codes[i]['region']].append(global_codes[i]['iso2']) 
 
 def loadCountryFlags():
  with open('./static/country_flags.json') as json_data:	 
 	
    return json.load(json_data)
+
+def sorted_GDP(data_dict):
+	data_remove = data_dict.copy()
+	for i in data_dict:
+		if data_dict[i] == None:
+			data_dict[i] = 0
+			data_remove.pop(i)
+		else:
+			shorts = global_codes[i]["iso2"]
+			data_remove[shorts] = data_remove.pop(i)
+			data_remove[shorts] = float(data_dict[i])
+	data_sort = sorted(data_remove.items(), key=lambda d:d[1],reverse = True)
+	rank = []
+	for i in range(len(data_sort)):
+		rank.append(data_sort[i][0])
+
+	return rank
 
 app = Flask(__name__)
 
@@ -97,7 +139,7 @@ def get_lastest_GDP():
 			data_dict[i] = 0
 			data_remove.pop(i)
 		else:
-			shorts = global_codes[i]["short"]
+			shorts = global_codes[i]["iso2"]
 			data_remove[shorts] = data_remove.pop(i)
 			data_remove[shorts] = float(data_dict[i])
 	data_sort = sorted(data_remove.items(), key=lambda d:d[0])
@@ -137,19 +179,45 @@ def get_sorted_GDP():
 
 @app.route("/detail/<code>",methods = ["GET"])
 def get_detail(code):
+	short_code  = code
 	code = country_change_code[code.upper()]
 	data_detail = {}
+
+	for ii in region_dic:
+		if short_code in region_dic[ii]:
+			data_detail['region'] = ii
+			reg = ii
+
+	data_GDP = model.query(OVERVIEW, 'lastest_GDP')
+	sortedGDP = sorted_GDP(data_GDP)
+	data_detail['worldRank'] = sortedGDP.index(short_code) + 1
+
+
+	regionGDP = []
+	for kk in range(len(sortedGDP)):
+		if sortedGDP[kk]  in region_dic[reg]:
+			regionGDP.append(sortedGDP[kk])
+	
+	data_detail['regionRank'] = regionGDP.index(short_code) + 1
+
+
+
 	data_detail['name'] = global_codes[code]['name']
+
 	data_detail['introduction'] = model.query(INTRODUCTION, code)
+
 	flag_prefix = 'https://www.cia.gov/library//publications/'\
                   + 'the-world-factbook/graphics/flags/large/'
 	flag_suffix = '-lgflag.gif'
 	short_code = global_codes[code]['short'].lower()
 	flag_url = flag_prefix + short_code + flag_suffix
 	data_detail['flag'] = flag_url
+
 	raw_data = model.query(INDICATOR, code)
 	for n in global_indicator:
-		data_detail[global_indicator[n]+'History'] = []
+		data_detail[global_indicator[n]+'History'] = {}
+		data_detail[global_indicator[n]+'History']['data'] = []
+		data_detail[global_indicator[n]+'History']['unit'] = None
 	for j in range (2016,1990,-1):
 		hasdata = 1
 		rightkey = {}
@@ -169,10 +237,11 @@ def get_detail(code):
 			year = j
 			datahas = rightkey
 			break
+
 	data_detail['year'] = year
+
 	for m in datahas:
-		data_detail[m] = rightkey[m]
-	print(data_detail)
+		data_detail[m] = datahas[m]
 	for i in range(1990,2017):
 		gdp = float(raw_data[str(i)]['GDP_total'])
 		for j in raw_data[str(i)]:
@@ -186,24 +255,44 @@ def get_detail(code):
 			else:
 				da = {'year':i,'value':raw_data[str(i)][j]}
 			key = global_indicator[j] + 'History'
-			data_detail[key].append(da)
+			data_detail[key]['data'].append(da)
+	#print(data_detail)
 	for i in data_detail:
 		if 'History' in i:
 			allva = []
-			for k in range(len(data_detail[i])):
-				if not data_detail[i][k]['value'] == None:
-					notst = float(data_detail[i][k]['value'])
+			for k in range(len(data_detail[i]['data'])):
+				if not data_detail[i]['data'][k]['value'] == None:
+					notst = float(data_detail[i]['data'][k]['value'])
 					allva.append(notst)
+			if not len(allva) == 0:
+				min_da = (sorted(allva))[0]
+				divide = int(min_da)
+				a = len(str(divide)) - 1
+				b = a % 3
+				c = int(a/3)
+				#print(c)
+				if c!= 0:
+					if b <= 1:
+						a = c * 3
+					else:
+						c = c + 1
+						a = c * 3
+					unit = dataunit[str(a)]
+					a = 10 ** a
+					data_detail[i]['unit'] = unit
+				else:
+					data_detail[i]['unit'] = None
+					a = 1
+
+			for k in range(len(data_detail[i]['data'])):
 				if not len(allva) == 0:
-					min_da = (sorted(allva))[0]
-					divide = int(min_da)
-					a = len(str(divide))
-			for k in range(len(data_detail[i])):
-				if not len(allva) == 0:
-					if not data_detail[i][k]['value'] == None:
-						notst = float(data_detail[i][k]['value'])
+					if not data_detail[i]['data'][k]['value'] == None:
+						notst = float(data_detail[i]['data'][k]['value'])
 						ll = notst / a
-						data_detail[i][k]['value'] = '%.2f'% ll
+						data_detail[i]['data'][k]['value'] = '%.2f'% ll
+				else:
+					data_detail[i]['unit'] = None
+
 	return json.dumps(data_detail)
 
 
@@ -221,152 +310,42 @@ def get_flags():
 		flags[country_name] = flag_url
 	return json.dumps(flags)
 
+@app.route("/region/<code>",methods = ["GET"])
+def get_regionsdata(code):
+	regionsdata = {}
+	analysis=Analysis()
+	raw_data = analysis.count_max_part(code)
+	flags_data = loadCountryFlags()
+
+	#print(flags_data)
+	for i in raw_data:
+		keypercent = global_indicator[i]
+		regionsdata[keypercent] = {}
+		country = []
+		for j in raw_data[i]:
+			if j == 'codes':
+				country = []
+				coun_name_flag = {}
+				for k in raw_data[i][j]:
+					coun_name_flag = {}
+					name = global_codes[k]['name']
+					coun_name_flag['name'] = name
+					for z in flags_data:
+						if global_codes[k]['iso2'] == z['code']:
+							coun_name_flag['flag'] = z['flag']
+							coun_name_flag['code'] = z['code']
+					country.append(coun_name_flag)
+				regionsdata[keypercent]['country'] = country
+			else:
+				regionsdata[keypercent][j] = raw_data[i][j]
+				
+	return json.dumps(regionsdata)
 
 if __name__ == "__main__":
+
 	db_client = connect(host=DB_URL)
+	#print(get_regionsdata('Americas'))
 	app.run()
-	data_dict = model.query(OVERVIEW, 'lastest_GDP')
-	data_remove = data_dict.copy()
-	for i in data_dict:
-		if data_dict[i] == None:
-			data_dict[i] = 0
-			data_remove.pop(i)
-		else:
-			shorts = global_codes[i]["short"]
-			data_remove[shorts] = data_remove.pop(i)
-			data_remove[shorts] = float(data_dict[i])
-	data_sort = sorted(data_remove.items(), key=lambda d:d[0])
-	min_dict = sorted(data_remove.items(),key = lambda d:d[1],reverse = True)[-1][1]
-	divide = int(min_dict)
-	a = len(str(divide))
-	print(a)
-	raw_data = model.query(INDICATOR, 'USA')
-	data_detail = {}
-	for n in global_indicator:
-		data_detail[global_indicator[n]+'History'] = []
-	for i in range(1990,2017):
-		gdp = float(raw_data[str(i)]['GDP_total'])
-		for j in raw_data[str(i)]:
-			if j == 'GDP_agriculture' or j == 'GDP_industry' or j == 'GDP_service':
-				if not raw_data[str(i)][j] == None:
-					da = float(raw_data[str(i)][j])
-					va = ( da * gdp)/100
-				else:
-					va = None
-				da = {'year':i ,'value':va}
-			else:
-				da = {'year':i,'value':raw_data[str(i)][j]}
-			key = global_indicator[j] + 'History'
-			data_detail[key].append(da)
-	print(data_detail)
-	for i in data_detail:
-		if 'History' in i:
-			allva = []
-			for k in range(len(data_detail[i])):
-				if not data_detail[i][k]['value'] == None:
-					notst = float(data_detail[i][k]['value'])
-					allva.append(notst)
-				if not len(allva) == 0:
-					min_da = (sorted(allva))[0]
-					divide = int(min_da)
-					a = len(str(divide))
-			for k in range(len(data_detail[i])):
-				if not len(allva) == 0:
-					if not data_detail[i][k]['value'] == None:
-						notst = float(data_detail[i][k]['value'])
-						ll = notst / a
-						data_detail[i][k]['value'] = '%.2f'% ll
-	print(data_detail)
 
-	#app.run()
-	# data_detail = {}	
-	# raw_data = model.query(INDICATOR, 'USA')
-	# #print(raw_data)
-	# for n in global_indicator:
-	# 	data_detail[global_indicator[n]+'History'] = []
-	# for j in range (2016,1990,-1):
-	# 	hasdata = 1
-	# 	rightkey = {}
-	# 	gdp = float(raw_data[str(j)]['GDP_total'])
-	# 	for k in global_indicator:
 
-	# 		if k == 'GDP_agriculture' or k == 'GDP_industry' or k == 'GDP_service':
-	# 			if raw_data[str(j)][k] == None:
-	# 				hasdata = 0
-	# 			else:
-	# 				rightkey[global_indicator[k]] = raw_data[str(j)][k]
-	# 				da = float(raw_data[str(j)][k])
-	# 				rightkey[global_indicator[k]+'Num'] = (da * gdp)/100  
-	# 		else:
-	# 			rightkey[global_indicator[k]] = raw_data[str(j)][k]
-	# 	if hasdata == 1:
-	# 		year = j
-	# 		datahas = rightkey
-	# 		break
-	# data_detail['year'] = year
-	# for m in datahas:
-	# 	data_detail[m] = rightkey[m]
-	# # for i in global_indicator:
-	# # 	n = global_indicator[i]
-	# # 	data_detail[n] = model.query(INDICATOR, code)['2016'][i]
-	# # 	data_detail[global_indicator[i]+'History'] = []
-	# print(data_detail)
-	# for i in range(1990,2017):
-	# 	gdp = float(raw_data[str(i)]['GDP_total'])
-	# 	for j in raw_data[str(i)]:
-	# 		if j == 'GDP_agriculture' or j == 'GDP_industry' or j == 'GDP_service':
-	# 			if not raw_data[str(i)][j] == None:
-	# 				da = float(raw_data[str(i)][j])
-	# 				va = ( da * gdp)/100
-	# 			else:
-	# 				va = None
-	# 			da = {'year':year,'value':va}
-	# 		else:
-	# 			da = {'year':i,'value':raw_data[str(i)][j]}
-	# 		key = global_indicator[j] + 'History'
-	# 		data_detail[key].append(da)
-	#print(raw_data)
-	# alldata = {}
-	# alldata = model.query(INDICATOR, 'USA')
-	# selectdata = {}	
-	# nullformat = {}
-	# nullformat['year'] = None
-	# datanull = {}
-	# for l in global_indicator:
-	# 	datanull[global_indicator[l]] = None
-	# nullformat['data'] = datanull
-	# select = {}
-	# #print(alldata)
-	# for j in range (2016,1990,-1):
-	# 	hasdata = 1
-	# 	rightkey = {}
-	# 	for k in global_indicator:
-	# 		if alldata[str(j)][k] == None:
-	# 			hasdata = 0
-	# 		else:
-	# 			rightkey[global_indicator[k]] = alldata[str(j)][k]
-	# 	if hasdata == 1:
-	# 		select['year'] = j
-	# 		select['data'] = rightkey
-	# 		selectdata[global_codes['USA']['iso2']] = select
-	# 		break
-	# if not hasdata:
-	# 	selectdata[global_codes['USA']['iso2']] = nullformat
-	# print(selectdata)
-	#app.run()
-	#app.run()
-	# data_detail = {}
-	# for i in global_indicator:
-	# 	n = global_indicator[i]
-	# 	data_detail[n] = model.query(INDICATOR, 'CHN')['2016'][i]
-	# 	data_detail[global_indicator[i]+'History'] = []
-	# raw_data = model.query(INDICATOR, 'CHN')
-	# print(data_detail)
-	# for i in range(1990,2017):
-	# 	year = str(i)
-	# 	for j in raw_data[year]:
-	# 		da = {'year':year,'value':raw_data[year][j]}
-	# 		key = global_indicator[j] + 'History'
-	# 		data_detail[key].append(da)
-	# print(data_detail)
 	db_client.close()

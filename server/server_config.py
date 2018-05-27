@@ -106,8 +106,8 @@ global_codes = {
         "name": "Antarctica",
         "iso2": "AQ",
         "short": "AY",
-        "region": "",
-        "subregion": ""
+        "region": "Antarctica",
+        "subregion": "Antarctica"
     },
     "ATG": {
         "name": "Antigua and Barbuda",
