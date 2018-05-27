@@ -507,7 +507,7 @@
 						<div id="c2"></div>
 						<script>
 							var data = 
-								{{country['GDPHistory']['data'] | tojson | safe}};
+								{{country[target + 'History']['data'] | tojson | safe}};
 							var chart = new G2.Chart({
 								id: 'c2',
 								forceFit: true,
@@ -520,7 +520,7 @@
 								},
 								value: {
 									range: [0, 1],
-									alias: 'GDP ( '+ '{{country['GDPHistory']['unit']}}' +' )'
+									alias: '{{target}}'+' ( '+ '{{country[ target+'History']['unit']}}' +' )'
 								}
 							});
 							chart.axis('year', {
@@ -548,26 +548,28 @@
 					</div>
 					<div class="col-sm-4">
 
-						<ul class="list-unstyled">
-							<li>
-								GDP
-							</li>
-						</ul>
-						<ul class="list-unstyled">
-							<li>
-								Industry
-							</li>
-						</ul>
-						<ul class="list-unstyled">
-							<li>
-								Service
-							</li>
-						</ul>
-						<ul class="list-unstyled">
-							<li>
-								Water
-							</li>
-						</ul>
+					<ul class="list-unstyled">
+						<li>
+							<div class="text-center">
+								<a href={{url_for('detail', country=code,  target='GDP')}} class="btn btn-d btn-block btn-lg btn-block">GDP</a>
+							</div>
+						</li>
+						<li>
+							<a href={{url_for('detail', country=code,  target='agriculture')}} class="btn btn-d btn-lg btn-block">Agriculture</a>
+						</li>
+						<li>
+							<a href={{url_for('detail', country=code,  target='service')}} class="btn btn-d btn-lg btn-block">Service</a>
+						</li>
+						<li>
+							<a href={{url_for('detail', country=code,  target='industry')}} class="btn btn-d btn-lg btn-block ">Industry</a>
+						</li>
+						<li>
+							<a href={{url_for('detail', country=code,  target='population')}} class="btn btn-d btn-lg btn-block">Population</a>
+						</li>
+						<li>
+							<a href={{url_for('detail', country=code,  target='PM25Index')}} class="btn btn-d btn-lg btn-block">PM2.5</a>
+						</li>
+					</ul>
 					</div>
 				</div>
 			</div>

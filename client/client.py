@@ -31,12 +31,17 @@ def home():
 	return render_template('index.html', GDP=dict['GDP'],flagList=dict['flags']), 200
 
 @app.route('/<country>', methods=['GET'])
-def detail(country):
+@app.route('/<country>/<target>', methods=['GET'])
+def detail(country,target='GDP'):
 	response = requests.get(apiBase+"/detail/"+country.upper())
-	country = json.loads(response.text)
-	for dict in country['GDPHistory']['data']:
-		dict['value'] = float(dict['value'])
-	return render_template('detail.html', country=country), 200
+	data = json.loads(response.text)
+	for key in ['GDP', 'agriculture', 'industry', 'service', 'population','PM25Index']:
+		key = key + 'History'
+		for dict in data[key]['data']:
+			if dict['value'] == None:
+				continue
+			dict['value'] = float(dict['value'])
+	return render_template('detail.html', country=data, code=country, target=target), 200
 
 @app.route('/analysis', methods=['GET'])
 def analysis():
