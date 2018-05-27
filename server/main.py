@@ -333,6 +333,7 @@ def get_regionsdata(code):
 					for z in flags_data:
 						if global_codes[k]['iso2'] == z['code']:
 							coun_name_flag['flag'] = z['flag']
+							coun_name_flag['code'] = z['code']
 					country.append(coun_name_flag)
 				regionsdata[keypercent]['country'] = country
 			else:
