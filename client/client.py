@@ -31,6 +31,12 @@ def analysis():
 	data = loadCountryFlag()
 	return render_template('analysis.html'), 200
 
+@app.route('/region/', methods=['GET'])
+def region():
+	response = requests.get(apiBase+"/region/Asia")
+	country = json.loads(response.text)
+	return render_template('regoin.html', country=country), 200
+
 if __name__ == "__main__":
 	app.config['JSON_AS_ASCII'] = False
 	app.run(debug=True , port=5001)
