@@ -474,7 +474,7 @@ def init( rebuild_overview=True,
 
 
 
-def query(col, doc):
+def query(col, doc=None):
     # Input:
     #   col: a collection name defined in server_config.py
     #   doc: the name of the document
@@ -513,10 +513,17 @@ def query(col, doc):
         #     }
         #   }
         #
-        if Collection_indicator.objects(country=doc):
-            data_json =  Collection_indicator.objects(country=doc)[0].data
-            data_dict = dict(json.loads(data_json))
-            return data_dict
+        if doc:
+            if Collection_indicator.objects(country=doc):
+                data_json =  Collection_indicator.objects(country=doc)[0].data
+                data_dict = dict(json.loads(data_json))
+                return data_dict
+        else:
+            all_data_dict = dict()
+            for data_json in Collection_indicator.objects():
+                data_dict = dict(json.loads(data_json.data))
+                all_data_dict[data_json.country] = data_dict
+            return(all_data_dict)
 
     elif col == FLAG:
         # Input:
@@ -558,7 +565,9 @@ if __name__ == "__main__":
 
     # print(query(OVERVIEW, 'lastest_GDP'))
     # print(query(INDICATOR, 'USA')['1990'])
+    # print(query(INDICATOR)['USA']['1990'])
     # print(query(FLAG, 'ZWE'))
     # print(query(INTRODUCTION, 'CHN'))
+
 
     db_client.close()
