@@ -8,6 +8,18 @@ flagList = []
 
 apiBase = "http://127.0.0.1:5000"
 
+regionDict = {"Asia":"asia_en",
+			  "Africa":"africa_en",
+			  "Oceania":"australia_en",
+			  "Americas":"north-america_en",
+			  "Europe":"europe_en",
+			  "World":"world_en"}
+
+def regionMapping(region):
+	if region in regionDict:
+		return regionDict[region]
+	return "world_en"
+
 def loadCountryFlag():
 	with open('./static/data/country_flags.json') as json_data:
 		return json.load(json_data)
@@ -35,7 +47,8 @@ def analysis():
 def region(region):
 	response = requests.get(apiBase+"/region/"+region)
 	country = json.loads(response.text)
-	return render_template('regoin.html', country=country), 200
+	map_type = regionMapping(region)
+	return render_template('regoin.html', region=map_type,country=country), 200
 
 if __name__ == "__main__":
 	app.config['JSON_AS_ASCII'] = False
