@@ -20,11 +20,10 @@ def home():
 
 @app.route('/<country>', methods=['GET'])
 def detail(country):
-	response = requests.get(apiBase+"/detail/"+country)
+	response = requests.get(apiBase+"/detail/"+country.upper())
 	country = json.loads(response.text)
-	for dict in country['GDPHistory']:
+	for dict in country['GDPHistory']['data']:
 		dict['value'] = float(dict['value'])
-		print(dict)
 	return render_template('detail.html', country=country), 200
 
 @app.route('/analysis', methods=['GET'])

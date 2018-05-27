@@ -153,6 +153,50 @@
 			</div>
 		</div>
 		<!-- bloc-4 END -->
+		
+		<!-- bloc-5 -->
+		<div class="bloc bgc-charcoal d-bloc " id="bloc-5">
+			<div class="container bloc-sm">
+				<div class="row">
+					<div class="col-sm-3">
+						<h4 class="mg-md text-center">
+							World GDP Rank
+						</h4>
+						<h3 class="mg-md numbers text-center">
+							{{country['worldRank']}}
+						</h3>
+					</div>
+					<div class="col-sm-3">
+						<h4 class="mg-md text-center">
+							Region
+						</h4>
+						<h3 class="mg-md numbers text-center">
+							{{country['region']}}
+						</h3>
+					</div>
+					<div class="col-sm-3">
+						<h4 class="mg-md text-center">
+							Region Rank
+						</h4>
+						<h3 class="mg-md numbers text-center">
+							{{country['regionRank']}}
+						</h3>
+					</div>
+					<div class="col-sm-3">
+						<h4 class="mg-md text-center">
+							Main Composition
+						</h4>
+						<h3 class="mg-md numbers text-center">
+							Industry
+						</h3>
+					</div>
+				</div>
+			</div>
+			<div class="divider-h">
+				<span class="divider"></span>
+			</div>
+		</div>
+		<!-- bloc-5 END -->
 
 		<!-- bloc-5 -->
 		<div class="bloc feature-list bgc-charcoal d-bloc " id="bloc-5">
@@ -162,9 +206,7 @@
 						<h2 class="text-center mg-md">
 							Data
 						</h2>
-						<div class="divider-h">
-							<span class="divider"></span>
-						</div>
+
 					</div>
 				</div>
 				<div class="row voffset">
@@ -462,7 +504,7 @@
 						<div id="c2"></div>
 						<script>
 							var data = 
-								{{country['GDPHistory'] | tojson | safe}};
+								{{country['GDPHistory']['data'] | tojson | safe}};
 							var chart = new G2.Chart({
 								id: 'c2',
 								forceFit: true,
@@ -475,7 +517,7 @@
 								},
 								value: {
 									range: [0, 1],
-									alias: 'GDP'
+									alias: 'GDP ( '+ '{{country['GDPHistory']['unit']}}' +' )'
 								}
 							});
 							chart.axis('year', {
@@ -484,7 +526,6 @@
 										fill: '#FFCF2C'
 									}
 								}
-
 							});
 
 							chart.axis('value', {
@@ -493,7 +534,6 @@
 										fill: '#FFCF2C'
 									}
 								}
-
 							});
 							
 							chart.area().position('year*value').color('l(90) 0:#FFCF2C 0.8:#2c3251 1:#2c3251').shape('smooth');
