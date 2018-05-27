@@ -22,7 +22,7 @@
 	<script src="../static/js/blocs.min.js"></script>
 	<script src="../static/js/jquery.touchSwipe.min.js" defer></script>
 	<script src="../static/js/lazysizes.min.js" defer></script>
-	
+
 	<title>Detail</title>
 	<script src="https://a.alipayobjects.com/jquery/jquery/1.11.1/jquery.js"></script>
 	<script src="https://gw.alipayobjects.com/as/g/datavis/g2/2.3.13/index.js"></script>
@@ -52,10 +52,10 @@
 				onLabelShow: function(event, label, code) {
 					label.text(label.text() + ' ( ' + sample_data[code] + ' )');
 				},
-				 onRegionClick: function (event, code, region) {
-					 var url = window.location.origin+'/'+code;
-					 window.location.replace('/'+code);
-				 }
+				onRegionClick: function(event, code, region) {
+					var url = window.location.origin + '/' + code;
+					window.location.replace('/' + code);
+				}
 			});
 		});
 	</script>
@@ -126,7 +126,8 @@
 							</li>
 							{% for item in country['industry']['country'] %}
 							<h4>
-							{{item['flag']}}    {{item['name']}}
+							
+							{{item['flag']}} {{item['name']}}
 							</h4>
 							{% endfor %}
 						</ul>
@@ -141,10 +142,10 @@
 									<span class="divider"></span>
 								</div>
 							</li>
-							
+
 							{% for item in country['service']['country'] %}
 							<h4>
-							{{item['flag']}}    {{item['name']}}
+								{{item['flag']}} {{item['name']}}
 							</h4>
 							{% endfor %}
 						</ul>
@@ -159,10 +160,10 @@
 									<span class="divider"></span>
 								</div>
 							</li>
-														
+
 							{% for item in country['agriculture']['country'] %}
 							<h4>
-							{{item['flag']}}    {{item['name']}}
+								{{item['flag']}} {{item['name']}}
 							</h4>
 							{% endfor %}
 						</ul>
@@ -175,16 +176,16 @@
 		<!-- bloc-12 -->
 		<div class="bloc bgc-charcoal d-bloc" id="bloc-12">
 			<div class="container bloc-sm">
-							<div class="row">
+				<div class="row">
 					<div class="col-sm-12">
 						<h2 class="mg-md text-center">
 							Distribution
 						</h2>
 					</div>
 				</div>
-																	<div class="divider-h">
-									<span class="divider"></span>
-								</div>
+				<div class="divider-h">
+					<span class="divider"></span>
+				</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<div id="c1"></div>
