@@ -270,4 +270,6 @@ if __name__ == "__main__":
 	#input region code
 	regions=analysis.region_dict.keys()
 	for region in regions:
-		print(region,analysis.count_max_part(region))
+		print(region)
+		result_d=analysis.count_max_part(region)
+		print(result_d)
