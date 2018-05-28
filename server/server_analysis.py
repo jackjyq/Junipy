@@ -50,10 +50,7 @@ class Analysis():
 		region_dict=defaultdict(list)
 		for k,i in global_codes.items():
 			region=i["region"]
-			if region!="Americas":
-				region_dict[region].append(k)
-			else:
-				region_dict[i["subregion"]].append(k)
+			region_dict[region].append(k)
 		return region_dict
 
 	def get_country_last(self,code):
