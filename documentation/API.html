@@ -1,0 +1,605 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="api-documentation-memo">API Documentation 📝</h1>
+<p>This documentation covers the GDP anaylasis web API.</p>
+<h4 id="media-type-support">Media Type support</h4>
+<hr>
+<p>All server response bodies and request bodies MUST be valid <strong><a href="https://tools.ietf.org/search/rfc4627">JSON</a></strong> messages.</p>
+<h3 id="home-coffee">Home ☕️</h3>
+<hr>
+<p>The <strong>Home</strong> URL (/home/) is the base URL for reading GDP objects The table below shows all the Task-related operations, their URLs, methods, and payloads.</p>
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>URL</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Inputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fetch homepage resource</td>
+<td>/home</td>
+<td>GET</td>
+<td><a href="#GDP&amp;Flags">GDP&amp;Flags</a></td>
+<td>None</td>
+</tr>
+</tbody>
+</table><h3 id="detail-sushi">Detail 🍣</h3>
+<hr>
+<p>The <strong>Detail</strong> URL (/detail/&lt;code&gt;/) is the base URL for get country detail objects and supports the following operations:</p>
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>URL</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Inputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get the detail of the country</td>
+<td>/detail/&lt;code&gt;/</td>
+<td>GET</td>
+<td><a href="#detail">detail</a></td>
+<td>country code</td>
+</tr>
+</tbody>
+</table><h3 id="analysis-cake">Analysis 🍰</h3>
+<hr>
+<p>The <strong>Analysis</strong> URL (/analysis/) is the an URL for get analysis information for global trend and supports the following operations:</p>
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>URL</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Inputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get analysis data</td>
+<td>/analysis/</td>
+<td>GET</td>
+<td><a href="#analysis">analysis</a></td>
+<td>None</td>
+</tr>
+</tbody>
+</table><h3 id="region-beer">Region 🍺</h3>
+<hr>
+<p>The <strong>Region</strong> URL (/regions/) is the  URL for get analysis information for each region and supports the following operations:</p>
+
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>URL</th>
+<th>Method</th>
+<th>Returns</th>
+<th>Inputs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>get the detail of the region</td>
+<td>/region/<code></code></td>
+<td>GET</td>
+<td><a href="#analysis">analysis</a></td>
+<td>region code</td>
+</tr>
+</tbody>
+</table><h2 id="responses-eyes">Responses 👀</h2>
+<p>The home API returns payloads (as JSON object):</p>
+<ul>
+<li><a href="#Home">Home</a></li>
+<li><a href="#Detail">Detail</a></li>
+<li><a href="#Analysis">Analysis</a></li>
+<li><a href="#Analysis">Region</a></li>
+</ul>
+<p>See below for details.</p>
+<hr>
+<h3 id="a-namehomea-home-json"><a></a> Home Json</h3>
+<p>A <strong>Home</strong> looks like this:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"GDP"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"AD"</span><span class="token punctuation">:</span> <span class="token number">2858517699.11504</span><span class="token punctuation">,</span>
+        <span class="token string">"AE"</span><span class="token punctuation">:</span> <span class="token number">348743265704.561</span><span class="token punctuation">,</span>
+        <span class="token string">"AF"</span><span class="token punctuation">:</span> <span class="token number">19469022207.6357</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"flags"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Afghanistan"</span><span class="token punctuation">,</span>
+            <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇫"</span><span class="token punctuation">,</span>
+            <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AF"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Albania"</span><span class="token punctuation">,</span>
+            <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇱"</span><span class="token punctuation">,</span>
+            <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AL"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token punctuation">{</span>
+            <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Algeria"</span><span class="token punctuation">,</span>
+            <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇩🇿"</span><span class="token punctuation">,</span>
+            <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"DZ"</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token operator">...</span><span class="token punctuation">.</span>
+    <span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>See <strong><a href="#Data">Data Elements</a></strong> for more information on each property.</p>
+<hr>
+<h4 id="a-namedetaila-detail-json"><a></a> Detail Json</h4>
+<p>A ** country detail** looks like this:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+    <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"United States of America"</span><span class="token punctuation">,</span>
+    <span class="token string">"introduction"</span><span class="token punctuation">:</span> <span class="token string">"Britain's American colonies broke with the mother country in 1776 and were recognized as the new nation of the United States of America following the Treaty of Paris in 1783. During the 19th and 20th centuries..."</span><span class="token punctuation">,</span>
+    <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"https://www.cia.gov/library//publications/the-world-factbook/graphics/flags/large/us-lgflag.gif"</span><span class="token punctuation">,</span>
+	<span class="token string">"GDPHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+	    <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+	        <span class="token punctuation">{</span>
+	            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+	            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"5.98"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token punctuation">{</span>
+	            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+	            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"6.17"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token punctuation">{</span>
+	            <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+	            <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"6.54"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+	    <span class="token punctuation">]</span><span class="token punctuation">,</span>
+	    <span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token string">"trillion"</span>
+	<span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"agriculture"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"agriculturePercent"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"agricultureHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token string">"trillion"</span>
+	<span class="token punctuation">}</span>
+    <span class="token string">"industry"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"industryPrecent"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"industryHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token string">"trillion"</span>
+	<span class="token punctuation">}</span>
+    <span class="token string">"service"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"servicePrecent"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"serviceHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token string">"trillion"</span>
+	<span class="token punctuation">}</span>
+    <span class="token string">"CO2"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"CO2History"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+			   <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"4.82"</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"4.82"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"4.91"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token string">"millon"</span>
+	<span class="token punctuation">}</span>
+    <span class="token string">"PM25Index"</span><span class="token punctuation">:</span> <span class="token string">"9.19693412255931"</span><span class="token punctuation">,</span>
+    <span class="token string">"PM25IndexHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+			   <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"11.38"</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span><span class="token keyword">null</span>"<span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+	<span class="token punctuation">}</span>
+    <span class="token string">"freshwaterWithdrawals"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"freshwaterWithdrawalsHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+			   <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"465.10"</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span><span class="token keyword">null</span>"<span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token keyword">null</span>
+	<span class="token punctuation">}</span>
+    <span class="token string">"populationHistory"</span><span class="token punctuation">:</span> <span class="token punctuation">{</span>
+        <span class="token string">"data"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1990</span><span class="token punctuation">,</span>
+			   <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"0.25"</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1991</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"0.25"</span>"<span class="token punctuation">}</span><span class="token punctuation">,</span>
+		   <span class="token punctuation">{</span>
+		       <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">1992</span><span class="token punctuation">,</span>
+		       <span class="token string">"value"</span><span class="token punctuation">:</span> <span class="token string">"0.26"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	        <span class="token operator">...</span>
+		<span class="token punctuation">]</span><span class="token punctuation">,</span>
+		<span class="token string">"unit"</span><span class="token punctuation">:</span> <span class="token string">"billon"</span>
+	<span class="token punctuation">}</span>
+    <span class="token string">"year"</span><span class="token punctuation">:</span> <span class="token number">2015</span><span class="token punctuation">,</span>
+    <span class="token string">"GDP"</span><span class="token punctuation">:</span> <span class="token string">"18120714000000"</span><span class="token punctuation">,</span>
+    <span class="token string">"agriculture"</span><span class="token punctuation">:</span> <span class="token string">"1.05221083917882"</span><span class="token punctuation">,</span>
+    <span class="token string">"agricultureNum"</span><span class="token punctuation">:</span> <span class="token number">190668116844.59393</span><span class="token punctuation">,</span>
+    <span class="token string">"industry"</span><span class="token punctuation">:</span> <span class="token string">"20.0272741736565"</span><span class="token punctuation">,</span>
+    <span class="token string">"industryNum"</span><span class="token punctuation">:</span> <span class="token number">3629085075004.158</span><span class="token punctuation">,</span>
+    <span class="token string">"service"</span><span class="token punctuation">:</span> <span class="token string">"78.9205149871647"</span><span class="token punctuation">,</span>
+    <span class="token string">"serviceNum"</span><span class="token punctuation">:</span> <span class="token number">14300960808151.25</span><span class="token punctuation">,</span>
+    <span class="token string">"CO2"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"PM25Index"</span><span class="token punctuation">:</span> <span class="token string">"9.16629624420346"</span><span class="token punctuation">,</span>
+    <span class="token string">"freshwaterWithdrawals"</span><span class="token punctuation">:</span> <span class="token keyword">null</span><span class="token punctuation">,</span>
+    <span class="token string">"population"</span><span class="token punctuation">:</span> <span class="token string">"320896618"</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h3 id="a-nameanalysisa-analysis-json"><a></a> Analysis Json</h3>
+<p>A <strong>Analysis</strong> looks like this:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+	heatmapLabel<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token string">'GDP_total'</span><span class="token punctuation">,</span> <span class="token string">'CO2_emission'</span><span class="token punctuation">,</span> <span class="token string">'PM25_index'</span><span class="token punctuation">,</span> 
+				  <span class="token string">'freshwater_withdrawals'</span><span class="token punctuation">,</span> <span class="token string">'Population'</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+	heatmapData<span class="token punctuation">:</span><span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.79</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.06</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.43</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.79</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.09</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.88</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.06</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.09</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.27</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.17</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.88</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.27</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0.94</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+				<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0.43</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0.75</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">0.17</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">0.94</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">1.0</span><span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+
+	matrixData<span class="token punctuation">:</span><span class="token punctuation">[</span>
+			<span class="token punctuation">{</span>
+				<span class="token string">"GDP"</span><span class="token punctuation">:</span> <span class="token number">92.0372973942371</span><span class="token punctuation">,</span>
+				<span class="token string">"CO2"</span><span class="token punctuation">:</span> <span class="token number">2680.577</span><span class="token punctuation">,</span>
+				<span class="token string">"PM25"</span><span class="token punctuation">:</span> <span class="token number">12.6266732807972</span><span class="token punctuation">,</span>
+				<span class="token string">"freshWaterWithdrawals"</span><span class="token punctuation">:</span> <span class="token number">0.017</span><span class="token punctuation">,</span>
+				<span class="token string">"population"</span><span class="token punctuation">:</span> <span class="token number">419455</span><span class="token punctuation">,</span>
+				<span class="token string">"class"</span><span class="token punctuation">:</span> <span class="token number">0</span>
+
+			<span class="token punctuation">}</span><span class="token punctuation">,</span>
+			<span class="token operator">...</span><span class="token punctuation">.</span>
+			<span class="token punctuation">]</span>
+
+</code></pre>
+<h3 id="a-nameregiona-region-json"><a></a> Region Json</h3>
+<p>A <strong>Region</strong> looks like this:</p>
+<pre class=" language-json"><code class="prism  language-json"><span class="token punctuation">{</span>
+
+   <span class="token string">"agriculture"</span><span class="token punctuation">:</span> 
+   <span class="token punctuation">{</span>
+       <span class="token string">"count"</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">,</span>
+       <span class="token string">"present"</span><span class="token punctuation">:</span> <span class="token number">0.213</span><span class="token punctuation">,</span>
+       <span class="token string">"country"</span><span class="token punctuation">:</span> 
+       <span class="token punctuation">[</span>
+           <span class="token punctuation">{</span>
+               <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Azerbaijan"</span><span class="token punctuation">,</span>
+               <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇿"</span><span class="token punctuation">,</span>
+               <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AZ"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+           <span class="token punctuation">{</span>
+               <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"China"</span><span class="token punctuation">,</span>
+               <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇨🇳"</span><span class="token punctuation">,</span>
+               <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"CN"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+           <span class="token punctuation">{</span>
+               <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Georgia"</span><span class="token punctuation">,</span>
+               <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇬🇪"</span><span class="token punctuation">,</span>
+               <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"GE"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+           <span class="token operator">...</span>
+         <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"industry"</span><span class="token punctuation">:</span> 
+    <span class="token punctuation">{</span>
+       <span class="token string">"count"</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token punctuation">,</span>
+       <span class="token string">"present"</span><span class="token punctuation">:</span> <span class="token number">0.085</span><span class="token punctuation">,</span>
+       <span class="token string">"country"</span><span class="token punctuation">:</span> 
+      <span class="token punctuation">[</span>
+           <span class="token punctuation">{</span>
+                <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Bhutan"</span><span class="token punctuation">,</span>
+                <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇧🇹"</span><span class="token punctuation">,</span>
+                <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"BT"</span>
+            <span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Brunei Darussalam"</span><span class="token punctuation">,</span>
+                <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇧🇳"</span><span class="token punctuation">,</span>
+                <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"BN"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Qatar"</span><span class="token punctuation">,</span>
+                <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇶🇦"</span><span class="token punctuation">,</span>
+                <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"QA"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+	       <span class="token operator">...</span>
+       <span class="token punctuation">]</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token string">"service"</span><span class="token punctuation">:</span> 
+    <span class="token punctuation">{</span>
+       <span class="token string">"count"</span><span class="token punctuation">:</span> <span class="token number">33</span><span class="token punctuation">,</span>
+        <span class="token string">"present"</span><span class="token punctuation">:</span> <span class="token number">0.702</span><span class="token punctuation">,</span>
+        <span class="token string">"country"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+            <span class="token punctuation">{</span>
+                <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Afghanistan"</span><span class="token punctuation">,</span>
+                <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇫"</span><span class="token punctuation">,</span>
+                <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AF"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Armenia"</span><span class="token punctuation">,</span>
+                <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇲"</span><span class="token punctuation">,</span>
+                <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AM"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token punctuation">{</span>
+                <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Bahrain"</span><span class="token punctuation">,</span>
+                <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇧🇭"</span><span class="token punctuation">,</span>
+                <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"BH"</span><span class="token punctuation">}</span><span class="token punctuation">,</span>
+            <span class="token operator">...</span>
+        <span class="token punctuation">]</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h2 id="a-namedataa-data-elements-sushi"><a></a> Data Elements 🍣</h2>
+<p>There is all the parameters describtion</p>
+<h4 id="a-namehomea-home"><a></a> Home</h4>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Meaning</th>
+<th>Type</th>
+<th align="center">Optional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GDP</td>
+<td>A list of latest year countries GDP</td>
+<td>List</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>flags</td>
+<td>Flags list of countries</td>
+<td>List</td>
+<td align="center">✖️</td>
+</tr>
+</tbody>
+</table><h4 id="a-namedetaila-detail"><a></a> Detail</h4>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Meaning</th>
+<th>Type</th>
+<th align="center">Optional</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td>country full name</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>introduction</td>
+<td>country’s short introduction</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>flag</td>
+<td>URL of large flag picture</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>GDP</td>
+<td>latest year GDP</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>GDPHistory</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>agriculture</td>
+<td>latest year agriculture</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>agriculturePrecent</td>
+<td>latest year agriculture percentage</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>agricultureHistory</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>industry</td>
+<td>latest year industry</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>industryPrecent</td>
+<td>latest year industry percentage</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>industryHistory</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>service</td>
+<td>latest year service</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>servicePrecent</td>
+<td>latest year service percentage</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>serviceHistory</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>CO2</td>
+<td>latest year CO2 emission</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>CO2History</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>PM25Index</td>
+<td>latest year PM2.5</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>PM25IndexHistory</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>freshwaterWithdrawals</td>
+<td>latest year freshwaterWithdrawals</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>GDPHistory</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>population</td>
+<td>latest year population</td>
+<td>String</td>
+<td align="center">✖️</td>
+</tr>
+<tr>
+<td>populationHistory</td>
+<td>{year:,value:}</td>
+<td>String:String</td>
+<td align="center">✖️</td>
+</tr>
+</tbody>
+</table><h4 id="a-namecountrycodea--country-code"><a></a>  Country Code</h4>
+<pre class=" language-json"><code class="prism  language-json">	<span class="token punctuation">[</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Afghanistan"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇫"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AF"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+93"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Åland Islands"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇽"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AX"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+358"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Albania"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇱"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AL"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+355"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"Algeria"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇩🇿"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"DZ"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+213"</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token punctuation">{</span>
+        <span class="token string">"name"</span><span class="token punctuation">:</span> <span class="token string">"American Samoa"</span><span class="token punctuation">,</span>
+        <span class="token string">"flag"</span><span class="token punctuation">:</span> <span class="token string">"🇦🇸"</span><span class="token punctuation">,</span>
+        <span class="token string">"code"</span><span class="token punctuation">:</span> <span class="token string">"AS"</span><span class="token punctuation">,</span>
+        <span class="token string">"dial_code"</span><span class="token punctuation">:</span> <span class="token string">"+1684"</span>
+    <span class="token punctuation">}</span>
+    <span class="token operator">...</span>
+    <span class="token punctuation">]</span>
+</code></pre>
+</div>
+</body>
+
+</html>
