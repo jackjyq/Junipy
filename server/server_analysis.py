@@ -50,7 +50,10 @@ class Analysis():
 		region_dict=defaultdict(list)
 		for k,i in global_codes.items():
 			region=i["region"]
-			region_dict[region].append(k)
+			if region!="Americas":
+				region_dict[region].append(k)
+			else:
+				region_dict[i["subregion"]].append(k)
 		return region_dict
 
 	def get_country_last(self,code):
@@ -191,12 +194,13 @@ class Analysis():
 	def get_corr_heatmap(self,file="heatmap.png"):
 		corr_df=self.corr_mat
 		corr_mat_abs=np.array(corr_df.abs())
-		corr_mat_=np.array(corr_df)
+		'''
 		sns.heatmap(corr_df.abs(), cmap="Blues", annot=corr_df,
 			fmt=".2f", linewidths=.5,square=True,
             yticklabels=corr_df.columns.values)
 		plt.title("Global Feature Correlation")
 		plt.savefig(file)
+		'''
 		corr_list=corr_mat_abs.tolist()
 		res_list=[ [k1,k,v]  for k,i in enumerate(corr_list) for k1,v in enumerate(i)]
 		name_list=[ 'GDP', 'CO2', 'PM25', 'freshWaterWithdrawals', 'population']
@@ -212,10 +216,11 @@ class Analysis():
 		select_data=data_array[:,index_indicator]
 		data_list=[ [k+self.min_year,i] for k,i in enumerate(select_data) if i>0]
 		new_data_array=np.array(data_list)
+		'''
 		plt.figure()
 		plt.plot(new_data_array[:,0],new_data_array[:,1])
 		plt.title(global_codes[code]["name"]+" "+indicator)
-		plt.savefig(file)
+		plt.savefig(file)'''
 
 	def pairMatrix(self):
 		data=self.combine_df.dropna(how="any")
@@ -234,10 +239,11 @@ class Analysis():
 		result_d= [ return_list(i) for i in data_list ]
 		Feature_name=['GDP', 'CO2', 'PM25', 'freshWaterWithdrawals', 'population','Class']
 		data_df=pd.DataFrame(data,columns=['GDP',"1","2","3", 'CO2', 'PM25', 'freshWaterWithdrawals', 'population','Class'])
+		'''
 		g = sns.PairGrid(data_df, hue="Class")
 		g = g.map_diag(plt.hist)
 		g = g.map_offdiag(plt.scatter)
-		g = g.add_legend()		
+		g = g.add_legend()'''
 		return result_d,Feature_name
 
 	def plots(self,code,indicators,file="trend.png"):
@@ -265,8 +271,8 @@ def get_pairMartix():
 
 if __name__ == "__main__":
 	analysis=Analysis()
-	get_heatmap()
-	get_pairMartix()
+	#get_heatmap()
+	#get_pairMartix()
 	#input region code
 	regions=analysis.region_dict.keys()
 	for region in regions:

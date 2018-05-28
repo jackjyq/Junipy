@@ -22,8 +22,8 @@
 	<script src="../static/js/blocs.min.js"></script>
 	<script src="../static/js/jquery.touchSwipe.min.js" defer></script>
 	<script src="../static/js/lazysizes.min.js" defer></script>
-	
-	<title>Detail</title>
+
+	<title>Region - Junipy</title>
 	<script src="https://a.alipayobjects.com/jquery/jquery/1.11.1/jquery.js"></script>
 	<script src="https://gw.alipayobjects.com/as/g/datavis/g2/2.3.13/index.js"></script>
 	<!--    <script>G2.Global.setTheme('dark');</script>-->
@@ -34,12 +34,17 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script type="text/javascript" src="../static/js/jquery.vmap.js"></script>
 	<script type="text/javascript" src="../static/js/jquery.vmap.asia.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.africa.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.australia.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.europe.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.north-america.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/jquery.vmap.south-america.js" charset="utf-8"></script>
 	<script type="text/javascript" src="../static/js/jquery.vmap.sampledata.js"></script>
 
 	<script type="text/javascript">
 		jQuery(document).ready(function() {
 			jQuery('#vmap').vectorMap({
-				map: 'asia_en',
+				map: '{{region}}',
 				backgroundColor: '#2C3251',
 				color: '#ffffff',
 				enableZoom: false,
@@ -52,10 +57,10 @@
 				onLabelShow: function(event, label, code) {
 					label.text(label.text() + ' ( ' + sample_data[code] + ' )');
 				},
-				 onRegionClick: function (event, code, region) {
-					 var url = window.location.origin+'/'+code;
-					 window.location.replace('/'+code);
-				 }
+				onRegionClick: function(event, code, region) {
+					var url = window.location.origin + '/' + code;
+					window.location.replace('/' + code);
+				}
 			});
 		});
 	</script>
@@ -118,15 +123,39 @@
 						<ul class="list-unstyled">
 							<li>
 								<h3 class="mg-md text-center">
+								Agriculture
+								</h3>
+								<div class="divider-h">
+									<span class="divider"></span>
+								</div>
+							</li>
+							{% for item in country['agriculture']['country'] %}
+							<h4>
+							<a href={{url_for('detail', country=item['code'])}}
+							class="a-btn a-block">
+							{{item['flag']}} {{item['name']}}
+								</a>
+							</h4>
+							{% endfor %}
+						</ul>
+					</div>
+					<div class="col-sm-4">
+						<ul class="list-unstyled">
+							<li>
+								<h3 class="mg-md text-center">
 									Industry
 								</h3>
 								<div class="divider-h">
 									<span class="divider"></span>
 								</div>
 							</li>
+
 							{% for item in country['industry']['country'] %}
 							<h4>
-							{{item['flag']}}    {{item['name']}}
+							<a href={{url_for('detail', country=item['code'])}}
+							class="a-btn a-block">
+								{{item['flag']}} {{item['name']}}
+								</a>
 							</h4>
 							{% endfor %}
 						</ul>
@@ -141,28 +170,13 @@
 									<span class="divider"></span>
 								</div>
 							</li>
-							
+
 							{% for item in country['service']['country'] %}
 							<h4>
-							{{item['flag']}}    {{item['name']}}
-							</h4>
-							{% endfor %}
-						</ul>
-					</div>
-					<div class="col-sm-4">
-						<ul class="list-unstyled">
-							<li>
-								<h3 class="mg-md text-center">
-									Agriculture
-								</h3>
-								<div class="divider-h">
-									<span class="divider"></span>
-								</div>
-							</li>
-														
-							{% for item in country['agriculture']['country'] %}
-							<h4>
-							{{item['flag']}}    {{item['name']}}
+							<a href={{url_for('detail', country=item['code'])}}
+							class="a-btn a-block">
+								{{item['flag']}} {{item['name']}}
+								</a>
 							</h4>
 							{% endfor %}
 						</ul>
@@ -175,16 +189,16 @@
 		<!-- bloc-12 -->
 		<div class="bloc bgc-charcoal d-bloc" id="bloc-12">
 			<div class="container bloc-sm">
-							<div class="row">
+				<div class="row">
 					<div class="col-sm-12">
 						<h2 class="mg-md text-center">
-							Distribution
+								Composition
 						</h2>
 					</div>
 				</div>
-																	<div class="divider-h">
-									<span class="divider"></span>
-								</div>
+				<div class="divider-h">
+					<span class="divider"></span>
+				</div>
 				<div class="row">
 					<div class="col-sm-12">
 						<div id="c1"></div>
