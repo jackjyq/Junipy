@@ -1,6 +1,6 @@
 # Junipy
 
-![**J**unipy **u**niversal **n**ational **i**ndicator **p**arse and anal**y**se service](./documentation/title.png)
+**J**ust an **u**niversal **n**ational **i**ndicator **p**arse and anal**y**se service
 
 
 ## Important Links
