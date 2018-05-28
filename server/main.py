@@ -41,6 +41,7 @@ region_dic = {'Asia': [] ,
 	}
 
 country_change_code = {}
+analysis=Analysis()
 for i in global_codes:
 	shorts = global_codes[i]['iso2']	
 	country_change_code[shorts] = i
@@ -313,7 +314,6 @@ def get_flags():
 @app.route("/region/<code>",methods = ["GET"])
 def get_regionsdata(code):
 	regionsdata = {}
-	analysis=Analysis()
 	raw_data = analysis.count_max_part(code)
 	flags_data = loadCountryFlags()
 
