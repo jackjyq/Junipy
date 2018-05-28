@@ -1,1 +1,0 @@
-pkill -f -e main.py
